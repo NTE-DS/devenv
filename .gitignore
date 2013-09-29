@@ -5,6 +5,7 @@
 *.suo
 *.user
 *.sln.docstates
+*.user.proj
 
 # Build results
 
@@ -146,6 +147,3 @@ $RECYCLE.BIN/
 
 # Mac crap
 .DS_Store
-
-# Help Compiled Files
-HelpSrc/Help5/HelpOnHelp/HelpOnHelp.NxC
