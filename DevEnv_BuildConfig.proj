@@ -10,5 +10,12 @@
       components
     -->
     <LibraryPath>..\Libraries</LibraryPath>
+
+    <!--
+      BuildPath: Path
+      
+      This property needs to be set to the location where you want to put builds in.
+    -->
+    <BuildPath>$(SolutionDir)..\bin\$(Configuration)</BuildPath>
   </PropertyGroup>
 </Project>
