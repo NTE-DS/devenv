@@ -9,7 +9,7 @@
       This property needs to be set to the location to the libraries required to build certan shared
       components
     -->
-    <LibraryPath>..\Libraries</LibraryPath>
+    <LibraryPath>$(SolutionDir)..\Libraries</LibraryPath>
 
     <!--
       BuildPath: Path

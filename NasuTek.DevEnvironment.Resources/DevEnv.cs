@@ -16,7 +16,6 @@
  ***************************************************************************************************/
 
 using NasuTek.DevEnvironment.Resources.Addins;
-using ProtocolPlugin;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -140,8 +139,8 @@ namespace NasuTek.DevEnvironment.Resources {
 
             if (AddInTree.ExistsTreeNode("/DevEnv/WebSchemes")) {
                 foreach (Codon i in AddInTree.GetTreeNode("/DevEnv/WebSchemes").Codons) {
-                    var obj = (IProtoPlug) i.AddIn.CreateObject(i.Properties["class"]);
-                    var protoPlug = new ProtoPlug(i.Properties["scheme"], obj);
+                    var obj = (IProtocol) i.AddIn.CreateObject(i.Properties["class"]);
+                    Protocol.RegisterProtocol(i.Properties["scheme"], obj);
                 }
             }
 
