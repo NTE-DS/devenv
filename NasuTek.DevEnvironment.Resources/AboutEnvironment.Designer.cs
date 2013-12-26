@@ -53,8 +53,8 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(399, 69);
             this.label1.TabIndex = 0;
-            this.label1.Text = "{0}\r\nCopyright © {1}-2013 NasuTek Enterprises\r\n\r\nNasuTek Developer Studio\r\nCopyri" +
-    "ght © {2}-2013 NasuTek Enterprises\r\n";
+            this.label1.Text = "{0}\r\nCopyright © {1}-2014 NasuTek Enterprises\r\n\r\nNasuTek Developer Studio\r\nCopyri" +
+    "ght © {2}-2014 NasuTek Enterprises\r\n";
             // 
             // label2
             // 

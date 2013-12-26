@@ -3,7 +3,6 @@
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <Import Project="$(SolutionDir)DevEnv_BuildConfig.proj" />
   <Import Project="$(SolutionDir)DevEnv_BuildConfig.user.proj" Condition="Exists('$(SolutionDir)DevEnv_BuildConfig.user.proj')" />
-
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -55,6 +54,135 @@
     <Compile Include="AboutEnvironment.Designer.cs">
       <DependentUpon>AboutEnvironment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Addins\AddInTree\AddInManager.cs" />
+    <Compile Include="Addins\AddInTree\AddInTree.cs" />
+    <Compile Include="Addins\AddInTree\AddInTreeNode.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\AddIn.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\AddInLoadException.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\AddInReference.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\AssemblyLocator.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\BuildItemArgs.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\Codon.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\ComplexCondition.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\Condition.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\DefaultConditionEvaluators\CompareConditionEvaluator.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\DefaultConditionEvaluators\LazyConditionEvaluator.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\DefaultConditionEvaluators\OwnerStateConditionEvaluator.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\DefaultDoozers\ClassDoozer.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\DefaultDoozers\FileFilterDoozer.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\DefaultDoozers\Icon\IconDescriptor.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\DefaultDoozers\Icon\IconDoozer.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\DefaultDoozers\IncludeDoozer.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\DefaultDoozers\LazyDoozer.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\DefaultDoozers\MenuItem\AbstractCheckableMenuCommand.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\DefaultDoozers\MenuItem\AbstractMenuCommand.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\DefaultDoozers\MenuItem\ICheckableMenuCommand.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\DefaultDoozers\MenuItem\IMenuCommand.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\DefaultDoozers\MenuItem\MenuItemDoozer.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\DefaultDoozers\StringDoozer.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\DefaultDoozers\ToolBarItem\AbstractComboBoxCommand.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\DefaultDoozers\ToolBarItem\AbstractTextBoxCommand.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\DefaultDoozers\ToolBarItem\IComboBoxCommand.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\DefaultDoozers\ToolBarItem\ITextBoxCommand.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\DefaultDoozers\ToolBarItem\ToolBarItemDoozer.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\ExtensionPath.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\IBuildItemsModifier.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\ICondition.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\IConditionEvaluator.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\IDoozer.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\Manifest.cs" />
+    <Compile Include="Addins\AddInTree\AddIn\Runtime.cs" />
+    <Compile Include="Addins\AddInTree\CoreStartup.cs" />
+    <Compile Include="Addins\AddInTree\TopologicalSort.cs" />
+    <Compile Include="Addins\AddInTree\TreePathNotFoundException.cs" />
+    <Compile Include="Addins\CoreException.cs" />
+    <Compile Include="Addins\ExtensionMethods.cs" />
+    <Compile Include="Addins\Menu\IStatusUpdate.cs" />
+    <Compile Include="Addins\Menu\ISubmenuBuilder.cs" />
+    <Compile Include="Addins\Menu\Menu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Addins\Menu\MenuCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Addins\Menu\MenuCommand.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Addins\Menu\MenuSeparator.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Addins\Menu\MenuService.cs" />
+    <Compile Include="Addins\MessageService\CustomDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Addins\MessageService\IDialogMessageService.cs" />
+    <Compile Include="Addins\MessageService\InputBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Addins\MessageService\SaveErrorChooseDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Addins\MessageService\SaveErrorInformDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Addins\MessageService\WinFormsMessageService.cs" />
+    <Compile Include="Addins\Services\AnalyticsMonitor\AnalyticsMonitorService.cs" />
+    <Compile Include="Addins\Services\AnalyticsMonitor\IAnalyticsMonitor.cs" />
+    <Compile Include="Addins\Services\ApplicationStateInfoService.cs" />
+    <Compile Include="Addins\Services\FileUtility\FileName.cs" />
+    <Compile Include="Addins\Services\FileUtility\FileNameEventHandler.cs" />
+    <Compile Include="Addins\Services\FileUtility\FileUtility.cs" />
+    <Compile Include="Addins\Services\FileUtility\FileUtility.Minimal.cs" />
+    <Compile Include="Addins\Services\LoggingService\ILoggingService.cs" />
+    <Compile Include="Addins\Services\LoggingService\LoggingService.cs" />
+    <Compile Include="Addins\Services\LoggingService\TextWriterLoggingService.cs" />
+    <Compile Include="Addins\Services\MessageService\IMessageService.cs" />
+    <Compile Include="Addins\Services\MessageService\MessageService.cs" />
+    <Compile Include="Addins\Services\MessageService\TextWriterMessageService.cs" />
+    <Compile Include="Addins\Services\PropertyService\Properties.cs" />
+    <Compile Include="Addins\Services\PropertyService\PropertyChangedEvent.cs" />
+    <Compile Include="Addins\Services\PropertyService\PropertyService.cs" />
+    <Compile Include="Addins\Services\RegistryService\RegistryService.cs" />
+    <Compile Include="Addins\Services\ResourceService\ResourceNotFoundException.cs" />
+    <Compile Include="Addins\Services\ResourceService\ResourceService.cs" />
+    <Compile Include="Addins\Services\ServiceManager.cs" />
+    <Compile Include="Addins\Services\ServiceNotFoundException.cs" />
+    <Compile Include="Addins\Services\StringParser\IStringTagProvider.cs" />
+    <Compile Include="Addins\Services\StringParser\PropertyObjectTagProvider.cs" />
+    <Compile Include="Addins\Services\StringParser\StringParser.cs" />
+    <Compile Include="Addins\ToolBar\ToolBarCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Addins\ToolBar\ToolBarComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Addins\ToolBar\ToolBarCommand.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Addins\ToolBar\ToolBarDropDownButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Addins\ToolBar\ToolBarLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Addins\ToolBar\ToolBarSeparator.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Addins\ToolBar\ToolBarService.cs" />
+    <Compile Include="Addins\ToolBar\ToolBarSplitButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Addins\ToolBar\ToolBarTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Addins\Util\AbstractCommand.cs" />
+    <Compile Include="Addins\Util\CallbackOnDispose.cs" />
+    <Compile Include="Addins\Util\ClipboardWrapper.cs" />
+    <Compile Include="Addins\Util\DebugTextWriter.cs" />
+    <Compile Include="Addins\Util\ICommand.cs" />
+    <Compile Include="Addins\Util\NativeMethods.cs" />
+    <Compile Include="Addins\Util\RightToLeftConverter.cs" />
+    <Compile Include="Addins\WinFormsResourceService.cs" />
     <Compile Include="Arguments.cs" />
     <Compile Include="Class1.cs">
       <SubType>Component</SubType>
@@ -294,18 +422,13 @@
     <Content Include="Docking\Resources\DockPane_Dock.bmp" />
     <Content Include="Docking\Resources\DockPane_Option.bmp" />
     <Content Include="Docking\Resources\DockPane_OptionOverflow.bmp" />
+    <None Include="Addins\AddIn.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Resources\SplashObject.png" />
     <None Include="Resources\AboutLogo.png" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Docking\Resources\Thumbs.db" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NasuTek.DevEnvironment.Resources.Addins\NasuTek.DevEnvironment.Resources.Addins.csproj">
-      <Project>{cdb70be9-6590-4850-a9f7-21ab491f6eca}</Project>
-      <Name>NasuTek.DevEnvironment.Resources.Addins</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,18 +1,20 @@
 ﻿/***************************************************************************************************
- * NasuTek Developer Studio
- * Copyright (C) 2005-2013 NasuTek Enterprises
+ * NasuTek Developer Studio Development Environment Core DLL
+ * Copyright (C) 2005-2014 NasuTek Enterprises
+ * Window Docking Portions Copyright (C) 2007-2012 Weifen Luo (email: weifenluo@yahoo.com)
+ * Addin Engine Portions Copyright (C) 2001-2012 AlphaSierraPapa for the SharpDevelop Team
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * This library is free software; you can redistribute it and/or modify it under the terms of the 
+ * GNU Library General Public License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * This library is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Library General Public License for more details.
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * You should have received a copy of the GNU Library General Public License along with this 
+ * library; if not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
  ***************************************************************************************************/
 
 using NasuTek.DevEnvironment.Resources.Addins;
@@ -45,7 +47,7 @@ namespace NasuTek.DevEnvironment.Resources
             }
         }
 
-        ToolBarManager toolBarManager;
+       public ToolBarManager toolBarManager { get; private set; }
 
         public Workspace()
         {
@@ -62,11 +64,6 @@ namespace NasuTek.DevEnvironment.Resources
             //toolBarManager.AddControl(menuStrip1);
 
             MenuService.AddItemsToMenu(menuStrip1.Items, menuStrip1, "/DevEnv/Menu");
-
-            //if(menuStrip1.Items)
-            //{
-                menuStrip1.MdiWindowListItem = menuStrip1.Items.Cast<ToolStripMenuItem>().FirstOrDefault(v=> v.Text == "Window");
-            //}
 
             if (AddInTree.ExistsTreeNode("/DevEnv/Pads"))
             {
@@ -97,7 +94,7 @@ namespace NasuTek.DevEnvironment.Resources
         }
 
         public DevEnvPane GetPane(string paneId) {
-            return (DevEnvPane)dockPanel1.Contents.Where(p => p is DevEnvPane && ((DevEnvPane)p).Name == paneId).FirstOrDefault();
+            return (DevEnvPane)dockPanel1.Contents.FirstOrDefault(p => p is DevEnvPane && ((DevEnvPane)p).Name == paneId);
         }
 
         private void Workspace_Load(object sender, EventArgs e)
