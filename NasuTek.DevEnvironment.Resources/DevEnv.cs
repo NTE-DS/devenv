@@ -17,7 +17,7 @@
  * Boston, MA 02111-1307, USA.
  ***************************************************************************************************/
 
-using NasuTek.DevEnvironment.Resources.Addins;
+using NasuTek.DevEnvironment.Extensibility.Addins;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -28,16 +28,21 @@ using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NasuTek.DevEnvironment.Workspace;
 
-namespace NasuTek.DevEnvironment.Resources {
+namespace NasuTek.DevEnvironment {
     public class DevEnv {
         public static DevEnv Instance { get; private set; }
 
-        public Workspace WorkspaceEnvironment { get; private set; }
+        public WorkspaceWindow WorkspaceEnvironment { get; private set; }
         public string ProductName { get; set; }
         public Icon WindowIcon { get; set; }
-        public Version ProductVersion { get; set; }
+        public Version ProductVersionRelease { get; set; }
+        public Version ProductVersionCodebase { get; set; }
+        public string ProductBuildCode { get; set; }
+        public string ProductBuildStage { get; set; }
         public string ProductCopyrightYear { get; set; }
+        public string ProductBuildLab { get; set; }
         public string RegisteredUser { get; set; }
         public string RegisteredCompany { get; set; }
         public Dictionary<string, object> DevEnvStorage { get; private set; }
@@ -47,7 +52,10 @@ namespace NasuTek.DevEnvironment.Resources {
             Instance = this;
 
             ProductName = "NasuTek Development Environment";
-            ProductVersion = new Version(DevEnvVersion.FullVersion);
+            ProductVersionCodebase = new Version(DevEnvVersion.CodebaseVersion);
+            ProductVersionRelease = new Version(DevEnvVersion.ReleaseVersion);
+            ProductBuildStage = DevEnvVersion.BuildStage;
+            ProductBuildLab = DevEnvVersion.BuildLab;
             ProductCopyrightYear = "2005";
             RegisteredUser = "Unregistered User";
             RegisteredCompany = "";
@@ -97,9 +105,9 @@ namespace NasuTek.DevEnvironment.Resources {
             // picked up when they are put into the
             // "data/resources" directory.
             ResourceService.RegisterNeutralStrings(
-                new ResourceManager("NasuTek.DevEnvironment.Resources.StringResources", exe));
+                new ResourceManager("NasuTek.DevEnvironment.StringResources", exe));
             ResourceService.RegisterNeutralImages(
-                new ResourceManager("NasuTek.DevEnvironment.Resources.ImageResources", exe));
+                new ResourceManager("NasuTek.DevEnvironment.ImageResources", exe));
 
             LoggingService.Info("Looking for AddIns...");
             // Searches for ".addin" files in the 
@@ -137,14 +145,16 @@ namespace NasuTek.DevEnvironment.Resources {
             // Workbench is our class from the base 
             // project, this method creates an instance
             // of the main form.
-            WorkspaceEnvironment = new Workspace {Text = ProductName, Icon = WindowIcon};
+            WorkspaceEnvironment = new WorkspaceWindow {Text = ProductName, Icon = WindowIcon};
 
+#if DEPROTOCOLSUPPORT
             if (AddInTree.ExistsTreeNode("/DevEnv/WebSchemes")) {
                 foreach (Codon i in AddInTree.GetTreeNode("/DevEnv/WebSchemes").Codons) {
                     var obj = (IProtocol) i.AddIn.CreateObject(i.Properties["class"]);
                     Protocol.RegisterProtocol(i.Properties["scheme"], obj);
                 }
             }
+#endif
 
             try {
                 LoggingService.Info("Running application...");

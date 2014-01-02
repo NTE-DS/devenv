@@ -1,4 +1,4 @@
-﻿namespace NasuTek.DevEnvironment.Resources {
+﻿namespace NasuTek.DevEnvironment {
     partial class SplashScreen {
         /// <summary>
         /// Required designer variable.
@@ -149,7 +149,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::NasuTek.DevEnvironment.Resources.Properties.Resources.SplashObject;
+            this.BackgroundImage = global::NasuTek.DevEnvironment.Properties.Resources.SplashObject;
             this.ClientSize = new System.Drawing.Size(716, 470);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label4);

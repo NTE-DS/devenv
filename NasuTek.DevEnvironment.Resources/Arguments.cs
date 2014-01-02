@@ -21,7 +21,7 @@ using System;
 using System.Collections.Specialized;
 using System.Text.RegularExpressions;
 
-namespace NasuTek.DevEnvironment.Resources
+namespace NasuTek.DevEnvironment
 {
 	public class Arguments
 	{
@@ -33,7 +33,10 @@ namespace NasuTek.DevEnvironment.Resources
 				return this._parameters[param];
 			}
 		}
-		public Arguments(string[] args)
+
+	    private Arguments() {}
+
+	    public Arguments(string[] args)
 		{
 			this._parameters = new StringDictionary();
 			Regex regex = new Regex("^-{1,2}|^/|=|:", RegexOptions.IgnoreCase | RegexOptions.Compiled);

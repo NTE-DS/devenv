@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace NasuTek.DevEnvironment.Resources {
+namespace NasuTek.DevEnvironment {
     public class ToolStripSpringTextBox : ToolStripTextBox {
         public override Size GetPreferredSize(Size constrainingSize) {
             // Use the default size if the text box is on the overflow menu 

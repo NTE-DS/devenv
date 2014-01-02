@@ -17,5 +17,12 @@
       This property needs to be set to the location where you want to put builds in.
     -->
     <BuildPath>$(SolutionDir)..\bin\$(Configuration)</BuildPath>
+
+    <!--
+      WithDeProtocol: Boolean
+      
+      Builds Development Environment with DevEnv Protocol Support.
+    -->
+    <WithDeProtocol>true</WithDeProtocol>
   </PropertyGroup>
 </Project>

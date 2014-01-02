@@ -23,13 +23,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using NasuTek.DevEnvironment.Resources.Addins.WinForms;
+using NasuTek.DevEnvironment.Extensibility.Addins;
+using NasuTek.DevEnvironment.Extensibility.Addins.WinForms;
 
-namespace NasuTek.DevEnvironment.Resources
+namespace NasuTek.DevEnvironment
 {
     public class WindowMenuBuilder : ISubmenuBuilder
     {
-        public System.Windows.Forms.ToolStripItem[] BuildSubmenu(Addins.Codon codon, object owner) {
+        public System.Windows.Forms.ToolStripItem[] BuildSubmenu(Codon codon, object owner) {
             var windowMenu = new ToolStripMenuItem("Window");
 
             var closeAllDocuments = new ToolStripMenuItem("C&lose All Documents");

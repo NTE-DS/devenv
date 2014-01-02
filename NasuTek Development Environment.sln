@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NasuTek.DevEnvironment.Resources", "NasuTek.DevEnvironment.Resources\NasuTek.DevEnvironment.Resources.csproj", "{813D5D0D-D1A1-40AD-8357-B54916647819}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NasuTek.DevEnvironment", "NasuTek.DevEnvironment.Resources\NasuTek.DevEnvironment.csproj", "{813D5D0D-D1A1-40AD-8357-B54916647819}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevEnv", "DevEnv\DevEnv.csproj", "{3B8762E7-C45A-4DFA-AF07-805AE47BEC56}"
 EndProject

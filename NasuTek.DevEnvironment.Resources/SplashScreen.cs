@@ -27,7 +27,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace NasuTek.DevEnvironment.Resources {
+namespace NasuTek.DevEnvironment {
     public partial class SplashScreen : Form {
         public SplashScreen() {
             InitializeComponent();

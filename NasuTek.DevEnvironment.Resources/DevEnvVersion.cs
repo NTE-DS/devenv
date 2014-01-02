@@ -23,13 +23,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NasuTek.DevEnvironment.Resources {
-    public class DevEnvVersion {
-        public const string Major = "8";
+namespace NasuTek.DevEnvironment {
+    public partial class DevEnvVersion {
+        public const string MajorCodebase = "7";
+        public const string MinorCodebase = "1";
+        public const string BuildCodebase = "9000";
+        public const string RevisionCodebase = "2900";
+        public const string Major = "1";
         public const string Minor = "0";
-        public const string Build = "9000";
+        public const string Build = "0";
         public const string Revision = "0";
-        public const string ShortVersion = Major + "." + Minor + "." + Build;
-        public const string FullVersion =  ShortVersion + "." + Revision;
+#if DEPROTOCOLSUPPORT
+        public const string BuildStage = "a1";
+#else
+        public const string BuildStage = "a1-nodeproto";
+#endif
+        public const string ReleaseVersion = Major + "." + Minor + "." + Build + "." + Revision;
+        public const string CodebaseVersion = MajorCodebase + "." + MinorCodebase + "." + BuildCodebase + "." + RevisionCodebase;
+        public const string FullVersion = CodebaseVersion + "-" + BuildStage;
     }
 }
