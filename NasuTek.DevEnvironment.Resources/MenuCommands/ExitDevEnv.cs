@@ -17,7 +17,7 @@
  * Boston, MA 02111-1307, USA.
  ***************************************************************************************************/
 
-using NasuTek.DevEnvironment.Extensibility.Addins;
+using NasuTek.DevEnvironment.Extendability;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +25,7 @@ using System.Windows.Forms;
 
 namespace NasuTek.DevEnvironment.MenuCommands
 {
-    public class ExitDevEnv : AbstractMenuCommand
+    public class ExitDevEnv : AbstractCommand
     {
         public override void Run()
         {

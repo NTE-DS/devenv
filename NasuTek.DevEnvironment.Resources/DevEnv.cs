@@ -17,7 +17,7 @@
  * Boston, MA 02111-1307, USA.
  ***************************************************************************************************/
 
-using NasuTek.DevEnvironment.Extensibility.Addins;
+using NasuTek.DevEnvironment.Extendability;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -28,10 +28,27 @@ using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using NasuTek.DevEnvironment.Workspace;
+using System.Diagnostics;
+using NasuTek.DevEnvironment.Pads;
+using NasuTek.DevEnvironment.Extensibility;
+using Microsoft.Win32;
+using NasuTek.DevEnvironment.Workbench;
 
 namespace NasuTek.DevEnvironment {
-    public class DevEnv {
+    class DebugLog : TraceListener
+    {
+        public override void Write(string message)
+        {
+            DevEnv.Instance.LogWrite("DevEnv Application Log", message);
+        }
+
+        public override void WriteLine(string message)
+        {
+            DevEnv.Instance.LogWriteLine("DevEnv Application Log", message);
+        }
+    }
+
+    public partial class DevEnv { 
         public static DevEnv Instance { get; private set; }
 
         public WorkspaceWindow WorkspaceEnvironment { get; private set; }
@@ -45,12 +62,18 @@ namespace NasuTek.DevEnvironment {
         public string ProductBuildLab { get; set; }
         public string RegisteredUser { get; set; }
         public string RegisteredCompany { get; set; }
-        public Dictionary<string, object> DevEnvStorage { get; private set; }
         public Arguments DevEnvArguments { get; private set; }
+        internal Dictionary<string, StringBuilder> Logs { get; private set; }
+        public bool ShowIDEOnStartup { get; set; }
+        public bool ExitThreadOnIDEExit { get; set; }
+        public IDevEnvReg DevEnvRegistry { get; set; }
+        public DEExtendability Extendability { get; private set; }
+        public bool EnvironmentInitialized { get; private set; }
 
-        public DevEnv() {
+        public DevEnv(string productId = "DeveloperStudio", string version = "7.1") {
             Instance = this;
 
+            WindowIcon = Properties.Resources.DevEnvMain;
             ProductName = "NasuTek Development Environment";
             ProductVersionCodebase = new Version(DevEnvVersion.CodebaseVersion);
             ProductVersionRelease = new Version(DevEnvVersion.ReleaseVersion);
@@ -59,126 +82,162 @@ namespace NasuTek.DevEnvironment {
             ProductCopyrightYear = "2005";
             RegisteredUser = "Unregistered User";
             RegisteredCompany = "";
-            DevEnvStorage = new Dictionary<string, object>();
+            Logs = new Dictionary<string, StringBuilder>();
+            ShowIDEOnStartup = true;
+            ExitThreadOnIDEExit = true;
+
+#if DEBUG
+            DevEnvRegistry = new DevEnvReg(productId, version + "-Debug");
+#else
+            DevEnvRegistry = new DevEnvReg(productId, version);
+#endif
+
+            Extendability = new DEExtendability();
         }
 
-        public void InitializeEnvironment(Arguments args) {
-            DevEnvArguments = args;
+        public void RegisterOutputLog(string name)
+        {
+            Logs.Add(name, new StringBuilder());
+            if (WorkspaceEnvironment != null && WorkspaceEnvironment.GetPane("Output") != null)
+                ((OutputPad)WorkspaceEnvironment.GetPane("Output")).RefreshLogs();
+        }
 
-            LoggingService.Info("Application start");
+        public void UnregisterOutputLog(string name)
+        {
+            Logs.Remove(name);
+            if (WorkspaceEnvironment != null && WorkspaceEnvironment.GetPane("Output") != null)
+                ((OutputPad)WorkspaceEnvironment.GetPane("Output")).RefreshLogs();
+        }
 
-            // Get a reference to the entry assembly (Startup.exe)
-            Assembly exe = typeof (DevEnv).Assembly;
+        public void LogWrite(string log, string message)
+        {
+            Logs[log].Append(message);
+            if (WorkspaceEnvironment != null && WorkspaceEnvironment.GetPane("Output") != null)
+                ((OutputPad)WorkspaceEnvironment.GetPane("Output")).RefreshActiveLog(log);
+        }
 
-            // Set the root path of our application. 
-            // ICSharpCode.Core looks for some other
-            // paths relative to the application root:
-            // "data/resources" for language resources, 
-            // "data/options" for default options
-            FileUtility.ApplicationRootPath = Path.GetDirectoryName(exe.Location);
+        public void LogWriteLine(string log, string message)
+        {
+            Logs[log].AppendLine(message);
+            if (WorkspaceEnvironment != null && WorkspaceEnvironment.GetPane("Output") != null)
+                ((OutputPad)WorkspaceEnvironment.GetPane("Output")).RefreshActiveLog(log);
+        }
 
-            LoggingService.Info("Starting core services...");
+        public void InitializeServices()
+        {
+            DevEnvSvc.RegisterService("UISvc", new UiSvc());
+            DevEnvSvc.RegisterService("PluginSvc", new PluginSvc());
+        }
 
-            // CoreStartup is a helper class 
-            // making starting the Core easier.
-            // The parameter is used as the application 
-            // name, e.g. for the default title of
-            // MessageService.ShowMessage() calls.
-            CoreStartup coreStartup = new CoreStartup(ProductName);
-            // It is also used as default storage 
-            // location for the application settings:
-            // "%Application Data%\%Application Name%", but you 
-            // can override that by setting c.ConfigDirectory
-
-            // Specify the name of the application settings 
-            // file (.xml is automatically appended)
-            coreStartup.PropertiesName = "AppProperties";
-
-            // Initializes the Core services 
-            // (ResourceService, PropertyService, etc.)
-            coreStartup.StartCoreServices();
-
-            // Registeres the default (English) strings 
-            // and images. They are compiled as
-            // "EmbeddedResource" into Startup.exe.
-            // Localized strings are automatically 
-            // picked up when they are put into the
-            // "data/resources" directory.
-            ResourceService.RegisterNeutralStrings(
-                new ResourceManager("NasuTek.DevEnvironment.StringResources", exe));
-            ResourceService.RegisterNeutralImages(
-                new ResourceManager("NasuTek.DevEnvironment.ImageResources", exe));
-
-            LoggingService.Info("Looking for AddIns...");
-            // Searches for ".addin" files in the 
-            // application directory.
-            coreStartup.AddAddInsFromDirectory(
-                Path.Combine(FileUtility.ApplicationRootPath, "AddIns"));
-
-            if (args["DisableUserAddons"] != "true") {
-                // Searches for a "AddIns.xml" in the user 
-                // profile that specifies the names of the
-                // AddIns that were deactivated by the 
-                // user, and adds "external" AddIns.
-                coreStartup.ConfigureExternalAddIns(
-                    Path.Combine(PropertyService.ConfigDirectory, "AddIns.xml"));
-
-                // Searches for AddIns installed by the 
-                // user into his profile directory. This also
-                // performs the job of installing, 
-                // uninstalling or upgrading AddIns if the user
-                // requested it the last time this application was running.
-                coreStartup.ConfigureUserAddIns(
-                    Path.Combine(PropertyService.ConfigDirectory, "AddInInstallTemp"),
-                    Path.Combine(PropertyService.ConfigDirectory, "AddIns"));
+        public void InitializeEnvironment(Arguments args)
+        {
+            foreach (var i in DevEnv.Instance.Extendability.Commands["BeforeEnvironmentInitialized"])
+            {
+                i.Run();
             }
 
+            EnvironmentInitialized = true;
+            DevEnvArguments = args;
+
+            RegisterOutputLog("DevEnv Application Log");
+            var log = new DebugLog();
+            Debug.Listeners.Add(log);
+
+            LoggingService.Info("Application start");
+            
             LoggingService.Info("Loading AddInTree...");
-            // Now finally initialize the application. 
-            // This parses the ".addin" files and
-            // creates the AddIn tree. It also 
-            // automatically runs the commands in
-            // "/Workspace/Autostart"
-            coreStartup.RunInitialization();
+            foreach(var i in DevEnvRegistry.OpenSubKey("Packages").GetSubKeyNames())
+            {
+                var addin = DevEnvRegistry.OpenSubKey("Packages").OpenSubKey(i);
+                var guid = Guid.Parse(i);
+                var name = (string)addin.GetValue(null);
+
+                try
+                {
+                    var addInAssemb = Assembly.LoadFile(Path.Combine(Application.StartupPath, (string)addin.GetValue("Assembly")));
+                    
+                    var addinPlug = (IPlugin)addInAssemb.CreateInstance((string)addin.GetValue("PackageClass"));
+                    var plugin = new PlugIn(guid, name, addinPlug);
+                    addinPlug.Load();
+                    Extendability.PluginsInt.Add(plugin);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(String.Format("Addin {1} '{0}' Could not load because of the following reason:\n\n{2}", name, guid, e.Message));
+                }
+            }
+
+            foreach (var i in DevEnvRegistry.OpenSubKey("DocumentTypes").GetSubKeyNames())
+            {
+                var addin = DevEnvRegistry.OpenSubKey("DocumentTypes").OpenSubKey(i);
+                var guid = Guid.Parse(i);
+                var name = (string)addin.GetValue(null);
+
+
+                var addInAssemb = AppDomain.CurrentDomain.GetAssemblies().First(v => v.GetName().FullName == (string)addin.GetValue("DocumentAssembly"));
+
+                var addinPlug = addInAssemb.GetType((string)addin.GetValue("DocumentClass"));
+
+                Extendability.DocumentTypes.Add(guid, Tuple.Create(name, addinPlug));
+            }
 
             LoggingService.Info("Initializing Workbench...");
             // Workbench is our class from the base 
             // project, this method creates an instance
             // of the main form.
-            WorkspaceEnvironment = new WorkspaceWindow {Text = ProductName, Icon = WindowIcon};
+            WorkspaceEnvironment = new WorkspaceWindow { Text = ProductName, Icon = WindowIcon };
 
 #if DEPROTOCOLSUPPORT
-            if (AddInTree.ExistsTreeNode("/DevEnv/WebSchemes")) {
-                foreach (Codon i in AddInTree.GetTreeNode("/DevEnv/WebSchemes").Codons) {
-                    var obj = (IProtocol) i.AddIn.CreateObject(i.Properties["class"]);
-                    Protocol.RegisterProtocol(i.Properties["scheme"], obj);
-                }
-            }
+            //TODO: WebSchemes
 #endif
+            
+            LoggingService.Info("Running application...");
+            // Workbench.Instance is the instance of 
+            // the main form, run the message loop.
+            Application.Run(new WorkspaceEnvironmentContext(this));
 
-            try {
-                LoggingService.Info("Running application...");
-                // Workbench.Instance is the instance of 
-                // the main form, run the message loop.
-                Application.Run(WorkspaceEnvironment);
-            } finally {
-                LoggingService.Info("Running finalize commands...");
-                foreach (ICommand command in AddInTree.BuildItems<ICommand>("/DevEnv/FinalizeCommands", null, false)) {
-                    try {
-                        command.Run();
-                    } catch (Exception ex) {
-                        // allow startup to continue if some commands fail
-                        MessageService.ShowException(ex);
-                    }
-                }
-                try {
-                    // Save changed properties
-                    PropertyService.Save();
-                } catch (Exception ex) {
-                    MessageService.ShowException(ex, "Error storing properties");
-                }
-            }
             LoggingService.Info("Application shutdown");
+        }
+    }
+
+    class WorkspaceEnvironmentContext : ApplicationContext
+    {
+        DevEnv environment;
+
+        public WorkspaceEnvironmentContext(DevEnv env)
+        {
+            ThreadExit += WorkspaceEnvironmentContext_ThreadExit;
+            if (env.ExitThreadOnIDEExit)
+                env.WorkspaceEnvironment.FormClosed += WorkspaceEnvironment_FormClosed;
+
+            if (env.ShowIDEOnStartup)
+                env.WorkspaceEnvironment.Show();
+
+            environment = env;
+        }
+
+        private void WorkspaceEnvironment_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ExitThread();
+        }
+
+        private void WorkspaceEnvironmentContext_ThreadExit(object sender, EventArgs e)
+        {
+            LoggingService.Info("Running finalize commands...");
+            foreach (var i in DevEnv.Instance.Extendability.Commands["Finalize"])
+            {
+                i.Run();
+            }
+           
+            //try
+            //{
+            //    // Save changed properties
+            //    PropertyService.Save();
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageService.ShowException(ex, "Error storing properties");
+            //}
         }
     }
 }

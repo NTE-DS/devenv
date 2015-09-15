@@ -17,7 +17,7 @@
  * Boston, MA 02111-1307, USA.
  ***************************************************************************************************/
 
-using NasuTek.DevEnvironment.Extensibility.Addins;
+using NasuTek.DevEnvironment.Extendability;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -37,17 +37,27 @@ namespace NasuTek.DevEnvironment.Forms
             label4.Text = DevEnv.Instance.RegisteredUser + "\n" + DevEnv.Instance.RegisteredCompany;
             label8.Text = String.Format(label8.Text, DevEnv.Instance.ProductVersionCodebase + "-" + DevEnv.Instance.ProductBuildStage + " (" + DevEnv.Instance.ProductBuildLab + ")", DevEnvVersion.FullVersion + " (" + DevEnvVersion.BuildLab + ")");
 
-            foreach(AddIn i in AddInTree.AddIns.Where(a => a.IsPreinstalled)){
-                listBox1.Items.Add(i.Name);
+            foreach(var prod in DevEnv.Instance.Extendability.InstalledProducts)
+            {
+                listBox1.Items.Add(prod);
+            }
+
+            foreach (var upd in DevEnv.Instance.Extendability.InstalledUpdates)
+            {
+                listBox2.Items.Add(upd);
             }
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e) {
             if (listBox1.SelectedItem == null) return;
-            var addIn = AddInTree.AddIns.First(a => a.Name == (string) listBox1.SelectedItem);
-            textBox1.Text = addIn.Properties["description"];
-            if (addIn.Properties["icon"] != "")
-                pictureBox2.Image = ResourceService.GetImageResource(addIn.Properties["icon"]) is Icon ? new Icon((Icon)ResourceService.GetImageResource(addIn.Properties["icon"]), new Size(48,48)).ToBitmap() : (Bitmap)ResourceService.GetImageResource(addIn.Properties["icon"]);
+
+            var prod = (Product)listBox1.SelectedItem;
+            textBox1.Text = prod.Description;
+            pictureBox2.Image = prod.Icon;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
 
         }
     }

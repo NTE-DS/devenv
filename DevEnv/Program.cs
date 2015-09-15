@@ -15,6 +15,7 @@ namespace DevEnv {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             var devEnv = new NasuTek.DevEnvironment.DevEnv();
+            devEnv.InitializeServices();
             devEnv.InitializeEnvironment(new Arguments(args));
         }
     }

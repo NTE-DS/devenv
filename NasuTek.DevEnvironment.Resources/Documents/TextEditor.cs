@@ -1,5 +1,4 @@
-﻿using System.IO;
-using NasuTek.DevEnvironment.Extensibility.Workbench;
+﻿using NasuTek.DevEnvironment.Extendability.Workbench;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,31 +7,23 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using NasuTek.DevEnvironment.Extendability;
 
 namespace NasuTek.DevEnvironment.Documents
 {
-    public partial class TextEditor : DevEnvDocument {
-        private string m_Path;
-
+    public partial class TextEditor : DevEnvDocument
+    {
         public TextEditor()
         {
             InitializeComponent();
         }
 
-        public override void Open(DocumentMetadata openObj) {
-            Text = Path.GetFileName(openObj.FilePath);
-            textEditorControl1.Text = File.ReadAllText(openObj.FilePath);
-            m_Path = openObj.FilePath;
-        }
-
-        public override void Save() {
-            File.WriteAllText(m_Path, textEditorControl1.Text);
-        }
-
-        public override void SaveAs(string path) {
-            m_Path = path;
-            Text = Path.GetFileName(m_Path);
-            Save();
+        public override void Open(DocumentMetadata openObj)
+        {
+            if (openObj.IsFile)
+                richTextBox1.LoadFile(openObj.FilePath);
+            else
+                richTextBox1.Text = openObj.DataObject.ToString();
         }
     }
 }

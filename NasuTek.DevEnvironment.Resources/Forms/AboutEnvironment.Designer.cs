@@ -57,8 +57,8 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(448, 69);
             this.label1.TabIndex = 0;
-            this.label1.Text = "{0}\r\nCopyright © {1}-2014 NasuTek Enterprises\r\n\r\nNasuTek Developer Studio\r\nCopyri" +
-    "ght © {2}-2014 NasuTek Enterprises\r\n";
+            this.label1.Text = "{0}\r\nCopyright © {1}-2016 NasuTek Enterprises\r\n\r\nNasuTek Developer Studio\r\nCopyri" +
+    "ght © {2}-2016 NasuTek Enterprises\r\n";
             // 
             // label2
             // 
@@ -112,6 +112,7 @@
             this.button1.TabIndex = 7;
             this.button1.Text = "Copy Info";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label6
             // 
@@ -124,12 +125,12 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(183, 356);
+            this.textBox1.Location = new System.Drawing.Point(155, 356);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(456, 69);
+            this.textBox1.Size = new System.Drawing.Size(484, 69);
             this.textBox1.TabIndex = 10;
             // 
             // label7
@@ -152,7 +153,7 @@
             // 
             // label8
             // 
-            this.label8.Location = new System.Drawing.Point(12, 576);
+            this.label8.Location = new System.Drawing.Point(12, 530);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(633, 31);
             this.label8.TabIndex = 13;
@@ -160,7 +161,7 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(111, 356);
+            this.pictureBox2.Location = new System.Drawing.Point(101, 356);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(48, 48);
             this.pictureBox2.TabIndex = 9;
@@ -179,7 +180,7 @@
             // 
             this.label9.Location = new System.Drawing.Point(12, 441);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(525, 125);
+            this.label9.Size = new System.Drawing.Size(525, 86);
             this.label9.TabIndex = 15;
             this.label9.Text = resources.GetString("label9.Text");
             // 
@@ -204,7 +205,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(657, 616);
+            this.ClientSize = new System.Drawing.Size(657, 564);
             this.Controls.Add(this.listBox2);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);

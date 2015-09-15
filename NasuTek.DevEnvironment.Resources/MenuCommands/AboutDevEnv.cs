@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NasuTek.DevEnvironment.Extensibility.Addins;
+using NasuTek.DevEnvironment.Extendability;
 using NasuTek.DevEnvironment.Forms;
 
 namespace NasuTek.DevEnvironment.MenuCommands
 {
-    public class AboutDevEnv : AbstractMenuCommand
+    public class AboutDevEnv : AbstractCommand
     {
         public override void Run()
         {

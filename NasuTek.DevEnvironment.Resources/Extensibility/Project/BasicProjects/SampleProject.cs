@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using NasuTek.DevEnvironment.Extensibility.Project;
+using NasuTek.DevEnvironment.Extendability;
 
 namespace NasuTek.DevEnvironment.ProjectAPI.BasicProjects
 {
@@ -143,9 +144,9 @@ namespace NasuTek.DevEnvironment.ProjectAPI.BasicProjects
             get { return ProjectService.EmptyObjects; }
         }
 
-        public string DocumentType
+        public Guid DocumentType
         {
-            get { return "SampleObject"; }
+            get { return Guid.Parse("{02D81841-9A80-44A5-9B57-9327F493C4C8}"); }
         }
 
         public SampleProjectObject() {

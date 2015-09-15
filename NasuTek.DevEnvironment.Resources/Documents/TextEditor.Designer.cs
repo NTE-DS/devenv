@@ -28,26 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textEditorControl1 = new NasuTek.DevEnvironment.Workspace.TextEditor.TextEditorControl();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
-            // textEditorControl1
+            // richTextBox1
             // 
-            this.textEditorControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textEditorControl1.IsReadOnly = false;
-            this.textEditorControl1.Location = new System.Drawing.Point(0, 0);
-            this.textEditorControl1.Name = "textEditorControl1";
-            this.textEditorControl1.Size = new System.Drawing.Size(724, 552);
-            this.textEditorControl1.TabIndex = 0;
-            this.textEditorControl1.Text = "textEditorControl1";
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox1.Location = new System.Drawing.Point(0, 0);
+            this.richTextBox1.Multiline = false;
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
+            this.richTextBox1.Size = new System.Drawing.Size(801, 645);
+            this.richTextBox1.TabIndex = 0;
+            this.richTextBox1.Text = "";
             // 
             // TextEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(724, 552);
-            this.Controls.Add(this.textEditorControl1);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ClientSize = new System.Drawing.Size(801, 645);
+            this.Controls.Add(this.richTextBox1);
             this.Name = "TextEditor";
             this.Text = "TextEditor";
             this.ResumeLayout(false);
@@ -56,6 +56,6 @@
 
         #endregion
 
-        private Workspace.TextEditor.TextEditorControl textEditorControl1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

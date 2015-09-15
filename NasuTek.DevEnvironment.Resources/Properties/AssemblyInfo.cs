@@ -6,7 +6,7 @@ using NasuTek.DevEnvironment;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Development Environment DLL")]
+[assembly: AssemblyTitle("Development Environment International Resources")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("NasuTek Enterprises")]

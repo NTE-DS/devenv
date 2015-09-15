@@ -23,23 +23,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using NasuTek.DevEnvironment.Extensibility.Addins;
-using NasuTek.DevEnvironment.Extensibility.Addins.WinForms;
+using NasuTek.DevEnvironment.Extendability;
 
 namespace NasuTek.DevEnvironment
 {
-    public class WindowMenuBuilder : ISubmenuBuilder
-    {
-        public System.Windows.Forms.ToolStripItem[] BuildSubmenu(Codon codon, object owner) {
-            var windowMenu = new ToolStripMenuItem("Window");
+    //public class WindowMenuBuilder : ISubmenuBuilder
+    //{
+    //    public System.Windows.Forms.ToolStripItem[] BuildSubmenu(Codon codon, object owner) {
+    //        var windowMenu = new ToolStripMenuItem("Window");
 
-            var closeAllDocuments = new ToolStripMenuItem("C&lose All Documents");
+    //        var closeAllDocuments = new ToolStripMenuItem("C&lose All Documents");
 
-            windowMenu.DropDownItems.Add(closeAllDocuments);
-            windowMenu.DropDownItems.Add(new ToolBarSeparator());
+    //        windowMenu.DropDownItems.Add(closeAllDocuments);
+    //        windowMenu.DropDownItems.Add(new ToolBarSeparator());
 
-            ((MenuStrip) owner).MdiWindowListItem = windowMenu;
-            return new ToolStripItem[] {windowMenu};
-        }
-    }
+    //        ((MenuStrip) owner).MdiWindowListItem = windowMenu;
+    //        return new ToolStripItem[] {windowMenu};
+    //    }
+    //}
 }

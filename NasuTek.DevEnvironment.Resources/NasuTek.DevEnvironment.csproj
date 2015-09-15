@@ -53,163 +53,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DocumentMetadata.cs" />
+    <Compile Include="DevEnvCore.cs" />
+    <Compile Include="DevEnvReg.cs" />
     <Compile Include="Documents\TextEditor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Documents\TextEditor.Designer.cs">
       <DependentUpon>TextEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Extensibility\Addins\MenuService.cs" />
+    <Compile Include="Extensibility\ExtendabilityCore.cs" />
+    <Compile Include="Extensibility\LoggingService.cs" />
+    <Compile Include="Extensibility\PluginSvc.cs" />
     <Compile Include="Extensibility\Project\BasicProjects\SampleDocument.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Extensibility\Project\BasicProjects\SampleDocument.Designer.cs">
       <DependentUpon>SampleDocument.cs</DependentUpon>
     </Compile>
-    <Compile Include="Extensibility\Project\DeletableObjectAttribute.cs" />
-    <Compile Include="Extensibility\Workbench\DevEnvDocument.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Extensibility\Workbench\DevEnvDocument.Designer.cs">
-      <DependentUpon>DevEnvDocument.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Extensibility\Workbench\ISolutionExplorerRename.cs" />
-    <Compile Include="Extensibility\Workbench\ISolutionExplorerRightClick.cs" />
+    <Compile Include="Extensibility\Project\DefaultSolution.cs" />
+    <Compile Include="Extensibility\UiSvc.cs" />
     <Compile Include="Forms\AboutEnvironment.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\AboutEnvironment.Designer.cs">
       <DependentUpon>AboutEnvironment.cs</DependentUpon>
     </Compile>
-    <Compile Include="Extensibility\Addins\AddInTree\AddInManager.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddInTree.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddInTreeNode.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\AddIn.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\AddInLoadException.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\AddInReference.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\AssemblyLocator.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\BuildItemArgs.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\Codon.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\ComplexCondition.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\Condition.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\DefaultConditionEvaluators\CompareConditionEvaluator.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\DefaultConditionEvaluators\LazyConditionEvaluator.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\DefaultConditionEvaluators\OwnerStateConditionEvaluator.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\DefaultDoozers\ClassDoozer.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\DefaultDoozers\FileFilterDoozer.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\DefaultDoozers\Icon\IconDescriptor.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\DefaultDoozers\Icon\IconDoozer.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\DefaultDoozers\IncludeDoozer.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\DefaultDoozers\LazyDoozer.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\DefaultDoozers\MenuItem\AbstractCheckableMenuCommand.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\DefaultDoozers\MenuItem\AbstractMenuCommand.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\DefaultDoozers\MenuItem\ICheckableMenuCommand.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\DefaultDoozers\MenuItem\IMenuCommand.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\DefaultDoozers\MenuItem\MenuItemDoozer.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\DefaultDoozers\StringDoozer.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\DefaultDoozers\ToolBarItem\AbstractComboBoxCommand.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\DefaultDoozers\ToolBarItem\AbstractTextBoxCommand.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\DefaultDoozers\ToolBarItem\IComboBoxCommand.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\DefaultDoozers\ToolBarItem\ITextBoxCommand.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\DefaultDoozers\ToolBarItem\ToolBarItemDoozer.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\ExtensionPath.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\IBuildItemsModifier.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\ICondition.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\IConditionEvaluator.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\IDoozer.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\Manifest.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\AddIn\Runtime.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\CoreStartup.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\TopologicalSort.cs" />
-    <Compile Include="Extensibility\Addins\AddInTree\TreePathNotFoundException.cs" />
-    <Compile Include="Extensibility\Addins\CoreException.cs" />
-    <Compile Include="Extensibility\Addins\ExtensionMethods.cs" />
-    <Compile Include="Extensibility\Addins\Menu\IStatusUpdate.cs" />
-    <Compile Include="Extensibility\Addins\Menu\ISubmenuBuilder.cs" />
-    <Compile Include="Extensibility\Addins\Menu\Menu.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Extensibility\Addins\Menu\MenuCheckBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Extensibility\Addins\Menu\MenuCommand.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Extensibility\Addins\Menu\MenuSeparator.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Extensibility\Addins\Menu\MenuService.cs" />
-    <Compile Include="Extensibility\Addins\MessageService\CustomDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Extensibility\Addins\MessageService\IDialogMessageService.cs" />
-    <Compile Include="Extensibility\Addins\MessageService\InputBox.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Extensibility\Addins\MessageService\SaveErrorChooseDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Extensibility\Addins\MessageService\SaveErrorInformDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Extensibility\Addins\MessageService\WinFormsMessageService.cs" />
-    <Compile Include="Extensibility\Addins\Services\AnalyticsMonitor\AnalyticsMonitorService.cs" />
-    <Compile Include="Extensibility\Addins\Services\AnalyticsMonitor\IAnalyticsMonitor.cs" />
-    <Compile Include="Extensibility\Addins\Services\ApplicationStateInfoService.cs" />
-    <Compile Include="Extensibility\Addins\Services\FileUtility\FileName.cs" />
-    <Compile Include="Extensibility\Addins\Services\FileUtility\FileNameEventHandler.cs" />
-    <Compile Include="Extensibility\Addins\Services\FileUtility\FileUtility.cs" />
-    <Compile Include="Extensibility\Addins\Services\FileUtility\FileUtility.Minimal.cs" />
-    <Compile Include="Extensibility\Addins\Services\LoggingService\ILoggingService.cs" />
-    <Compile Include="Extensibility\Addins\Services\LoggingService\LoggingService.cs" />
-    <Compile Include="Extensibility\Addins\Services\LoggingService\TextWriterLoggingService.cs" />
-    <Compile Include="Extensibility\Addins\Services\MessageService\IMessageService.cs" />
-    <Compile Include="Extensibility\Addins\Services\MessageService\MessageService.cs" />
-    <Compile Include="Extensibility\Addins\Services\MessageService\TextWriterMessageService.cs" />
-    <Compile Include="Extensibility\Addins\Services\PropertyService\Properties.cs" />
-    <Compile Include="Extensibility\Addins\Services\PropertyService\PropertyChangedEvent.cs" />
-    <Compile Include="Extensibility\Addins\Services\PropertyService\PropertyService.cs" />
-    <Compile Include="Extensibility\Addins\Services\RegistryService\RegistryService.cs" />
-    <Compile Include="Extensibility\Addins\Services\ResourceService\ResourceNotFoundException.cs" />
-    <Compile Include="Extensibility\Addins\Services\ResourceService\ResourceService.cs" />
-    <Compile Include="Extensibility\Addins\Services\ServiceManager.cs" />
-    <Compile Include="Extensibility\Addins\Services\ServiceNotFoundException.cs" />
-    <Compile Include="Extensibility\Addins\Services\StringParser\IStringTagProvider.cs" />
-    <Compile Include="Extensibility\Addins\Services\StringParser\PropertyObjectTagProvider.cs" />
-    <Compile Include="Extensibility\Addins\Services\StringParser\StringParser.cs" />
-    <Compile Include="Extensibility\Addins\ToolBar\ToolBarCheckBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Extensibility\Addins\ToolBar\ToolBarComboBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Extensibility\Addins\ToolBar\ToolBarCommand.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Extensibility\Addins\ToolBar\ToolBarDropDownButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Extensibility\Addins\ToolBar\ToolBarLabel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Extensibility\Addins\ToolBar\ToolBarSeparator.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Extensibility\Addins\ToolBar\ToolBarService.cs" />
-    <Compile Include="Extensibility\Addins\ToolBar\ToolBarSplitButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Extensibility\Addins\ToolBar\ToolBarTextBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Extensibility\Addins\Util\AbstractCommand.cs" />
-    <Compile Include="Extensibility\Addins\Util\CallbackOnDispose.cs" />
-    <Compile Include="Extensibility\Addins\Util\ClipboardWrapper.cs" />
-    <Compile Include="Extensibility\Addins\Util\DebugTextWriter.cs" />
-    <Compile Include="Extensibility\Addins\Util\ICommand.cs" />
-    <Compile Include="Extensibility\Addins\Util\NativeMethods.cs" />
-    <Compile Include="Extensibility\Addins\Util\RightToLeftConverter.cs" />
-    <Compile Include="Extensibility\Addins\WinFormsResourceService.cs" />
     <Compile Include="Arguments.cs" />
     <Compile Include="Class1.cs">
       <SubType>Component</SubType>
@@ -220,132 +89,46 @@
     <Compile Include="Forms\CustomizeEnvironment.Designer.cs">
       <DependentUpon>CustomizeEnvironment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\NewObject.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\NewObject.Designer.cs">
+      <DependentUpon>NewObject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\OpenWith.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OpenWith.Designer.cs">
+      <DependentUpon>OpenWith.cs</DependentUpon>
+    </Compile>
     <Compile Include="MenuCommands\AboutDevEnv.cs" />
     <Compile Include="MenuCommands\CustomizeEnvironmentMenuItem.cs" />
     <Compile Include="DevEnv.cs" />
-    <Compile Include="Extensibility\Workbench\DevEnvPane.cs">
+    <Compile Include="MenuCommands\NewObjectMenuItem.cs" />
+    <Compile Include="Pads\IntermediateWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Extensibility\Workbench\DevEnvPane.Designer.cs">
-      <DependentUpon>DevEnvPane.cs</DependentUpon>
+    <Compile Include="Pads\IntermediateWindow.Designer.cs">
+      <DependentUpon>IntermediateWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="DevEnvVersion.cs" />
+    <Compile Include="Pads\OutputPad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pads\OutputPad.Designer.cs">
+      <DependentUpon>OutputPad.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pads\PropertyWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Pads\PropertyWindow.Designer.cs">
       <DependentUpon>PropertyWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Workspace\Docking\AutoHideStripBase.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Workspace\Docking\DockAreasEditor.cs" />
-    <Compile Include="Workspace\Docking\DockContent.cs">
+    <Compile Include="Pads\TaskList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Workspace\Docking\DockContentCollection.cs" />
-    <Compile Include="Workspace\Docking\DockContentEventArgs.cs" />
-    <Compile Include="Workspace\Docking\DockContentHandler.cs" />
-    <Compile Include="Workspace\Docking\DockOutlineBase.cs" />
-    <Compile Include="Workspace\Docking\DockPane.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="Pads\TaskList.Designer.cs">
+      <DependentUpon>TaskList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Workspace\Docking\DockPane.SplitterControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Workspace\Docking\DockPaneCaptionBase.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Workspace\Docking\DockPaneCollection.cs" />
-    <Compile Include="Workspace\Docking\DockPanel.Appearance.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Workspace\Docking\DockPanel.AutoHideWindow.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Workspace\Docking\DockPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Workspace\Docking\DockPanel.DockDragHandler.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Workspace\Docking\DockPanel.DragHandler.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Workspace\Docking\DockPanel.FocusManager.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Workspace\Docking\DockPanel.MdiClientController.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Workspace\Docking\DockPanel.Persistor.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Workspace\Docking\DockPanel.SplitterDragHandler.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Workspace\Docking\DockPanelExtender.cs" />
-    <Compile Include="Workspace\Docking\DockPanelSkin.cs" />
-    <Compile Include="Workspace\Docking\DockPaneStripBase.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Workspace\Docking\DockWindow.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Workspace\Docking\DockWindow.SplitterControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Workspace\Docking\DockWindowCollection.cs" />
-    <Compile Include="Workspace\Docking\DragForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Workspace\Docking\DummyControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Workspace\Docking\Enums.cs" />
-    <Compile Include="Workspace\Docking\FloatWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Workspace\Docking\FloatWindowCollection.cs" />
-    <Compile Include="Workspace\Docking\Helpers\DockHelper.cs" />
-    <Compile Include="Workspace\Docking\Helpers\DrawHelper.cs" />
-    <Compile Include="Workspace\Docking\Helpers\ResourceHelper.cs" />
-    <Compile Include="Workspace\Docking\Helpers\Win32Helper.cs" />
-    <Compile Include="Workspace\Docking\InertButtonBase.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Workspace\Docking\Interfaces.cs" />
-    <Compile Include="Workspace\Docking\Localization.cs" />
-    <Compile Include="Workspace\Docking\Measures.cs" />
-    <Compile Include="Workspace\Docking\NestedDockingStatus.cs" />
-    <Compile Include="Workspace\Docking\NestedPaneCollection.cs" />
-    <Compile Include="Workspace\Docking\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Workspace\Docking\Skins\DockPanelSkinBuilder.cs" />
-    <Compile Include="Workspace\Docking\Skins\Style.cs" />
-    <Compile Include="Workspace\Docking\SplitterBase.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Workspace\Docking\Strings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Strings.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Workspace\Docking\VisibleNestedPaneCollection.cs" />
-    <Compile Include="Workspace\Docking\VS2005AutoHideStrip.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Workspace\Docking\VS2005DockPaneCaption.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Workspace\Docking\VS2005DockPaneStrip.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Workspace\Docking\Win32\Enums.cs" />
-    <Compile Include="Workspace\Docking\Win32\NativeMethods.cs" />
     <Compile Include="Forms\EnvironmentOptions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -355,12 +138,6 @@
     <Compile Include="MenuCommands\EnvironmentOptionsMenuItem.cs" />
     <Compile Include="MenuCommands\ExitDevEnv.cs" />
     <Compile Include="MenuCommands\OpenProject.cs" />
-    <Compile Include="Extensibility\Workbench\OptionsPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Extensibility\Workbench\OptionsPage.Designer.cs">
-      <DependentUpon>OptionsPage.cs</DependentUpon>
-    </Compile>
     <Compile Include="Pads\SolutionExplorer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -368,11 +145,6 @@
       <DependentUpon>SolutionExplorer.cs</DependentUpon>
     </Compile>
     <Compile Include="Extensibility\Project\BasicProjects\SampleProject.cs" />
-    <Compile Include="Extensibility\Project\IFolder.cs" />
-    <Compile Include="Extensibility\Project\IObject.cs" />
-    <Compile Include="Extensibility\Project\IProject.cs" />
-    <Compile Include="Extensibility\Project\IProjectGenerator.cs" />
-    <Compile Include="Extensibility\Project\ISolution.cs" />
     <Compile Include="Extensibility\Project\ProjectService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -386,150 +158,6 @@
     <Compile Include="SplashScreen.Designer.cs">
       <DependentUpon>SplashScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="Workspace\AllowedBorders.cs" />
-    <Compile Include="Workspace\DockLocation.cs" />
-    <Compile Include="Workspace\TextEditor\Actions\BookmarkActions.cs" />
-    <Compile Include="Workspace\TextEditor\Actions\CaretActions.cs" />
-    <Compile Include="Workspace\TextEditor\Actions\ClipBoardActions.cs" />
-    <Compile Include="Workspace\TextEditor\Actions\FoldActions.cs" />
-    <Compile Include="Workspace\TextEditor\Actions\FormatActions.cs" />
-    <Compile Include="Workspace\TextEditor\Actions\HomeEndActions.cs" />
-    <Compile Include="Workspace\TextEditor\Actions\IEditAction.cs" />
-    <Compile Include="Workspace\TextEditor\Actions\MiscActions.cs" />
-    <Compile Include="Workspace\TextEditor\Actions\SelectionActions.cs" />
-    <Compile Include="Workspace\TextEditor\Document\AbstractSegment.cs" />
-    <Compile Include="Workspace\TextEditor\Document\BookmarkManager\Bookmark.cs" />
-    <Compile Include="Workspace\TextEditor\Document\BookmarkManager\BookmarkEventHandler.cs" />
-    <Compile Include="Workspace\TextEditor\Document\BookmarkManager\BookmarkManager.cs" />
-    <Compile Include="Workspace\TextEditor\Document\BookmarkManager\BookmarkManagerMemento.cs" />
-    <Compile Include="Workspace\TextEditor\Document\DefaultDocument.cs" />
-    <Compile Include="Workspace\TextEditor\Document\DefaultTextEditorProperties.cs" />
-    <Compile Include="Workspace\TextEditor\Document\DocumentEventArgs.cs" />
-    <Compile Include="Workspace\TextEditor\Document\DocumentFactory.cs" />
-    <Compile Include="Workspace\TextEditor\Document\FoldingStrategy\FoldingManager.cs" />
-    <Compile Include="Workspace\TextEditor\Document\FoldingStrategy\FoldMarker.cs" />
-    <Compile Include="Workspace\TextEditor\Document\FoldingStrategy\IFoldingStrategy.cs" />
-    <Compile Include="Workspace\TextEditor\Document\FoldingStrategy\IndentFoldingStrategy.cs" />
-    <Compile Include="Workspace\TextEditor\Document\FormattingStrategy\DefaultFormattingStrategy.cs" />
-    <Compile Include="Workspace\TextEditor\Document\FormattingStrategy\IFormattingStrategy.cs" />
-    <Compile Include="Workspace\TextEditor\Document\HighlightingStrategy\DefaultHighlightingStrategy.cs" />
-    <Compile Include="Workspace\TextEditor\Document\HighlightingStrategy\FontContainer.cs" />
-    <Compile Include="Workspace\TextEditor\Document\HighlightingStrategy\HighlightBackground.cs" />
-    <Compile Include="Workspace\TextEditor\Document\HighlightingStrategy\HighlightColor.cs" />
-    <Compile Include="Workspace\TextEditor\Document\HighlightingStrategy\HighlightInfo.cs" />
-    <Compile Include="Workspace\TextEditor\Document\HighlightingStrategy\HighlightingColorNotFoundException.cs" />
-    <Compile Include="Workspace\TextEditor\Document\HighlightingStrategy\HighlightingDefinitionInvalidException.cs" />
-    <Compile Include="Workspace\TextEditor\Document\HighlightingStrategy\HighlightingDefinitionParser.cs" />
-    <Compile Include="Workspace\TextEditor\Document\HighlightingStrategy\HighlightingManager.cs" />
-    <Compile Include="Workspace\TextEditor\Document\HighlightingStrategy\HighlightingStrategyFactory.cs" />
-    <Compile Include="Workspace\TextEditor\Document\HighlightingStrategy\HighlightRuleSet.cs" />
-    <Compile Include="Workspace\TextEditor\Document\HighlightingStrategy\IHighlightingStrategy.cs" />
-    <Compile Include="Workspace\TextEditor\Document\HighlightingStrategy\NextMarker.cs" />
-    <Compile Include="Workspace\TextEditor\Document\HighlightingStrategy\PrevMarker.cs" />
-    <Compile Include="Workspace\TextEditor\Document\HighlightingStrategy\Span.cs" />
-    <Compile Include="Workspace\TextEditor\Document\HighlightingStrategy\SpanStack.cs" />
-    <Compile Include="Workspace\TextEditor\Document\HighlightingStrategy\SyntaxModes\FileSyntaxModeProvider.cs" />
-    <Compile Include="Workspace\TextEditor\Document\HighlightingStrategy\SyntaxModes\ISyntaxModeFileProvider.cs" />
-    <Compile Include="Workspace\TextEditor\Document\HighlightingStrategy\SyntaxModes\ResourceSyntaxModeProvider.cs" />
-    <Compile Include="Workspace\TextEditor\Document\HighlightingStrategy\SyntaxModes\SyntaxMode.cs" />
-    <Compile Include="Workspace\TextEditor\Document\HighlightingStrategy\TextWord.cs" />
-    <Compile Include="Workspace\TextEditor\Document\IDocument.cs" />
-    <Compile Include="Workspace\TextEditor\Document\ISegment.cs" />
-    <Compile Include="Workspace\TextEditor\Document\ITextEditorProperties.cs" />
-    <Compile Include="Workspace\TextEditor\Document\LineManager\DeferredEventList.cs" />
-    <Compile Include="Workspace\TextEditor\Document\LineManager\LineManager.cs" />
-    <Compile Include="Workspace\TextEditor\Document\LineManager\LineManagerEventArgs.cs" />
-    <Compile Include="Workspace\TextEditor\Document\LineManager\LineSegment.cs" />
-    <Compile Include="Workspace\TextEditor\Document\LineManager\LineSegmentTree.cs" />
-    <Compile Include="Workspace\TextEditor\Document\MarkerStrategy\MarkerStrategy.cs" />
-    <Compile Include="Workspace\TextEditor\Document\MarkerStrategy\TextMarker.cs" />
-    <Compile Include="Workspace\TextEditor\Document\Selection\ColumnRange.cs" />
-    <Compile Include="Workspace\TextEditor\Document\Selection\DefaultSelection.cs" />
-    <Compile Include="Workspace\TextEditor\Document\Selection\ISelection.cs" />
-    <Compile Include="Workspace\TextEditor\Document\Selection\SelectionManager.cs" />
-    <Compile Include="Workspace\TextEditor\Document\TextAnchor.cs" />
-    <Compile Include="Workspace\TextEditor\Document\TextBufferStrategy\GapTextBufferStrategy.cs" />
-    <Compile Include="Workspace\TextEditor\Document\TextBufferStrategy\ITextBufferStrategy.cs" />
-    <Compile Include="Workspace\TextEditor\Document\TextBufferStrategy\StringTextBufferStrategy.cs" />
-    <Compile Include="Workspace\TextEditor\Document\TextLocation.cs" />
-    <Compile Include="Workspace\TextEditor\Document\TextUtilities.cs" />
-    <Compile Include="Workspace\TextEditor\Gui\AbstractMargin.cs" />
-    <Compile Include="Workspace\TextEditor\Gui\BracketHighlighter.cs" />
-    <Compile Include="Workspace\TextEditor\Gui\BrushRegistry.cs" />
-    <Compile Include="Workspace\TextEditor\Gui\Caret.cs" />
-    <Compile Include="Workspace\TextEditor\Gui\CompletionWindow\AbstractCompletionWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Workspace\TextEditor\Gui\CompletionWindow\CodeCompletionListView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Workspace\TextEditor\Gui\CompletionWindow\CodeCompletionWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Workspace\TextEditor\Gui\CompletionWindow\DeclarationViewWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Workspace\TextEditor\Gui\CompletionWindow\ICompletionData.cs" />
-    <Compile Include="Workspace\TextEditor\Gui\CompletionWindow\ICompletionDataProvider.cs" />
-    <Compile Include="Workspace\TextEditor\Gui\DrawableLine.cs" />
-    <Compile Include="Workspace\TextEditor\Gui\FoldMargin.cs" />
-    <Compile Include="Workspace\TextEditor\Gui\GutterMargin.cs" />
-    <Compile Include="Workspace\TextEditor\Gui\HRuler.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Workspace\TextEditor\Gui\IconBarMargin.cs" />
-    <Compile Include="Workspace\TextEditor\Gui\Ime.cs" />
-    <Compile Include="Workspace\TextEditor\Gui\InsightWindow\IInsightDataProvider.cs" />
-    <Compile Include="Workspace\TextEditor\Gui\InsightWindow\InsightWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Workspace\TextEditor\Gui\TextArea.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Workspace\TextEditor\Gui\TextAreaClipboardHandler.cs" />
-    <Compile Include="Workspace\TextEditor\Gui\TextAreaControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Workspace\TextEditor\Gui\TextAreaDragDropHandler.cs" />
-    <Compile Include="Workspace\TextEditor\Gui\TextAreaMouseHandler.cs" />
-    <Compile Include="Workspace\TextEditor\Gui\TextAreaUpdate.cs" />
-    <Compile Include="Workspace\TextEditor\Gui\TextEditorControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Workspace\TextEditor\Gui\TextEditorControlBase.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Workspace\TextEditor\Gui\TextView.cs" />
-    <Compile Include="Workspace\TextEditor\Gui\ToolTipRequestEventArgs.cs" />
-    <Compile Include="Workspace\TextEditor\Undo\IUndoableOperation.cs" />
-    <Compile Include="Workspace\TextEditor\Undo\UndoableDelete.cs" />
-    <Compile Include="Workspace\TextEditor\Undo\UndoableInsert.cs" />
-    <Compile Include="Workspace\TextEditor\Undo\UndoableReplace.cs" />
-    <Compile Include="Workspace\TextEditor\Undo\UndoQueue.cs" />
-    <Compile Include="Workspace\TextEditor\Undo\UndoStack.cs" />
-    <Compile Include="Workspace\TextEditor\Util\AugmentableRedBlackTree.cs" />
-    <Compile Include="Workspace\TextEditor\Util\CheckedList.cs" />
-    <Compile Include="Workspace\TextEditor\Util\FileReader.cs" />
-    <Compile Include="Workspace\TextEditor\Util\LoggingService.cs" />
-    <Compile Include="Workspace\TextEditor\Util\LookupTable.cs" />
-    <Compile Include="Workspace\TextEditor\Util\MouseWheelHandler.cs" />
-    <Compile Include="Workspace\TextEditor\Util\RedBlackTreeIterator.cs" />
-    <Compile Include="Workspace\TextEditor\Util\RtfWriter.cs" />
-    <Compile Include="Workspace\TextEditor\Util\TextUtility.cs" />
-    <Compile Include="Workspace\TextEditor\Util\TipPainter.cs" />
-    <Compile Include="Workspace\TextEditor\Util\TipPainterTools.cs" />
-    <Compile Include="Workspace\TextEditor\Util\TipSection.cs" />
-    <Compile Include="Workspace\TextEditor\Util\TipSpacer.cs" />
-    <Compile Include="Workspace\TextEditor\Util\TipSplitter.cs" />
-    <Compile Include="Workspace\TextEditor\Util\TipText.cs" />
-    <Compile Include="Workspace\TextEditor\Util\WeakCollection.cs" />
-    <Compile Include="Workspace\ToolBarDockArea.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Workspace\ToolBarDockHolder.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Workspace\ToolBarManager.cs" />
     <Compile Include="Documents\WebBrowserDocument.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -551,31 +179,32 @@
     <EmbeddedResource Include="Extensibility\Project\BasicProjects\SampleDocument.resx">
       <DependentUpon>SampleDocument.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Extensibility\Workbench\DevEnvDocument.resx">
-      <DependentUpon>DevEnvDocument.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AboutEnvironment.resx">
       <DependentUpon>AboutEnvironment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CustomizeEnvironment.resx">
       <DependentUpon>CustomizeEnvironment.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\NewObject.resx">
+      <DependentUpon>NewObject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OpenWith.resx">
+      <DependentUpon>OpenWith.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pads\IntermediateWindow.resx">
+      <DependentUpon>IntermediateWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pads\OutputPad.resx">
+      <DependentUpon>OutputPad.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pads\PropertyWindow.resx">
       <DependentUpon>PropertyWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Workspace\Docking\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Workspace\Docking\Strings.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    <EmbeddedResource Include="Pads\TaskList.resx">
+      <DependentUpon>TaskList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EnvironmentOptions.resx">
       <DependentUpon>EnvironmentOptions.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Extensibility\Workbench\OptionsPage.resx">
-      <DependentUpon>OptionsPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pads\SolutionExplorer.resx">
       <DependentUpon>SolutionExplorer.cs</DependentUpon>
@@ -595,59 +224,18 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DevEnvVersion.gen.cs" />
-    <EmbeddedResource Include="Workspace\TextEditor\Resources\RightArrow.cur" />
-    <EmbeddedResource Include="Workspace\TextEditor\Resources\SyntaxModes.xml" />
-    <EmbeddedResource Include="Workspace\TextEditor\Resources\TextEditorControl.bmp" />
+    <None Include="Resources\DevEnvMain.ico" />
     <None Include="Resources\LGPL-V3.png" />
-    <Content Include="Workspace\Docking\DockPanel.bmp" />
-    <Content Include="Workspace\Docking\Resources\DockIndicator_PaneDiamond.bmp" />
-    <Content Include="Workspace\Docking\Resources\DockIndicator_PaneDiamond_Bottom.bmp" />
-    <Content Include="Workspace\Docking\Resources\Dockindicator_PaneDiamond_Fill.bmp" />
-    <Content Include="Workspace\Docking\Resources\DockIndicator_PaneDiamond_Hotspot.bmp" />
-    <Content Include="Workspace\Docking\Resources\DockIndicator_PaneDiamond_HotspotIndex.bmp" />
-    <Content Include="Workspace\Docking\Resources\DockIndicator_PaneDiamond_Left.bmp" />
-    <Content Include="Workspace\Docking\Resources\DockIndicator_PaneDiamond_Right.bmp" />
-    <Content Include="Workspace\Docking\Resources\DockIndicator_PaneDiamond_Top.bmp" />
-    <Content Include="Workspace\Docking\Resources\DockIndicator_PanelBottom.bmp" />
-    <Content Include="Workspace\Docking\Resources\DockIndicator_PanelBottom_Active.bmp" />
-    <Content Include="Workspace\Docking\Resources\DockIndicator_PanelFill.bmp" />
-    <Content Include="Workspace\Docking\Resources\DockIndicator_PanelFill_Active.bmp" />
-    <Content Include="Workspace\Docking\Resources\DockIndicator_PanelLeft.bmp" />
-    <Content Include="Workspace\Docking\Resources\DockIndicator_PanelLeft_Active.bmp" />
-    <Content Include="Workspace\Docking\Resources\DockIndicator_PanelRight.bmp" />
-    <Content Include="Workspace\Docking\Resources\DockIndicator_PanelRight_Active.bmp" />
-    <Content Include="Workspace\Docking\Resources\DockIndicator_PanelTop.bmp" />
-    <Content Include="Workspace\Docking\Resources\DockIndicator_PanelTop_Active.bmp" />
-    <Content Include="Workspace\Docking\Resources\DockPane_AutoHide.bmp" />
-    <Content Include="Workspace\Docking\Resources\DockPane_Close.bmp" />
-    <Content Include="Workspace\Docking\Resources\DockPane_Dock.bmp" />
-    <Content Include="Workspace\Docking\Resources\DockPane_Option.bmp" />
-    <Content Include="Workspace\Docking\Resources\DockPane_OptionOverflow.bmp" />
-    <None Include="Extensibility\Addins\AddIn.xsd">
-      <SubType>Designer</SubType>
-    </None>
+    <Content Include="InitialUi.xml" />
     <None Include="Resources\SplashObject.png" />
     <None Include="Resources\AboutLogo.png" />
-    <EmbeddedResource Include="Workspace\TextEditor\Resources\ASPX.xshd" />
-    <EmbeddedResource Include="Workspace\TextEditor\Resources\BAT-Mode.xshd" />
-    <EmbeddedResource Include="Workspace\TextEditor\Resources\Boo.xshd" />
-    <EmbeddedResource Include="Workspace\TextEditor\Resources\Coco-Mode.xshd" />
-    <EmbeddedResource Include="Workspace\TextEditor\Resources\CPP-Mode.xshd" />
-    <EmbeddedResource Include="Workspace\TextEditor\Resources\CSharp-Mode.xshd" />
-    <EmbeddedResource Include="Workspace\TextEditor\Resources\HTML-Mode.xshd" />
-    <EmbeddedResource Include="Workspace\TextEditor\Resources\Java-Mode.xshd" />
-    <EmbeddedResource Include="Workspace\TextEditor\Resources\JavaScript-Mode.xshd" />
-    <EmbeddedResource Include="Workspace\TextEditor\Resources\Mode.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Workspace\TextEditor\Resources\Patch-Mode.xshd" />
-    <EmbeddedResource Include="Workspace\TextEditor\Resources\PHP-Mode.xshd" />
-    <EmbeddedResource Include="Workspace\TextEditor\Resources\Tex-Mode.xshd" />
-    <EmbeddedResource Include="Workspace\TextEditor\Resources\VBNET-Mode.xshd" />
-    <EmbeddedResource Include="Workspace\TextEditor\Resources\XML-Mode.xshd" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\NasuTek.DevEnvironment.Extendability\NasuTek.DevEnvironment.Extendability.csproj">
+      <Project>{af925380-0b78-49e3-9a47-98194703b511}</Project>
+      <Name>NasuTek.DevEnvironment.Extendability</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

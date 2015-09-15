@@ -1,38 +1,52 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using NasuTek.DevEnvironment.Extensibility.Project;
-using NasuTek.DevEnvironment.Extensibility.Workbench;
-using NasuTek.DevEnvironment.ProjectAPI;
+using NasuTek.DevEnvironment.Extendability.Workbench;
 
-namespace NasuTek.DevEnvironment.Pads {
+namespace NasuTek.DevEnvironment.Pads
+{
     public partial class SolutionExplorer : DevEnvPane {
-        private IProject m_ActiveProject;
+        private ISolution m_ActiveSolution;
 
         internal string Extension { get; set; }
 
-        public IProject ActiveProject {
-            get { return m_ActiveProject; }
-            set {
+        public bool HideSolutionRoot { get; set; }
+
+        public ISolution ActiveSolution {
+            get { return m_ActiveSolution; }
+            set
+            {
                 DevEnv.Instance.WorkspaceEnvironment.CloseAllDocuments();
 
-                m_ActiveProject = value;
+                m_ActiveSolution = value;
 
                 treeView1.Nodes.Clear();
 
-                var rootNode = new TreeNode(m_ActiveProject.ProjectName) {ImageKey = "GenericProject", SelectedImageKey = "GenericProject", Tag = m_ActiveProject};
-                FillFolder(rootNode, m_ActiveProject.RootFolder, m_ActiveProject);
+                TreeNode rootNode = null;
 
-                treeView1.Nodes.Add(rootNode);
+                if (!HideSolutionRoot)
+                    rootNode = new TreeNode("Solution '" + m_ActiveSolution.SolutionName + "'") { ImageKey = "GenericProject", SelectedImageKey = "GenericProject", Tag = m_ActiveSolution };
+
+                foreach (var proj in m_ActiveSolution.Projects)
+                {
+                    var projNode = new TreeNode(proj.ProjectName) { ImageKey = "GenericProject", SelectedImageKey = "GenericProject", Tag = proj };
+                    FillFolder(projNode, proj.RootFolder, proj);
+                    if (!HideSolutionRoot)
+                        rootNode.Nodes.Add(projNode);
+                    else
+                        treeView1.Nodes.Add(projNode);
+                }
+
+                if (!HideSolutionRoot)
+                    treeView1.Nodes.Add(rootNode);
             }
         }
 
         public SolutionExplorer() {
             InitializeComponent();
         }
-
 
         private void FillFolder(TreeNode rootNode, IFolder folder, IProject proj) {
             foreach (var objNode in folder.Objects.Select(o => new TreeNode(o.Name) {ImageKey = "GenericFile", SelectedImageKey = "GenericFile", Tag = Tuple.Create(o, proj)})) {
@@ -59,7 +73,7 @@ namespace NasuTek.DevEnvironment.Pads {
         }
 
         private void treeView1_ItemDrag(object sender, ItemDragEventArgs e) {
-            if (!(((TreeNode) e.Item).Tag is IProject))
+            if (!(((TreeNode)e.Item).Tag is IProject) && !typeof(ISolution).IsAssignableFrom(((TreeNode)e.Item).Tag.GetType()))
                 DoDragDrop(e.Item, DragDropEffects.Move);
         }
 
@@ -75,6 +89,7 @@ namespace NasuTek.DevEnvironment.Pads {
                 TreeNode DestinationNode = ((TreeView) sender).GetNodeAt(pt);
                 NewNode = (TreeNode) e.Data.GetData("System.Windows.Forms.TreeNode");
                 if (DestinationNode.Tag is Tuple<IObject, IProject>) return;
+                if (typeof(ISolution).IsAssignableFrom(DestinationNode.Tag.GetType())) return;
 
                 if (NewNode.Tag is Tuple<IObject, IProject>) {
                     if (!MoveFile(NewNode, DestinationNode, ((Tuple<IObject, IProject>) NewNode.Tag).Item2)) return;
@@ -93,11 +108,7 @@ namespace NasuTek.DevEnvironment.Pads {
                 }
             }
         }
-
-        public void RemoveObject(TreeNode folderNode, TreeNode deleteNode, IObject objId) {
-            RemoveObject(folderNode, deleteNode, objId, m_ActiveProject);
-        }
-
+        
         public void RemoveObject(TreeNode folderNode, TreeNode deleteNode, IObject objId, IProject project)
         {
             if (MessageBox.Show("Are you sure you want to remove \"" + objId.Name + "\"?", DevEnv.Instance.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button2) != DialogResult.Yes) return;
@@ -105,12 +116,7 @@ namespace NasuTek.DevEnvironment.Pads {
             deleteNode.Remove();
             ((Tuple<IFolder, IProject>)folderNode.Tag).Item1.RemoveObject(objId);
         }
-
-        public void RemoveFolder(TreeNode folderNode, TreeNode deleteNode, IFolder folderId)
-        {
-            RemoveFolder(folderNode, deleteNode, folderId, m_ActiveProject);
-        }
-
+        
         public void RemoveFolder(TreeNode folderNode, TreeNode deleteNode, IFolder folder, IProject project)
         {
             if (MessageBox.Show("Are you sure you want to remove \"" + folder.Name + "\"?", DevEnv.Instance.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button2) != DialogResult.Yes) return;
@@ -122,21 +128,12 @@ namespace NasuTek.DevEnvironment.Pads {
             else if (folderNode.Tag is IProject)
                 ((IProject)folderNode.Tag).RootFolder.RemoveFolder(folder);
         }
-
-        public void AddObject(TreeNode folderNode, IObject objId) {
-            AddObject(folderNode, objId, m_ActiveProject);
-        }
-
+        
         public void AddObject(TreeNode folderNode, IObject objId, IProject project) {
             folderNode.Nodes.Add(new TreeNode(objId.Name) {ImageKey = "GenericFile", SelectedImageKey = "GenericFile", Tag = Tuple.Create(objId, project)});
             ((Tuple<IFolder, IProject>) folderNode.Tag).Item1.AddObject(objId);
         }
-
-        public void AddFolder(TreeNode folderNode, IFolder folderId)
-        {
-            AddFolder(folderNode, folderId, m_ActiveProject);
-        }
-
+        
         public void AddFolder(TreeNode folderNode, IFolder folder, IProject project) {
             folderNode.Nodes.Add(new TreeNode(folder.Name) {ImageKey = "GenericFolder", SelectedImageKey = "GenericFolder", Tag = Tuple.Create(folder, project)});
             if (folderNode.Tag is Tuple<IFolder, IProject>)
@@ -147,19 +144,19 @@ namespace NasuTek.DevEnvironment.Pads {
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e) {
             if (treeView1.SelectedNode.Tag is IProject) {
-                var propPad = (PropertyWindow) DevEnv.Instance.WorkspaceEnvironment.GetPane("Properties");
+                var propPad = (PropertyWindow) DevEnv.Instance.WorkspaceEnvironment.GetPane("PropertyWindow");
                 if (propPad == null) return;
                 propPad.SetObjects(((IProject) treeView1.SelectedNode.Tag).PropertyObjects);
             }
 
             if (treeView1.SelectedNode.Tag is Tuple<IObject, IProject>) {
-                var propPad = (PropertyWindow) DevEnv.Instance.WorkspaceEnvironment.GetPane("Properties");
+                var propPad = (PropertyWindow) DevEnv.Instance.WorkspaceEnvironment.GetPane("PropertyWindow");
                 if (propPad == null) return;
                 propPad.SetObjects(((Tuple<IObject, IProject>) treeView1.SelectedNode.Tag).Item1.PropertyObjects);
             }
 
             if (treeView1.SelectedNode.Tag is Tuple<IFolder, IProject>) {
-                var propPad = (PropertyWindow) DevEnv.Instance.WorkspaceEnvironment.GetPane("Properties");
+                var propPad = (PropertyWindow) DevEnv.Instance.WorkspaceEnvironment.GetPane("PropertyWindow");
                 if (propPad == null) return;
                 propPad.SetObjects(((Tuple<IFolder, IProject>) treeView1.SelectedNode.Tag).Item1.PropertyObjects);
             }

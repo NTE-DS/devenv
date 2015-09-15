@@ -17,17 +17,19 @@
  * Boston, MA 02111-1307, USA.
  ***************************************************************************************************/
 
-using NasuTek.DevEnvironment.Extensibility.Addins;
-using NasuTek.DevEnvironment.Extensibility.Addins.WinForms;
-using NasuTek.DevEnvironment.Extensibility.Workbench;
-using NasuTek.DevEnvironment.Workspace.Docking;
+using NasuTek.DevEnvironment.Extendability;
+using NasuTek.DevEnvironment.Extendability.Workbench;
+using NasuTek.DevEnvironment.Extendability.Workbench.Docking;
+using NasuTek.DevEnvironment.Extendability.Workbench.Toolbar;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace NasuTek.DevEnvironment.Workspace
+namespace NasuTek.DevEnvironment.Workbench
 {
     public partial class WorkspaceWindow : Form
     {
@@ -48,46 +50,37 @@ namespace NasuTek.DevEnvironment.Workspace
 
         public WorkspaceWindow()
         {
-            if (AddInTree.ExistsTreeNode("/DevEnv/AutoExec/BeforeInitialization")) {
-                foreach (Codon i in AddInTree.GetTreeNode("/DevEnv/AutoExec/BeforeInitialization").Codons) {
-                    var obj = (ICommand)i.AddIn.CreateObject(i.Properties["class"]);
-                    obj.Run();
-                }
+            foreach(var i in DevEnv.Instance.Extendability.Commands["BeforeInitialization"])
+            {
+                i.Run();
             }
-
+            
             InitializeComponent();
 
             toolBarManager = new ToolBarManager(dockPanel1, this);
             //toolBarManager.AddControl(menuStrip1);
 
-            MenuService.AddItemsToMenu(menuStrip1.Items, menuStrip1, "/DevEnv/Menu");
+            DevEnv.Instance.Extendability.GenerateMenu(menuStrip1);
 
-            if (AddInTree.ExistsTreeNode("/DevEnv/Pads"))
+            dockPanel1.LoadFromXml(new MemoryStream(System.Text.Encoding.UTF8.GetBytes(Properties.Resources.InitialUi)), new DeserializeDockContent((str) =>
             {
-                foreach (Codon i in AddInTree.GetTreeNode("/DevEnv/Pads").Codons)
-                {
-                    var obj = (DevEnvPane)i.AddIn.CreateObject(i.Properties["class"]);
-                    obj.Name = i.Id;
-                    obj.Text = i.Properties["title"];
-                    if (i.Properties["icon"] != "")
-                        obj.Icon = ResourceService.GetImageResource(i.Properties["icon"]) is Icon ? (Icon)ResourceService.GetImageResource(i.Properties["icon"]) : Icon.FromHandle(((Bitmap)ResourceService.GetImageResource(i.Properties["icon"])).GetHicon());
-                    obj.Show(dockPanel1, i.Properties["defaultPosition"] == "" ? DockState.Document : (DockState)Enum.Parse(typeof(DockState), i.Properties["defaultPosition"]));
-                }
-            }
+                return DevEnv.Instance.Extendability.DevEnvPanes.FirstOrDefault(v => v.GetType().FullName == str);
+            }));
+            
+            //TODO: Toolbars
+            //if (AddInTree.ExistsTreeNode("/DevEnv/Toolbars"))
+            //{
+            //    var toolbars = ToolbarService.CreateToolbars(this, "/DevEnv/Toolbars");
 
-            if (AddInTree.ExistsTreeNode("/DevEnv/Toolbars"))
-            {
-                var toolbars = ToolbarService.CreateToolbars(this, "/DevEnv/Toolbars");
-
-                foreach (var toolbar in toolbars)
-                {
-                    toolbar.GripStyle = ToolStripGripStyle.Hidden;
-                    toolbar.Renderer = new BorderRenderer();
+            //    foreach (var toolbar in toolbars)
+            //    {
+            //        toolbar.GripStyle = ToolStripGripStyle.Hidden;
+            //        toolbar.Renderer = new BorderRenderer();
                     
-                    //toolbar.RenderMode = ToolStripRenderMode;
-                    toolBarManager.AddControl(toolbar);
-                }
-            }
+            //        //toolbar.RenderMode = ToolStripRenderMode;
+            //        toolBarManager.AddControl(toolbar);
+            //    }
+            //}
         }
 
         public DevEnvPane GetPane(string paneId) {
@@ -111,30 +104,17 @@ namespace NasuTek.DevEnvironment.Workspace
 
             DevEnvDocument docFormat;
 
-            if (AddInTree.ExistsTreeNode("/DevEnv/DocumentTypes")) {
-                var docCodon = AddInTree.GetTreeNode("/DevEnv/DocumentTypes").Codons.FirstOrDefault(v => v.Id == documentMetadata.RequestedFormat);
-                if (docCodon != null) {
-                    docFormat = (DevEnvDocument) docCodon.AddIn.CreateObject(docCodon.Properties["class"]);
-                    goto CreateDocFormat;
-                }
-            }
+            docFormat = (DevEnvDocument)Activator.CreateInstance(DevEnv.Instance.Extendability.DocumentTypes[documentMetadata.RequestedFormat].Item2);
 
-            if (!documentMetadata.IsFile) return;
-            docFormat = new Documents.TextEditor();
-            CreateDocFormat:
             docFormat.Show(dockPanel1, DockState.Document);
             docFormat.Open(documentMetadata);
         }
 
         private void Workspace_Load(object sender, EventArgs e)
         {
-            if (AddInTree.ExistsTreeNode("/DevEnv/AutoExec/AfterInitialization"))
+            foreach (var i in DevEnv.Instance.Extendability.Commands["AfterInitialization"])
             {
-                foreach (Codon i in AddInTree.GetTreeNode("/DevEnv/AutoExec/AfterInitialization").Codons)
-                {
-                    var obj = (ICommand)i.AddIn.CreateObject(i.Properties["class"]);
-                    obj.Run();
-                }
+                i.Run();
             }
 
             var windows = this.MdiChildren;

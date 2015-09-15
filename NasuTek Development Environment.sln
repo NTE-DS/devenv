@@ -1,9 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NasuTek.DevEnvironment", "NasuTek.DevEnvironment.Resources\NasuTek.DevEnvironment.csproj", "{813D5D0D-D1A1-40AD-8357-B54916647819}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevEnv", "DevEnv\DevEnv.csproj", "{3B8762E7-C45A-4DFA-AF07-805AE47BEC56}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NasuTek.DevEnvironment.GPLComponents", "NasuTek.DevEnvironment.GPLComponents\NasuTek.DevEnvironment.GPLComponents.csproj", "{53A9376E-881D-42EA-881F-3238202D8854}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NasuTek.DevEnvironment.Extendability", "NasuTek.DevEnvironment.Extendability\NasuTek.DevEnvironment.Extendability.csproj", "{AF925380-0B78-49E3-9A47-98194703B511}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +25,14 @@ Global
 		{3B8762E7-C45A-4DFA-AF07-805AE47BEC56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B8762E7-C45A-4DFA-AF07-805AE47BEC56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B8762E7-C45A-4DFA-AF07-805AE47BEC56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53A9376E-881D-42EA-881F-3238202D8854}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53A9376E-881D-42EA-881F-3238202D8854}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53A9376E-881D-42EA-881F-3238202D8854}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53A9376E-881D-42EA-881F-3238202D8854}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF925380-0B78-49E3-9A47-98194703B511}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF925380-0B78-49E3-9A47-98194703B511}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF925380-0B78-49E3-9A47-98194703B511}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF925380-0B78-49E3-9A47-98194703B511}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
