@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NasuTek.DevEnvironment.Extendability;
+using NasuTek.DevEnvironment.Extensibility;
 using NasuTek.DevEnvironment.Forms;
 
 namespace NasuTek.DevEnvironment.MenuCommands

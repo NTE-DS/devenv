@@ -11,9 +11,9 @@ using System.Drawing;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-using NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document;
+using NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor
 {
 	/// <summary>
 	/// In this enumeration are all caret modes listed.

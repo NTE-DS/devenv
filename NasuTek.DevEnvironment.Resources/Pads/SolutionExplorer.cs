@@ -3,7 +3,8 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using NasuTek.DevEnvironment.Extensibility.Project;
-using NasuTek.DevEnvironment.Extendability.Workbench;
+using NasuTek.DevEnvironment.Extensibility.Workbench;
+using NasuTek.DevEnvironment.Extensibility;
 
 namespace NasuTek.DevEnvironment.Pads
 {
@@ -18,7 +19,7 @@ namespace NasuTek.DevEnvironment.Pads
             get { return m_ActiveSolution; }
             set
             {
-                DevEnv.Instance.WorkspaceEnvironment.CloseAllDocuments();
+                DevEnv.GetActiveInstance().WorkspaceEnvironment.CloseAllDocuments();
 
                 m_ActiveSolution = value;
 
@@ -111,7 +112,7 @@ namespace NasuTek.DevEnvironment.Pads
         
         public void RemoveObject(TreeNode folderNode, TreeNode deleteNode, IObject objId, IProject project)
         {
-            if (MessageBox.Show("Are you sure you want to remove \"" + objId.Name + "\"?", DevEnv.Instance.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button2) != DialogResult.Yes) return;
+            if (MessageBox.Show("Are you sure you want to remove \"" + objId.Name + "\"?", DevEnv.GetActiveInstance().Settings.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button2) != DialogResult.Yes) return;
 
             deleteNode.Remove();
             ((Tuple<IFolder, IProject>)folderNode.Tag).Item1.RemoveObject(objId);
@@ -119,7 +120,7 @@ namespace NasuTek.DevEnvironment.Pads
         
         public void RemoveFolder(TreeNode folderNode, TreeNode deleteNode, IFolder folder, IProject project)
         {
-            if (MessageBox.Show("Are you sure you want to remove \"" + folder.Name + "\"?", DevEnv.Instance.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button2) != DialogResult.Yes) return;
+            if (MessageBox.Show("Are you sure you want to remove \"" + folder.Name + "\"?", DevEnv.GetActiveInstance().Settings.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button2) != DialogResult.Yes) return;
 
             deleteNode.Remove();
 
@@ -144,19 +145,19 @@ namespace NasuTek.DevEnvironment.Pads
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e) {
             if (treeView1.SelectedNode.Tag is IProject) {
-                var propPad = (PropertyWindow) DevEnv.Instance.WorkspaceEnvironment.GetPane("PropertyWindow");
+                var propPad = (PropertyWindow) DevEnv.GetActiveInstance().Extensibility.GetPane("PropertyWindow");
                 if (propPad == null) return;
                 propPad.SetObjects(((IProject) treeView1.SelectedNode.Tag).PropertyObjects);
             }
 
             if (treeView1.SelectedNode.Tag is Tuple<IObject, IProject>) {
-                var propPad = (PropertyWindow) DevEnv.Instance.WorkspaceEnvironment.GetPane("PropertyWindow");
+                var propPad = (PropertyWindow) DevEnv.GetActiveInstance().Extensibility.GetPane("PropertyWindow");
                 if (propPad == null) return;
                 propPad.SetObjects(((Tuple<IObject, IProject>) treeView1.SelectedNode.Tag).Item1.PropertyObjects);
             }
 
             if (treeView1.SelectedNode.Tag is Tuple<IFolder, IProject>) {
-                var propPad = (PropertyWindow) DevEnv.Instance.WorkspaceEnvironment.GetPane("PropertyWindow");
+                var propPad = (PropertyWindow) DevEnv.GetActiveInstance().Extensibility.GetPane("PropertyWindow");
                 if (propPad == null) return;
                 propPad.SetObjects(((Tuple<IFolder, IProject>) treeView1.SelectedNode.Tag).Item1.PropertyObjects);
             }
@@ -200,7 +201,7 @@ namespace NasuTek.DevEnvironment.Pads
         private void treeView1_AfterLabelEdit(object sender, NodeLabelEditEventArgs e) {
             if (e.Label == null) return;
             if (e.Label == "") {
-                MessageBox.Show("Blank names not allowed.", DevEnv.Instance.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("Blank names not allowed.", DevEnv.GetActiveInstance().Settings.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 e.CancelEdit = true;
                 return;
             }
@@ -208,29 +209,29 @@ namespace NasuTek.DevEnvironment.Pads
             if (e.Node.Tag is IProject && e.Node.Tag is ISolutionExplorerRename) {
                 var rightClick = (ISolutionExplorerRename) e.Node.Tag;
                 if (!rightClick.Rename(e.Label)) {
-                    MessageBox.Show("Cannot rename this object.", DevEnv.Instance.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    MessageBox.Show("Cannot rename this object.", DevEnv.GetActiveInstance().Settings.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     e.CancelEdit = true;
                 } else {
-                    DevEnv.Instance.WorkspaceEnvironment.RefreshDocuments();
+                    DevEnv.GetActiveInstance().WorkspaceEnvironment.RefreshDocuments();
                 }
             } else if (e.Node.Tag is Tuple<IObject, IProject> && ((Tuple<IObject, IProject>) e.Node.Tag).Item1 is ISolutionExplorerRename) {
                 var rightClick = (ISolutionExplorerRename) ((Tuple<IObject, IProject>) e.Node.Tag).Item1;
                 if (!rightClick.Rename(e.Label)) {
-                    MessageBox.Show("Cannot rename this object.", DevEnv.Instance.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    MessageBox.Show("Cannot rename this object.", DevEnv.GetActiveInstance().Settings.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     e.CancelEdit = true;
                 } else {
-                    DevEnv.Instance.WorkspaceEnvironment.RefreshDocuments();
+                    DevEnv.GetActiveInstance().WorkspaceEnvironment.RefreshDocuments();
                 }
             } else if (e.Node.Tag is Tuple<IFolder, IProject> && ((Tuple<IFolder, IProject>) e.Node.Tag).Item1 is ISolutionExplorerRename) {
                 var rightClick = (ISolutionExplorerRename) ((Tuple<IFolder, IProject>) e.Node.Tag).Item1;
                 if (!rightClick.Rename(e.Label)) {
-                    MessageBox.Show("Cannot rename this object.", DevEnv.Instance.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    MessageBox.Show("Cannot rename this object.", DevEnv.GetActiveInstance().Settings.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     e.CancelEdit = true;
                 } else {
-                    DevEnv.Instance.WorkspaceEnvironment.RefreshDocuments();
+                    DevEnv.GetActiveInstance().WorkspaceEnvironment.RefreshDocuments();
                 }
             } else {
-                MessageBox.Show("Cannot rename this object.", DevEnv.Instance.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("Cannot rename this object.", DevEnv.GetActiveInstance().Settings.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 e.CancelEdit = true;
             }
         }

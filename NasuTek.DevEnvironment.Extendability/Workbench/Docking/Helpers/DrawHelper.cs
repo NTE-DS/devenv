@@ -23,7 +23,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.Docking
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.Docking
 {
 	internal static class DrawHelper
 	{

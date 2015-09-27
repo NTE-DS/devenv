@@ -6,9 +6,9 @@
 // </file>
 
 using System;
-using NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document;
+using NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Util
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Util
 {
 	/// <summary>
 	/// This class implements a keyword map. It implements a digital search trees (tries) to find

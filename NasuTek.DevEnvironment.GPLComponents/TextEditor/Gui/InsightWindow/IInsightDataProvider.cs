@@ -7,7 +7,7 @@
 
 using System;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Gui.InsightWindow
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Gui.InsightWindow
 {
 	public interface IInsightDataProvider
 	{

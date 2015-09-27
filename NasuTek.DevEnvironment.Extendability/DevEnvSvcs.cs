@@ -1,12 +1,12 @@
-﻿using NasuTek.DevEnvironment.Extendability.Workbench;
+﻿using NasuTek.DevEnvironment.Extensibility.Workbench;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NasuTek.DevEnvironment.Extendability
+namespace NasuTek.DevEnvironment.Extensibility
 {
-    public interface IDevEnvPluginSvc
+    public interface IDevEnvPackageSvc
     {
         void AddProduct(Product prod);
         void AddUpdate(Update upd);
@@ -19,15 +19,15 @@ namespace NasuTek.DevEnvironment.Extendability
         /// </param>
         /// <param name="command">AbstractCommand to attach to the command group</param>
         void AttachCommand(string commGroup, AbstractCommand command);
-        /// <summary>
-        /// Allows changing the DevEnv Settings/Addin Registry to any other method then the Windows
-        /// Registry.
-        /// 
-        /// This command cannot be executed after Environment Initialization. Addins cannot execute
-        /// this command as it will cause an exception.
-        /// </summary>
-        /// <param name="reg">IDevEnvReg object</param>
-        void ChangeDevEnvRegistry(IDevEnvReg reg);
+    }
+
+    public interface IDevEnvLoggingSvc
+    {
+        void Info(string message);
+        void Error(string message);
+        void Error(Exception exception);
+        void Warning(string message);
+        void ShowDialog(string message, MessageType type);
     }
 
     public interface IDevEnvSolutionSvc
@@ -37,23 +37,33 @@ namespace NasuTek.DevEnvironment.Extendability
 
     public interface IDevEnvUISvc
     {
+        void AddToolbar(ToolBar toolbar);
+        ToolBar GetToolBar(string name);
         void AddRootMenuItem(MenuItem menuItem);
         MenuItem GetRootMenuItem(string id);
         void RegisterPane(DevEnvPane pane);
         DevEnvPane GetPane(string id);
     }
 
-    public interface IDevEnvReg
+    public enum SettingsReg
     {
-        IDevEnvRegSubKey OpenSubKey(string v);
+        Global,
+        User,
+    }
+
+    public interface IDevEnvRegSvc
+    {
+        IDevEnvRegSubKey OpenSubKey(SettingsReg reg, string keyName);
+        bool SubKeyExists(SettingsReg reg, string keyName);
     }
 
     public interface IDevEnvRegSubKey
     {
-        string[] GetSubKeyNames();
-
+        IDevEnvRegSubKey[] GetSubKeys();
         IDevEnvRegSubKey OpenSubKey(string keyName);
-
+        bool SubKeyExists(string keyName);
         object GetValue(string valueName);
+        void SetValue(string valueName, object value);
+        string Name { get; }
     }
 }

@@ -11,9 +11,9 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 
-using NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document;
+using NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor
 {
 	/// <summary>
 	/// This class views the line numbers and folding markers.
@@ -26,7 +26,7 @@ namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor
 		
 		static GutterMargin()
 		{
-			Stream cursorStream = Assembly.GetCallingAssembly().GetManifestResourceStream("NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Resources.RightArrow.cur");
+			Stream cursorStream = Assembly.GetCallingAssembly().GetManifestResourceStream("NasuTek.DevEnvironment.GPLComponents.TextEditor.Resources.RightArrow.cur");
 			if (cursorStream == null) throw new Exception("could not find cursor resource");
 			RightLeftCursor = new Cursor(cursorStream);
 			cursorStream.Close();

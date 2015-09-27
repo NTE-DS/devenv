@@ -7,7 +7,7 @@
 
 using System;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document
 {
 	/// <summary>
 	/// This interface handles the auto and smart indenting and formating

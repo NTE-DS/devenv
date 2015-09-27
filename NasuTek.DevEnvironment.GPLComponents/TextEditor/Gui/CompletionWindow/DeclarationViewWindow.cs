@@ -9,9 +9,9 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-using NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Util;
+using NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Util;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Gui.CompletionWindow
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Gui.CompletionWindow
 {
 	public interface IDeclarationViewWindow
 	{

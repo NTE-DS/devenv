@@ -1,5 +1,5 @@
-﻿using NasuTek.DevEnvironment.Extendability;
-using NasuTek.DevEnvironment.Extendability;
+﻿using NasuTek.DevEnvironment.Extensibility;
+using NasuTek.DevEnvironment.Extensibility;
 using NasuTek.DevEnvironment.MenuCommands;
 using NasuTek.DevEnvironment.Pads;
 using System;
@@ -10,14 +10,14 @@ using System.Text;
 
 namespace NasuTek.DevEnvironment
 {
-    public class DevEnvCore : IPlugin
+    public class DevEnvCore : IPackage
     {
         public void Load()
         {
-            var plugSvc = (IDevEnvPluginSvc)DevEnvSvc.GetService("PluginSvc");
-            var uiSvc = (IDevEnvUISvc)DevEnvSvc.GetService("UISvc");
+            var plugSvc = (IDevEnvPackageSvc)DevEnvSvc.GetService(DevEnvSvc.PackageSvc);
+            var uiSvc = (IDevEnvUISvc)DevEnvSvc.GetService(DevEnvSvc.UISvc);
 
-            plugSvc.AddProduct(new Product("NasuTek Development Environment", "NasuTek Development Environment", new Icon(Properties.Resources.DevEnvMain, new Size(48, 48)).ToBitmap()));
+            plugSvc.AddProduct(new Product("NasuTek Development Environment", "NasuTek Development Environment", null));
             plugSvc.AddUpdate(new Update("NasuTek DevEnv R2 Addin Engine Update"));
 
             // Load Pads
@@ -27,6 +27,17 @@ namespace NasuTek.DevEnvironment
             uiSvc.RegisterPane(new TaskList());
             uiSvc.RegisterPane(new IntermediateWindow());
 
+            // Create Standard Toolbar
+            var standardTb = new ToolBar("Standard");
+            uiSvc.AddToolbar(standardTb);
+
+#if DEBUG
+            // Create Tester Toolbar
+            var debugTb = new ToolBar("IDE Tester Toolbar");
+            uiSvc.AddToolbar(debugTb);
+#endif
+
+            // Create Basic Menu
             uiSvc.AddRootMenuItem(new MenuItem("File", "File", null));
             var fileMenu = uiSvc.GetRootMenuItem("File");
             fileMenu.SubItems.Add(new MenuItem("New", "New", null));
@@ -39,20 +50,18 @@ namespace NasuTek.DevEnvironment
             uiSvc.AddRootMenuItem(new MenuItem("Edit", "Edit", null));
             uiSvc.AddRootMenuItem(new MenuItem("View", "View", null));
             var viewMenu = uiSvc.GetRootMenuItem("View");
-            viewMenu.SubItems.Add(new MenuItem("IntermediateWindow", "Intermediate...", new IntermediateMenu()));
+            viewMenu.SubItems.Add(new MenuItem("Windows", "Windows", null));
+            var windowViewMenu = viewMenu.GetMenuItem("Windows");
+            windowViewMenu.SubItems.Add(new MenuItem("CommandWindow", "Command Window...", new IntermediateMenu()));
             uiSvc.AddRootMenuItem(new MenuItem("Tools", "Tools", null));
             var toolsMenu = uiSvc.GetRootMenuItem("Tools");
             toolsMenu.SubItems.Add(new MenuItem("Customize", "Customize", new CustomizeEnvironmentMenuItem()));
             toolsMenu.SubItems.Add(new MenuItem("Options", "Options", new EnvironmentOptionsMenuItem()));
+            toolsMenu.SubItems.Add(new MenuItem("MacrosIDE", "Macros Designer", new MacrosIDE()));
             uiSvc.AddRootMenuItem(new MenuItem("Window", "Window", null));
             uiSvc.AddRootMenuItem(new MenuItem("Help", "Help", null));
             var helpMenu = uiSvc.GetRootMenuItem("Help");
             helpMenu.SubItems.Add(new MenuItem("About", "About NasuTek Development Environment", new AboutDevEnv()));
-        }
-
-        public void Unload()
-        {
-            throw new NotImplementedException();
         }
     }
 }

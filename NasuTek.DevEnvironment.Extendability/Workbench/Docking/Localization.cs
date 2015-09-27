@@ -20,7 +20,7 @@
 using System;
 using System.ComponentModel;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.Docking
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.Docking
 {
 	[AttributeUsage(AttributeTargets.All)]
 	internal sealed class LocalizedDescriptionAttribute : DescriptionAttribute

@@ -7,7 +7,7 @@
 
 using System;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Util
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Util
 {
 	/// <summary>
 	/// Central location for logging calls in the text editor.

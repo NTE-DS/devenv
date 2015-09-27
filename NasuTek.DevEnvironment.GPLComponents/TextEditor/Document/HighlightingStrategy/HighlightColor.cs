@@ -12,7 +12,7 @@ using System.Globalization;
 using System.Reflection;
 using System.Xml;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document
 {
 	/// <summary>
 	/// A color used for highlighting
@@ -109,7 +109,7 @@ namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document
 		/// </summary>
 		public HighlightColor(XmlElement el)
 		{
-			Debug.Assert(el != null, "NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document.SyntaxColor(XmlElement el) : el == null");
+			Debug.Assert(el != null, "NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document.SyntaxColor(XmlElement el) : el == null");
 			if (el.Attributes["bold"] != null) {
 				bold = Boolean.Parse(el.Attributes["bold"].InnerText);
 			}
@@ -150,7 +150,7 @@ namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document
 		/// </summary>
 		public HighlightColor(XmlElement el, HighlightColor defaultColor)
 		{
-			Debug.Assert(el != null, "NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document.SyntaxColor(XmlElement el) : el == null");
+			Debug.Assert(el != null, "NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document.SyntaxColor(XmlElement el) : el == null");
 			if (el.Attributes["bold"] != null) {
 				bold = Boolean.Parse(el.Attributes["bold"].InnerText);
 			} else {

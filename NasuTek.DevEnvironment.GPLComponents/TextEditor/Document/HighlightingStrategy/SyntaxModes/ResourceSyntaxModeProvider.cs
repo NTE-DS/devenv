@@ -11,7 +11,7 @@ using System.IO;
 using System.Reflection;
 using System.Xml;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document
 {
 	public class ResourceSyntaxModeProvider : ISyntaxModeFileProvider
 	{
@@ -26,7 +26,7 @@ namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document
 		public ResourceSyntaxModeProvider()
 		{
 			Assembly assembly = typeof(SyntaxMode).Assembly;
-			Stream syntaxModeStream = assembly.GetManifestResourceStream("NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Resources.SyntaxModes.xml");
+			Stream syntaxModeStream = assembly.GetManifestResourceStream("NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Resources.SyntaxModes.xml");
 			if (syntaxModeStream != null) {
 				syntaxModes = SyntaxMode.GetSyntaxModes(syntaxModeStream);
 			} else {
@@ -37,7 +37,7 @@ namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document
 		public XmlTextReader GetSyntaxModeFile(SyntaxMode syntaxMode)
 		{
 			Assembly assembly = typeof(SyntaxMode).Assembly;
-			return new XmlTextReader(assembly.GetManifestResourceStream("NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Resources." + syntaxMode.FileName));
+			return new XmlTextReader(assembly.GetManifestResourceStream("NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Resources." + syntaxMode.FileName));
 		}
 		
 		public void UpdateSyntaxModeList()

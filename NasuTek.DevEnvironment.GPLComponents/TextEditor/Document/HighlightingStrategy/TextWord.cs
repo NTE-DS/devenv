@@ -9,7 +9,7 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document
 {
 	public enum TextWordType {
 		Word,

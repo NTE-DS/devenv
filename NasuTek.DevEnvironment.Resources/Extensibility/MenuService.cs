@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using MenuItem = NasuTek.DevEnvironment.Extendability.MenuItem;
+using MenuItem = NasuTek.DevEnvironment.Extensibility.MenuItem;
 
 namespace NasuTek.DevEnvironment
 {
     public partial class DevEnv
     {
-        public partial class DEExtendability
+        public partial class DEExtensibility
         {
             public void GenerateMenu(MenuStrip menu)
             {

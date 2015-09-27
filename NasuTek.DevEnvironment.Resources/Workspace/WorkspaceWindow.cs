@@ -17,10 +17,10 @@
  * Boston, MA 02111-1307, USA.
  ***************************************************************************************************/
 
-using NasuTek.DevEnvironment.Extendability;
-using NasuTek.DevEnvironment.Extendability.Workbench;
-using NasuTek.DevEnvironment.Extendability.Workbench.Docking;
-using NasuTek.DevEnvironment.Extendability.Workbench.Toolbar;
+using NasuTek.DevEnvironment.Extensibility;
+using NasuTek.DevEnvironment.Extensibility.Workbench;
+using NasuTek.DevEnvironment.Extensibility.Workbench.Docking;
+using NasuTek.DevEnvironment.Extensibility.Workbench.Toolbar;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -50,7 +50,7 @@ namespace NasuTek.DevEnvironment.Workbench
 
         public WorkspaceWindow()
         {
-            foreach(var i in DevEnv.Instance.Extendability.Commands["BeforeInitialization"])
+            foreach(var i in DevEnv.GetActiveInstance().Extensibility.Commands["BeforeInitialization"])
             {
                 i.Run();
             }
@@ -60,31 +60,36 @@ namespace NasuTek.DevEnvironment.Workbench
             toolBarManager = new ToolBarManager(dockPanel1, this);
             //toolBarManager.AddControl(menuStrip1);
 
-            DevEnv.Instance.Extendability.GenerateMenu(menuStrip1);
-
-            dockPanel1.LoadFromXml(new MemoryStream(System.Text.Encoding.UTF8.GetBytes(Properties.Resources.InitialUi)), new DeserializeDockContent((str) =>
-            {
-                return DevEnv.Instance.Extendability.DevEnvPanes.FirstOrDefault(v => v.GetType().FullName == str);
-            }));
+            DevEnv.GetActiveInstance().Extensibility.GenerateMenu(menuStrip1);
             
-            //TODO: Toolbars
-            //if (AddInTree.ExistsTreeNode("/DevEnv/Toolbars"))
-            //{
-            //    var toolbars = ToolbarService.CreateToolbars(this, "/DevEnv/Toolbars");
+            foreach(var tb in DevEnv.GetActiveInstance().Extensibility.GenerateToolbars())
+            {
+                toolBarManager.AddControl(tb);
+            }
 
-            //    foreach (var toolbar in toolbars)
-            //    {
-            //        toolbar.GripStyle = ToolStripGripStyle.Hidden;
-            //        toolbar.Renderer = new BorderRenderer();
-                    
-            //        //toolbar.RenderMode = ToolStripRenderMode;
-            //        toolBarManager.AddControl(toolbar);
-            //    }
-            //}
+            LoadWorkbenchData();
         }
 
-        public DevEnvPane GetPane(string paneId) {
-            return (DevEnvPane)dockPanel1.Contents.FirstOrDefault(p => p is DevEnvPane && ((DevEnvPane)p).Name == paneId);
+        public void LoadWorkbenchData()
+        {
+            var regSvc = (IDevEnvRegSvc)DevEnvSvc.GetService(DevEnvSvc.RegSvc);
+
+            if (regSvc.OpenSubKey(SettingsReg.User, "Workbench").GetValue("WorkbenchPaneData") == null)
+                regSvc.OpenSubKey(SettingsReg.User, "Workbench").SetValue("WorkbenchPaneData", DevEnv.GetActiveInstance().ActiveWorkbenchSettings);
+
+            dockPanel1.LoadFromXml(new MemoryStream((byte[])regSvc.OpenSubKey(SettingsReg.User, "Workbench").GetValue("WorkbenchPaneData")), new DeserializeDockContent((str) =>
+            {
+                return DevEnv.GetActiveInstance().Extensibility.DevEnvPanes.FirstOrDefault(v => v.GetType().FullName == str);
+            }));
+        }
+
+        public void SaveWorkbenchData()
+        {
+            var regSvc = (IDevEnvRegSvc)DevEnvSvc.GetService(DevEnvSvc.RegSvc);
+            var wbStream = new MemoryStream();
+
+            dockPanel1.SaveAsXml(wbStream, System.Text.Encoding.UTF8);
+            regSvc.OpenSubKey(SettingsReg.User, "Workbench").SetValue("WorkbenchPaneData", wbStream.GetBuffer());
         }
 
         public void CloseAllDocuments() {
@@ -104,7 +109,7 @@ namespace NasuTek.DevEnvironment.Workbench
 
             DevEnvDocument docFormat;
 
-            docFormat = (DevEnvDocument)Activator.CreateInstance(DevEnv.Instance.Extendability.DocumentTypes[documentMetadata.RequestedFormat].Item2);
+            docFormat = (DevEnvDocument)Activator.CreateInstance(DevEnv.GetActiveInstance().Extensibility.DocumentTypes[documentMetadata.RequestedFormat].Item2);
 
             docFormat.Show(dockPanel1, DockState.Document);
             docFormat.Open(documentMetadata);
@@ -112,7 +117,7 @@ namespace NasuTek.DevEnvironment.Workbench
 
         private void Workspace_Load(object sender, EventArgs e)
         {
-            foreach (var i in DevEnv.Instance.Extendability.Commands["AfterInitialization"])
+            foreach (var i in DevEnv.GetActiveInstance().Extensibility.Commands["AfterInitialization"])
             {
                 i.Run();
             }

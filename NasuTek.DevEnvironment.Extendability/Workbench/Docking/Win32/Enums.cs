@@ -19,7 +19,7 @@
 
 using System;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.Docking.Win32
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.Docking.Win32
 {
 	[Flags]
 	internal enum FlagsSetWindowPos : uint

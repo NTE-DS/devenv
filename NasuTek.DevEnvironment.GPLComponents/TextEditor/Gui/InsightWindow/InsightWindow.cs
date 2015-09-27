@@ -10,10 +10,10 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-using NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Gui.CompletionWindow;
-using NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Util;
+using NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Gui.CompletionWindow;
+using NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Util;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Gui.InsightWindow
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Gui.InsightWindow
 {
 	public class InsightWindow : AbstractCompletionWindow
 	{

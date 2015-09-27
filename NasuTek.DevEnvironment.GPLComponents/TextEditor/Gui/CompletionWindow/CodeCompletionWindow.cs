@@ -9,9 +9,9 @@ using System;
 using System.Drawing;
 using System.Diagnostics;
 using System.Windows.Forms;
-using NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document;
+using NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Gui.CompletionWindow
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Gui.CompletionWindow
 {
 	public class CodeCompletionWindow : AbstractCompletionWindow
 	{

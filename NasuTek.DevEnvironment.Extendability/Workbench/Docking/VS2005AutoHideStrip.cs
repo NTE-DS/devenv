@@ -23,7 +23,7 @@ using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using System.ComponentModel;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.Docking
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.Docking
 {
     internal class VS2005AutoHideStrip : AutoHideStripBase
     {

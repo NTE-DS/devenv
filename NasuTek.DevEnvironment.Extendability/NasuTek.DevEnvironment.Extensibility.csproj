@@ -9,7 +9,7 @@
     <ProjectGuid>{AF925380-0B78-49E3-9A47-98194703B511}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NasuTek.DevEnvironment.Extendability</RootNamespace>
+    <RootNamespace>NasuTek.DevEnvironment.Extensibility</RootNamespace>
     <AssemblyName>devenvapi</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -44,13 +44,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractCommand.cs" />
+    <Compile Include="DevEnvMarshal.cs" />
+    <Compile Include="DevEnvSettings.cs" />
     <Compile Include="DevEnvSvc.cs" />
     <Compile Include="DevEnvVersion.cs" />
     <Compile Include="DevEnvVersion.gen.cs" />
     <Compile Include="DocumentMetadata.cs" />
     <Compile Include="DevEnvSvcs.cs" />
-    <Compile Include="IPlugin.cs" />
+    <Compile Include="IPackage.cs" />
     <Compile Include="MenuItem.cs" />
+    <Compile Include="MessageType.cs" />
     <Compile Include="PlugIn.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Project\DeletableObjectAttribute.cs" />
@@ -60,6 +63,13 @@
     <Compile Include="Project\IProjectGenerator.cs" />
     <Compile Include="Project\ISolution.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ToolBar.cs" />
+    <Compile Include="ToolBarItem.cs" />
     <Compile Include="Workbench\Toolbar\AllowedBorders.cs" />
     <Compile Include="Workbench\DevEnvDocument.cs">
       <SubType>Form</SubType>
@@ -202,6 +212,7 @@
     <None Include="DevEnvVersion.gen.cs.autogen" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\DevEnvMain.ico" />
     <Content Include="Workbench\Docking\DockPanel.bmp" />
     <Content Include="Workbench\Docking\Resources\DockIndicator_PaneDiamond.bmp" />
     <Content Include="Workbench\Docking\Resources\DockIndicator_PaneDiamond_Bottom.bmp" />
@@ -228,6 +239,10 @@
     <Content Include="Workbench\Docking\Resources\DockPane_OptionOverflow.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Workbench\DevEnvDocument.resx">
       <DependentUpon>DevEnvDocument.cs</DependentUpon>
     </EmbeddedResource>

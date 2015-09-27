@@ -7,7 +7,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document
 {
 	/// <summary>
 	/// A list of events that are fired after the line manager has finished working.

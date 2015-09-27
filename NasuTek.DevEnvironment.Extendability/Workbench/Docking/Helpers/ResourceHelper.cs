@@ -23,7 +23,7 @@ using System.Reflection;
 using System.Resources;
 using System.Windows.Forms;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.Docking
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.Docking
 {
 	internal static class ResourceHelper
 	{
@@ -34,7 +34,7 @@ namespace NasuTek.DevEnvironment.Extendability.Workbench.Docking
             get
             {
                 if (_resourceManager == null)
-                    _resourceManager = new ResourceManager("NasuTek.DevEnvironment.Extendability.Workbench.Docking.Strings", typeof(ResourceHelper).Assembly);
+                    _resourceManager = new ResourceManager("NasuTek.DevEnvironment.Extensibility.Workbench.Docking.Strings", typeof(ResourceHelper).Assembly);
                 return _resourceManager;
             }
 

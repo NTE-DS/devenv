@@ -26,7 +26,7 @@ using System.Drawing.Design;
 using System.Windows.Forms.Design;
 using System.ComponentModel;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.Docking
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.Docking
 {
     #region DockPanelSkin classes
     /// <summary>

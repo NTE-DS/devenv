@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Undo
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Undo
 {
 	/// <summary>
 	/// This class stacks the last x operations from the undostack and makes
@@ -27,7 +27,7 @@ namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Undo
 				throw new ArgumentNullException("stack");
 			}
 			
-			Debug.Assert(numops > 0 , "NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Undo.UndoQueue : numops should be > 0");
+			Debug.Assert(numops > 0 , "NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Undo.UndoQueue : numops should be > 0");
 			if (numops > stack.Count) {
 				numops = stack.Count;
 			}

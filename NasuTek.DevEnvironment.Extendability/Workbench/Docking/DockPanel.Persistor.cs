@@ -21,13 +21,13 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 using System.Drawing;
-using NasuTek.DevEnvironment.Extendability.Workbench.Docking;
+using NasuTek.DevEnvironment.Extensibility.Workbench.Docking;
 using System.IO;
 using System.Text;
 using System.Xml;
 using System.Globalization;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.Docking
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.Docking
 {
     partial class DockPanel
     {

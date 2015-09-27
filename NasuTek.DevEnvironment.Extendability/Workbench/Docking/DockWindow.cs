@@ -23,7 +23,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.Docking
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.Docking
 {
 	[ToolboxItem(false)]
 	public partial class DockWindow : Panel, INestedPanesContainer, ISplitterDragSource

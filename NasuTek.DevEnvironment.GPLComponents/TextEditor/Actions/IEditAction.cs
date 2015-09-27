@@ -8,7 +8,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Actions
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Actions
 {
 	/// <summary>
 	/// To define a new key for the textarea, you must write a class which

@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevEnv", "DevEnv\DevEnv.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NasuTek.DevEnvironment.GPLComponents", "NasuTek.DevEnvironment.GPLComponents\NasuTek.DevEnvironment.GPLComponents.csproj", "{53A9376E-881D-42EA-881F-3238202D8854}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NasuTek.DevEnvironment.Extendability", "NasuTek.DevEnvironment.Extendability\NasuTek.DevEnvironment.Extendability.csproj", "{AF925380-0B78-49E3-9A47-98194703B511}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NasuTek.DevEnvironment.Extensibility", "NasuTek.DevEnvironment.Extendability\NasuTek.DevEnvironment.Extensibility.csproj", "{AF925380-0B78-49E3-9A47-98194703B511}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

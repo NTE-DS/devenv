@@ -7,7 +7,7 @@
 
 using System;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor
 {
 	/// <summary>
 	/// A line/column position.

@@ -21,7 +21,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.Docking
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.Docking
 {
 	[Flags]
 	[Serializable]

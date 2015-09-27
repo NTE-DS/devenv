@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor
 {
 	/// <summary>
 	/// Contains brushes/pens for the text editor to speed up drawing. Re-Creation of brushes and pens

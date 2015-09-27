@@ -8,7 +8,7 @@
 using System;
 using System.Drawing;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor
 {
 	public delegate void ToolTipRequestEventHandler(object sender, ToolTipRequestEventArgs e);
 	

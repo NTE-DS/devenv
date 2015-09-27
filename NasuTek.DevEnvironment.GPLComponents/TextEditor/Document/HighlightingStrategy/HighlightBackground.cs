@@ -9,7 +9,7 @@ using System;
 using System.Drawing;
 using System.Xml;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document
 {
 	/// <summary>
 	/// Extens the highlighting color with a background image.

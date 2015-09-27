@@ -21,7 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using NasuTek.DevEnvironment.Extendability;
+using NasuTek.DevEnvironment.Extensibility;
 using NasuTek.DevEnvironment.Forms;
 
 namespace NasuTek.DevEnvironment.MenuCommands
@@ -31,6 +31,14 @@ namespace NasuTek.DevEnvironment.MenuCommands
         public override void Run() {
             var optionsForm = new EnvironmentOptions();
             if (optionsForm.ShowDialog() != DialogResult.OK) return;
+        }
+    }
+
+    public class MacrosIDE : AbstractCommand
+    {
+        public override void Run()
+        {
+            DevEnvSvc.InitializeDevEnv(new DevEnvSettings { ProductID = "MacrosIDE", ProductName = "NasuTek Developer Studio Macros IDE" }, new string[] { }, true);
         }
     }
 }

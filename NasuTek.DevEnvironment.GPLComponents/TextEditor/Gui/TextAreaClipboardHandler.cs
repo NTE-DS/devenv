@@ -11,10 +11,10 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-using NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document;
-using NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Util;
+using NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document;
+using NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Util;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor
 {
 	public class TextAreaClipboardHandler
 	{
@@ -231,12 +231,12 @@ namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor
 		
 		public void Delete(object sender, EventArgs e)
 		{
-			new NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Actions.Delete().Execute(textArea);
+			new NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Actions.Delete().Execute(textArea);
 		}
 		
 		public void SelectAll(object sender, EventArgs e)
 		{
-			new NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Actions.SelectWholeDocument().Execute(textArea);
+			new NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Actions.SelectWholeDocument().Execute(textArea);
 		}
 		
 		protected virtual void OnCopyText(CopyTextEventArgs e)

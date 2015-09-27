@@ -5,7 +5,7 @@
 //     <version>$Revision$</version>
 // </file>
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Undo
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Undo
 {
 	/// <summary>
 	/// This Interface describes a the basic Undo/Redo operation

@@ -23,7 +23,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Linq;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.Toolbar
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.Toolbar
 {
 	public class ToolBarManager : IMessageFilter
 	{

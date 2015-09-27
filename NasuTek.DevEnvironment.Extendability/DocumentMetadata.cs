@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NasuTek.DevEnvironment.Extendability
+namespace NasuTek.DevEnvironment.Extensibility
 {
     public class DocumentMetadata
     {
@@ -11,7 +11,7 @@ namespace NasuTek.DevEnvironment.Extendability
         public Guid RequestedFormat { get; set; }
         public bool IsFile { get; set; }
         public List<object> Metadata { get; private set; }
-        public object DataObject { get { return Metadata[0]; } }
+        public object DataObject { get { return Metadata.Count > 0 ? Metadata[0] : null; } }
 
         public DocumentMetadata() {
             Metadata = new List<object>();

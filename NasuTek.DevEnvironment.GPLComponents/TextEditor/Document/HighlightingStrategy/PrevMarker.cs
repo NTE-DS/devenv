@@ -8,7 +8,7 @@
 using System;
 using System.Xml;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document
 {
 	/// <summary>
 	/// Used for mark previous token

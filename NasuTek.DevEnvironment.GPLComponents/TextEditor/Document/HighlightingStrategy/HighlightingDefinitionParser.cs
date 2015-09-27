@@ -13,7 +13,7 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Schema;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document
 {
 	public static class HighlightingDefinitionParser
 	{
@@ -31,7 +31,7 @@ namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document
 			try {
 				List<ValidationEventArgs> errors = null;
 				XmlReaderSettings settings = new XmlReaderSettings();
-				Stream shemaStream = typeof(HighlightingDefinitionParser).Assembly.GetManifestResourceStream("NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Resources.Mode.xsd");
+				Stream shemaStream = typeof(HighlightingDefinitionParser).Assembly.GetManifestResourceStream("NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Resources.Mode.xsd");
 				settings.Schemas.Add("", new XmlTextReader(shemaStream));
 				settings.Schemas.ValidationEventHandler += delegate(object sender, ValidationEventArgs args) {
 					if (errors == null) {

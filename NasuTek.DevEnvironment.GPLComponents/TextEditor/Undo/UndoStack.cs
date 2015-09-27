@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Undo
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Undo
 {
 	/// <summary>
 	/// This class implements an undo stack

@@ -22,7 +22,7 @@ using System.Collections;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.Toolbar
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.Toolbar
 {
 	public class ToolBarDockArea : System.Windows.Forms.UserControl
 	{

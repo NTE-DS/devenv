@@ -7,7 +7,7 @@
 
 using System;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Gui.CompletionWindow
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Gui.CompletionWindow
 {
 	public interface ICompletionData
 	{

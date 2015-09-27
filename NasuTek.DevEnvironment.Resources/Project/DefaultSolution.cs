@@ -1,9 +1,10 @@
-﻿using System;
+﻿using NasuTek.DevEnvironment.Extensibility.Project;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NasuTek.DevEnvironment.Extensibility.Project
+namespace NasuTek.DevEnvironment.Project
 {
     public class DefaultSolution : ISolution
     {

@@ -71,36 +71,16 @@ namespace NasuTek.DevEnvironment.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon DevEnvMain {
-            get {
-                object obj = ResourceManager.GetObject("DevEnvMain", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;!--DockPanel configuration file. Author: Weifen Luo, all rights reserved.--&gt;
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;!--DockPanel configuration file. Author: Weifen Luo, all rights reserved.--&gt;
         ///&lt;!--!!! AUTOMATICALLY GENERATED FILE. DO NOT MODIFY !!!--&gt;
         ///&lt;DockPanel FormatVersion=&quot;1.0&quot; DockLeftPortion=&quot;0.25&quot; DockRightPortion=&quot;0.25&quot; DockTopPortion=&quot;0.25&quot; DockBottomPortion=&quot;0.327057793345009&quot; ActiveDocumentPane=&quot;-1&quot; ActivePane=&quot;3&quot;&gt;
-        ///  &lt;Contents Count=&quot;4&quot;&gt;
-        ///    &lt;Content ID=&quot;0&quot; PersistString=&quot;NasuTek.DevEnvironment.Pads.OutputPad&quot; AutoHidePortion=&quot;0.25&quot; IsHidden=&quot;False&quot; IsFloat=&quot;False&quot; /&gt;
-        ///    &lt;Content ID=&quot;1&quot; PersistString=&quot;N [rest of string was truncated]&quot;;.
+        ///  &lt;Contents Count=&quot;5&quot;&gt;
+        ///    &lt;Content ID=&quot;0&quot; PersistString=&quot;NasuTek.DevEnvironment.Pads.OutputPad&quot; AutoHidePortion=&quot;0.25&quot; IsHidden=&quot;False&quot; IsFloat=&quot;False&quot;  [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string InitialUi {
             get {
                 return ResourceManager.GetString("InitialUi", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap LGPL_V3 {
-            get {
-                object obj = ResourceManager.GetObject("LGPL-V3", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document
 {
 	/// <summary>
 	/// Manages the list of markers and provides ways to retrieve markers for specific positions.

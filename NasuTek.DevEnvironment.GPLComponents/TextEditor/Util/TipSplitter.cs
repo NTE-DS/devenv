@@ -9,7 +9,7 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Util
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Util
 {
 	class TipSplitter: TipSection
 	{

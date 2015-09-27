@@ -76,13 +76,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NasuTek.DevEnvironment.Extendability\NasuTek.DevEnvironment.Extendability.csproj">
+    <ProjectReference Include="..\NasuTek.DevEnvironment.Extendability\NasuTek.DevEnvironment.Extensibility.csproj">
       <Project>{af925380-0b78-49e3-9a47-98194703b511}</Project>
-      <Name>NasuTek.DevEnvironment.Extendability</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NasuTek.DevEnvironment.Resources\NasuTek.DevEnvironment.csproj">
-      <Project>{813d5d0d-d1a1-40ad-8357-b54916647819}</Project>
-      <Name>NasuTek.DevEnvironment</Name>
+      <Name>NasuTek.DevEnvironment.Extensibility</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

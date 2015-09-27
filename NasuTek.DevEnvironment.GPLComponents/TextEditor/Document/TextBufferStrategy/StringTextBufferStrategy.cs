@@ -9,7 +9,7 @@ using System;
 using System.IO;
 using System.Text;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document
 {
 	/// <summary>
 	/// Simple implementation of the ITextBuffer interface implemented using a

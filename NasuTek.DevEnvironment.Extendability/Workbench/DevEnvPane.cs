@@ -17,13 +17,13 @@
  * Boston, MA 02111-1307, USA.
  ***************************************************************************************************/
 
-using NasuTek.DevEnvironment.Extendability.Workbench.Docking;
+using NasuTek.DevEnvironment.Extensibility.Workbench.Docking;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench
+namespace NasuTek.DevEnvironment.Extensibility.Workbench
 {
     public partial class DevEnvPane : DockContent
     {

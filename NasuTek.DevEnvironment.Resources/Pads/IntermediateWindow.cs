@@ -1,4 +1,5 @@
-﻿using NasuTek.DevEnvironment.Extendability.Workbench;
+﻿using NasuTek.DevEnvironment.Extensibility;
+using NasuTek.DevEnvironment.Extensibility.Workbench;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -36,10 +37,10 @@ namespace NasuTek.DevEnvironment.Pads
                     switch (cmd)
                     {
                         case "OpenWindow":
-                            DevEnv.Instance.Extendability.DevEnvPanes.First(v => v.Name == tld[0]);
+                            DevEnv.GetActiveInstance().Extensibility.DevEnvPanes.First(v => v.Name == tld[0]);
                             break;
                         case "SaveWindowSettings":
-                            DevEnv.Instance.WorkspaceEnvironment.DockPanel.SaveAsXml(String.Join(" ", tld.ToArray()));
+                            DevEnv.GetActiveInstance().WorkspaceEnvironment.DockPanel.SaveAsXml(String.Join(" ", tld.ToArray()));
                             break;
                     }
 

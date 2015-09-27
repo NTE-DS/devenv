@@ -1,4 +1,5 @@
-﻿using NasuTek.DevEnvironment.Extendability.Workbench;
+﻿using NasuTek.DevEnvironment.Extensibility;
+using NasuTek.DevEnvironment.Extensibility.Workbench;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,7 +22,7 @@ namespace NasuTek.DevEnvironment.Pads
         internal void RefreshLogs()
         {
             comboBox1.Items.Clear();
-            foreach (var i in DevEnv.Instance.Logs)
+            foreach (var i in DevEnv.GetActiveInstance().Logs)
                 comboBox1.Items.Add(i.Key);
         }
 
@@ -33,7 +34,7 @@ namespace NasuTek.DevEnvironment.Pads
         internal void RefreshActiveLog(string log)
         {
             if (comboBox1.Text != log) return;
-            textBox1.Text = DevEnv.Instance.Logs[log].ToString();
+            textBox1.Text = DevEnv.GetActiveInstance().Logs[log].ToString();
             textBox1.SelectionStart = textBox1.TextLength;
             textBox1.ScrollToCaret();
         }

@@ -26,7 +26,7 @@ using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.Diagnostics.CodeAnalysis;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.Docking
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.Docking
 {
     [ToolboxItem(false)]
     public partial class DockPane : UserControl, IDockDragSource

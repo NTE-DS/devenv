@@ -21,8 +21,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using NasuTek.DevEnvironment.Extendability.Workbench;
-using NasuTek.DevEnvironment.Extendability.Workbench.Toolbar;
+using NasuTek.DevEnvironment.Extensibility.Workbench;
+using NasuTek.DevEnvironment.Extensibility.Workbench.Toolbar;
 
 namespace NasuTek.DevEnvironment.Forms
 {
@@ -33,13 +33,13 @@ namespace NasuTek.DevEnvironment.Forms
             InitializeComponent();
 
             foreach (var toolBarDockHolder in mgr.GetToolBars) {
-                checkedListBox1.Items.Add(toolBarDockHolder);
+                checkedListBox1.Items.Add(toolBarDockHolder, toolBarDockHolder.Visible);
             }
         }
 
         private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            //((ToolBarDockHolder)checkedListBox1.Items[e.Index])
+            ((ToolBarDockHolder)checkedListBox1.Items[e.Index]).Visible = e.NewValue == CheckState.Checked ? true : false;
         }
     }
 }

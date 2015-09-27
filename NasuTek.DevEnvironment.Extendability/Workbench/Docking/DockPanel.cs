@@ -37,14 +37,14 @@ internal class resfinder
 {
 }
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.Docking
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.Docking
 {
     [SuppressMessage("Microsoft.Naming", "CA1720:AvoidTypeNamesInParameters", MessageId = "0#")]
 	public delegate IDockContent DeserializeDockContent(string persistString);
 
     [LocalizedDescription("DockPanel_Description")]
     [Designer("System.Windows.Forms.Design.ControlDesigner, System.Design")]
-    [ToolboxBitmap(typeof(resfinder), "NasuTek.DevEnvironment.Extendability.Workbench.Docking.DockPanel.bmp")]
+    [ToolboxBitmap(typeof(resfinder), "NasuTek.DevEnvironment.Extensibility.Workbench.Docking.DockPanel.bmp")]
     [DefaultProperty("DocumentStyle")]
     [DefaultEvent("ActiveContentChanged")]
 	public partial class DockPanel : Panel

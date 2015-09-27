@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NasuTek.DevEnvironment;
+using NasuTek.DevEnvironment.Extensibility;
+using System.Threading;
 
 namespace DevEnv {
     static class Program {
@@ -14,9 +16,7 @@ namespace DevEnv {
         static void Main(string[] args) {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            var devEnv = new NasuTek.DevEnvironment.DevEnv();
-            devEnv.InitializeServices();
-            devEnv.InitializeEnvironment(new Arguments(args));
+            DevEnvSvc.InitializeDevEnv(new DevEnvSettings(), args, false);
         }
     }
 }

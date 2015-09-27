@@ -23,7 +23,7 @@ using System.Drawing;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.Docking
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.Docking
 {
 	public delegate string GetPersistStringCallback();
 

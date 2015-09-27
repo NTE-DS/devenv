@@ -11,7 +11,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Xml;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document
 {
 	public class SyntaxMode
 	{

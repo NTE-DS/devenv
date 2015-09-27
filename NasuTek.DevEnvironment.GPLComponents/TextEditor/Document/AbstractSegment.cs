@@ -7,7 +7,7 @@
 
 using System;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document
 {
 	/// <summary>
 	/// This interface is used to describe a span inside a text sequence
@@ -19,7 +19,7 @@ namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document
 		[CLSCompliant(false)]
 		protected int length = -1;
 		
-		#region NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document.ISegment interface implementation
+		#region NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document.ISegment interface implementation
 		public virtual int Offset {
 			get {
 				return offset;

@@ -1,4 +1,4 @@
-﻿namespace NasuTek.DevEnvironment.Extendability.Workbench
+﻿namespace NasuTek.DevEnvironment.Extensibility.Workbench
 {
     partial class DevEnvPane
     {

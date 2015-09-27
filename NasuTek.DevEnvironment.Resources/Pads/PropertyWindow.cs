@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using NasuTek.DevEnvironment.Extendability.Workbench;
+using NasuTek.DevEnvironment.Extensibility.Workbench;
 
 namespace NasuTek.DevEnvironment.Pads
 {

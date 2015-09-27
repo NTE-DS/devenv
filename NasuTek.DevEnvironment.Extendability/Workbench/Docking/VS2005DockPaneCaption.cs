@@ -24,7 +24,7 @@ using System.Windows.Forms;
 using System.ComponentModel;
 using System.Windows.Forms.VisualStyles;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.Docking
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.Docking
 {
 	internal class VS2005DockPaneCaption : DockPaneCaptionBase
 	{

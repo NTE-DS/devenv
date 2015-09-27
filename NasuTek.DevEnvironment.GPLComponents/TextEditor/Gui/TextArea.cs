@@ -14,11 +14,11 @@ using System.Drawing.Text;
 using System.Text;
 using System.Windows.Forms;
 
-using NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Actions;
-using NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document;
-using NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Gui.CompletionWindow;
+using NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Actions;
+using NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document;
+using NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Gui.CompletionWindow;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor
 {
 	public delegate bool KeyEventHandler(char ch);
 	public delegate bool DialogKeyProcessor(Keys keyData);

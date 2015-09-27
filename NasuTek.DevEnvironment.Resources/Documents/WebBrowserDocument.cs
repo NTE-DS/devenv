@@ -21,7 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using NasuTek.DevEnvironment.Extendability.Workbench;
+using NasuTek.DevEnvironment.Extensibility.Workbench;
 
 namespace NasuTek.DevEnvironment.Documents
 {

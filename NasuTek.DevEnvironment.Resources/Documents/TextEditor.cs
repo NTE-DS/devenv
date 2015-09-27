@@ -1,4 +1,4 @@
-﻿using NasuTek.DevEnvironment.Extendability.Workbench;
+﻿using NasuTek.DevEnvironment.Extensibility.Workbench;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,7 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using NasuTek.DevEnvironment.Extendability;
+using NasuTek.DevEnvironment.Extensibility;
 
 namespace NasuTek.DevEnvironment.Documents
 {

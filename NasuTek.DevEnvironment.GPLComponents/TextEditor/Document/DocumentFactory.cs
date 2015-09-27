@@ -8,7 +8,7 @@
 using System;
 using System.Text;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document
 {
 	/// <summary>
 	/// This interface represents a container which holds a text sequence and

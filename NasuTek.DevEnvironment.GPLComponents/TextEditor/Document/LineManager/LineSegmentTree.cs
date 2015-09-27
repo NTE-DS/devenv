@@ -8,9 +8,9 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Util;
+using NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Util;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document
 {
 	/// <summary>
 	/// Data structure for efficient management of the line segments (most operations are O(lg n)).

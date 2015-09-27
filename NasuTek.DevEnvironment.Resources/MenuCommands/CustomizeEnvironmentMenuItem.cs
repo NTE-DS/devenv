@@ -21,7 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using NasuTek.DevEnvironment.Extendability;
+using NasuTek.DevEnvironment.Extensibility;
 using NasuTek.DevEnvironment.Forms;
 
 namespace NasuTek.DevEnvironment.MenuCommands
@@ -29,7 +29,7 @@ namespace NasuTek.DevEnvironment.MenuCommands
     public class CustomizeEnvironmentMenuItem : AbstractCommand
     {
         public override void Run() {
-            var customizeForm = new CustomizeEnvironment(DevEnv.Instance.WorkspaceEnvironment.toolBarManager);
+            var customizeForm = new CustomizeEnvironment(DevEnv.GetActiveInstance().WorkspaceEnvironment.toolBarManager);
             if (customizeForm.ShowDialog() != DialogResult.OK) return;
         }
     }

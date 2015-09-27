@@ -8,7 +8,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Util
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Util
 {
 	/// <summary>
 	/// Accumulates mouse wheel deltas and reports the actual number of lines to scroll.

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using NasuTek.DevEnvironment.Extendability;
+using NasuTek.DevEnvironment.Extensibility;
 using System.Reflection;
+using NasuTek.DevEnvironment.Project;
 
 namespace NasuTek.DevEnvironment.Extensibility.Project
 {
@@ -14,23 +15,24 @@ namespace NasuTek.DevEnvironment.Extensibility.Project
         private static Dictionary<string, Tuple<Guid, string, string[]>> m_ProjExtensions = new Dictionary<string, Tuple<Guid, string, string[]>>();
 
         static ProjectService() {
-            foreach (var i in DevEnv.Instance.DevEnvRegistry.OpenSubKey("ProjectTypes").GetSubKeyNames())
-            {
-                var addin = DevEnv.Instance.DevEnvRegistry.OpenSubKey("ProjectTypes").OpenSubKey(i);
-                var guid = Guid.Parse(i);
-                var name = (string)addin.GetValue(null);
+            var regSvc = (IDevEnvRegSvc)DevEnvSvc.GetService(DevEnvSvc.RegSvc);
 
-                var addInAssemb = AppDomain.CurrentDomain.GetAssemblies().First(v => v.GetName().FullName == (string)addin.GetValue("ProjectAssembly"));
-
-                var addinPlug = (IProjectGenerator)addInAssemb.CreateInstance((string)addin.GetValue("ProjectClass"));
-                m_ProjectGenerators.Add(guid, addinPlug);
-
-                foreach (var ext in ((string)addin.GetValue("ProjectExtension")).Split(';').Where(ext => !m_ProjExtensions.ContainsKey(ext)))
+            if (regSvc.SubKeyExists(SettingsReg.Global, "ProjectTypes"))
+                foreach (var addin in regSvc.OpenSubKey(SettingsReg.Global, "ProjectTypes").GetSubKeys())
                 {
-                    m_ProjExtensions.Add(ext, Tuple.Create(guid, name, new string[] { ext }.Concat(addin.GetValue("CompatableExtensions") != null ? ((string)addin.GetValue("CompatableExtensions")).Split(';') : new string[] { }).ToArray()));
-                }
+                    var guid = Guid.Parse(addin.Name);
+                    var name = (string)addin.GetValue(null);
 
-            }
+                    var addInAssemb = AppDomain.CurrentDomain.GetAssemblies().First(v => v.GetName().FullName == (string)addin.GetValue("ProjectAssembly"));
+
+                    var addinPlug = (IProjectGenerator)addInAssemb.CreateInstance((string)addin.GetValue("ProjectClass"));
+                    m_ProjectGenerators.Add(guid, addinPlug);
+
+                    foreach (var ext in ((string)addin.GetValue("ProjectExtension")).Split(';').Where(ext => !m_ProjExtensions.ContainsKey(ext)))
+                    {
+                        m_ProjExtensions.Add(ext, Tuple.Create(guid, name, new string[] { ext }.Concat(addin.GetValue("CompatableExtensions") != null ? ((string)addin.GetValue("CompatableExtensions")).Split(';') : new string[] { }).ToArray()));
+                    }
+                }
         }
 
         public static ISolution OpenSolution(string solutionFilePath) {

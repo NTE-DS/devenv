@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Diagnostics;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document
 {
 	public class HighlightingManager
 	{

@@ -15,10 +15,10 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
-using NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Actions;
-using NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document;
+using NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Actions;
+using NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor
 {
 	/// <summary>
 	/// This class is used for a basic text area control

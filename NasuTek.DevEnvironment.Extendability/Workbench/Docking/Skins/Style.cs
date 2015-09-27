@@ -17,7 +17,7 @@
  * Boston, MA 02111-1307, USA.
  ***************************************************************************************************/
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.Docking.Skins
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.Docking.Skins
 {
     public enum Style
     {

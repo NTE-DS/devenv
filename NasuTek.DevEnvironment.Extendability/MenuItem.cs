@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NasuTek.DevEnvironment.Extendability
+namespace NasuTek.DevEnvironment.Extensibility
 {
     public class MenuItem
     {
@@ -19,6 +19,10 @@ namespace NasuTek.DevEnvironment.Extendability
         public string Text { get; private set; }
         public AbstractCommand Command { get; private set; }
         public MenuType Type { get; private set; }
+
+        public MenuItem(string id) : this(id, null, null) { }
+
+        public MenuItem(string id, string title) : this(id, title, null) { }
 
         public MenuItem(string id, string title, AbstractCommand command)
         {

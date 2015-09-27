@@ -10,7 +10,7 @@ using System.Text;
 using System.Diagnostics;
 using System.Collections.Generic;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Util
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Util
 {
 	internal sealed class RedBlackTreeNode<T>
 	{

@@ -9,7 +9,7 @@ using System;
 using System.Drawing;
 using System.Text;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document
 {
 	public interface ITextEditorProperties
 	{

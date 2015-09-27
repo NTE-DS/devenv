@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Util
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Util
 {
 	/// <summary>
 	/// A collection that does not allows its elements to be garbage-collected (unless there are other

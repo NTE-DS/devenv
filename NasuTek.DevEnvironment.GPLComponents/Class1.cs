@@ -1,4 +1,4 @@
-﻿using NasuTek.DevEnvironment.Extendability;
+﻿using NasuTek.DevEnvironment.Extensibility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,16 +6,14 @@ using System.Text;
 
 namespace NasuTek.DevEnvironment.GPLComponents
 {
-    public class Core : IPlugin
+    public class Core : IPackage
     {
         public void Load()
         {
-            DevEnv.Instance.Extendability.InstalledProducts.Add(new Product("DevEnv GPL Components", "Includes any GPL components. Not required for base IDE functions.", null));
-        }
+            var plugSvc = (IDevEnvPackageSvc)DevEnvSvc.GetService(DevEnvSvc.PackageSvc);
+            var uiSvc = (IDevEnvUISvc)DevEnvSvc.GetService(DevEnvSvc.UISvc);
 
-        public void Unload()
-        {
-            throw new NotImplementedException();
+            plugSvc.AddProduct(new Product("DevEnv LGPL Components", "Includes any LGPL components. Not required for base IDE functions.", null));
         }
     }
 }

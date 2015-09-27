@@ -7,9 +7,9 @@
 
 using System;
 using System.Diagnostics;
-using NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document;
+using NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Undo
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Undo
 {
 	/// <summary>
 	/// This class is for the undo of Document insert operations

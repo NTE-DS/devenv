@@ -17,7 +17,7 @@
  * Boston, MA 02111-1307, USA.
  ***************************************************************************************************/
 
-using NasuTek.DevEnvironment.Extendability;
+using NasuTek.DevEnvironment.Extensibility;
 using System;
 using System.Collections.Generic;
 using System.Linq;

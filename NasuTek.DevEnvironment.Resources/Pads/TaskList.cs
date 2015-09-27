@@ -1,4 +1,4 @@
-﻿using NasuTek.DevEnvironment.Extendability.Workbench;
+﻿using NasuTek.DevEnvironment.Extensibility.Workbench;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

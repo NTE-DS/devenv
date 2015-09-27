@@ -21,7 +21,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.Toolbar
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.Toolbar
 {
 	public class ToolBarDockHolder : System.Windows.Forms.UserControl
 	{

@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document
 {
 	/// <summary>
 	/// A stack of Span instances. Works like Stack&lt;Span&gt;, but can be cloned quickly

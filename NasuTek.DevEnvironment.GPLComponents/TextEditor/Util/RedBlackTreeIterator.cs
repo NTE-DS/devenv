@@ -9,7 +9,7 @@ using System;
 using System.Diagnostics;
 using System.Collections.Generic;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Util
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Util
 {
 	internal struct RedBlackTreeIterator<T> : IEnumerator<T>
 	{

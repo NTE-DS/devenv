@@ -11,7 +11,7 @@ using System.Drawing;
 using System.Diagnostics;
 using System.Text;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document
 {
 	public sealed class LineSegment : ISegment
 	{

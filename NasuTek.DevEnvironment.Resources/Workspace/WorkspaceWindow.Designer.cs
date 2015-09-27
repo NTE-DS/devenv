@@ -28,24 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            NasuTek.DevEnvironment.Extendability.Workbench.Docking.DockPanelSkin dockPanelSkin1 = new NasuTek.DevEnvironment.Extendability.Workbench.Docking.DockPanelSkin();
-            NasuTek.DevEnvironment.Extendability.Workbench.Docking.AutoHideStripSkin autoHideStripSkin1 = new NasuTek.DevEnvironment.Extendability.Workbench.Docking.AutoHideStripSkin();
-            NasuTek.DevEnvironment.Extendability.Workbench.Docking.DockPanelGradient dockPanelGradient1 = new NasuTek.DevEnvironment.Extendability.Workbench.Docking.DockPanelGradient();
-            NasuTek.DevEnvironment.Extendability.Workbench.Docking.TabGradient tabGradient1 = new NasuTek.DevEnvironment.Extendability.Workbench.Docking.TabGradient();
-            NasuTek.DevEnvironment.Extendability.Workbench.Docking.DockPaneStripSkin dockPaneStripSkin1 = new NasuTek.DevEnvironment.Extendability.Workbench.Docking.DockPaneStripSkin();
-            NasuTek.DevEnvironment.Extendability.Workbench.Docking.DockPaneStripGradient dockPaneStripGradient1 = new NasuTek.DevEnvironment.Extendability.Workbench.Docking.DockPaneStripGradient();
-            NasuTek.DevEnvironment.Extendability.Workbench.Docking.TabGradient tabGradient2 = new NasuTek.DevEnvironment.Extendability.Workbench.Docking.TabGradient();
-            NasuTek.DevEnvironment.Extendability.Workbench.Docking.DockPanelGradient dockPanelGradient2 = new NasuTek.DevEnvironment.Extendability.Workbench.Docking.DockPanelGradient();
-            NasuTek.DevEnvironment.Extendability.Workbench.Docking.TabGradient tabGradient3 = new NasuTek.DevEnvironment.Extendability.Workbench.Docking.TabGradient();
-            NasuTek.DevEnvironment.Extendability.Workbench.Docking.DockPaneStripToolWindowGradient dockPaneStripToolWindowGradient1 = new NasuTek.DevEnvironment.Extendability.Workbench.Docking.DockPaneStripToolWindowGradient();
-            NasuTek.DevEnvironment.Extendability.Workbench.Docking.TabGradient tabGradient4 = new NasuTek.DevEnvironment.Extendability.Workbench.Docking.TabGradient();
-            NasuTek.DevEnvironment.Extendability.Workbench.Docking.TabGradient tabGradient5 = new NasuTek.DevEnvironment.Extendability.Workbench.Docking.TabGradient();
-            NasuTek.DevEnvironment.Extendability.Workbench.Docking.DockPanelGradient dockPanelGradient3 = new NasuTek.DevEnvironment.Extendability.Workbench.Docking.DockPanelGradient();
-            NasuTek.DevEnvironment.Extendability.Workbench.Docking.TabGradient tabGradient6 = new NasuTek.DevEnvironment.Extendability.Workbench.Docking.TabGradient();
-            NasuTek.DevEnvironment.Extendability.Workbench.Docking.TabGradient tabGradient7 = new NasuTek.DevEnvironment.Extendability.Workbench.Docking.TabGradient();
+            NasuTek.DevEnvironment.Extensibility.Workbench.Docking.DockPanelSkin dockPanelSkin1 = new NasuTek.DevEnvironment.Extensibility.Workbench.Docking.DockPanelSkin();
+            NasuTek.DevEnvironment.Extensibility.Workbench.Docking.AutoHideStripSkin autoHideStripSkin1 = new NasuTek.DevEnvironment.Extensibility.Workbench.Docking.AutoHideStripSkin();
+            NasuTek.DevEnvironment.Extensibility.Workbench.Docking.DockPanelGradient dockPanelGradient1 = new NasuTek.DevEnvironment.Extensibility.Workbench.Docking.DockPanelGradient();
+            NasuTek.DevEnvironment.Extensibility.Workbench.Docking.TabGradient tabGradient1 = new NasuTek.DevEnvironment.Extensibility.Workbench.Docking.TabGradient();
+            NasuTek.DevEnvironment.Extensibility.Workbench.Docking.DockPaneStripSkin dockPaneStripSkin1 = new NasuTek.DevEnvironment.Extensibility.Workbench.Docking.DockPaneStripSkin();
+            NasuTek.DevEnvironment.Extensibility.Workbench.Docking.DockPaneStripGradient dockPaneStripGradient1 = new NasuTek.DevEnvironment.Extensibility.Workbench.Docking.DockPaneStripGradient();
+            NasuTek.DevEnvironment.Extensibility.Workbench.Docking.TabGradient tabGradient2 = new NasuTek.DevEnvironment.Extensibility.Workbench.Docking.TabGradient();
+            NasuTek.DevEnvironment.Extensibility.Workbench.Docking.DockPanelGradient dockPanelGradient2 = new NasuTek.DevEnvironment.Extensibility.Workbench.Docking.DockPanelGradient();
+            NasuTek.DevEnvironment.Extensibility.Workbench.Docking.TabGradient tabGradient3 = new NasuTek.DevEnvironment.Extensibility.Workbench.Docking.TabGradient();
+            NasuTek.DevEnvironment.Extensibility.Workbench.Docking.DockPaneStripToolWindowGradient dockPaneStripToolWindowGradient1 = new NasuTek.DevEnvironment.Extensibility.Workbench.Docking.DockPaneStripToolWindowGradient();
+            NasuTek.DevEnvironment.Extensibility.Workbench.Docking.TabGradient tabGradient4 = new NasuTek.DevEnvironment.Extensibility.Workbench.Docking.TabGradient();
+            NasuTek.DevEnvironment.Extensibility.Workbench.Docking.TabGradient tabGradient5 = new NasuTek.DevEnvironment.Extensibility.Workbench.Docking.TabGradient();
+            NasuTek.DevEnvironment.Extensibility.Workbench.Docking.DockPanelGradient dockPanelGradient3 = new NasuTek.DevEnvironment.Extensibility.Workbench.Docking.DockPanelGradient();
+            NasuTek.DevEnvironment.Extensibility.Workbench.Docking.TabGradient tabGradient6 = new NasuTek.DevEnvironment.Extensibility.Workbench.Docking.TabGradient();
+            NasuTek.DevEnvironment.Extensibility.Workbench.Docking.TabGradient tabGradient7 = new NasuTek.DevEnvironment.Extensibility.Workbench.Docking.TabGradient();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.dockPanel1 = new NasuTek.DevEnvironment.Extendability.Workbench.Docking.DockPanel();
+            this.dockPanel1 = new NasuTek.DevEnvironment.Extensibility.Workbench.Docking.DockPanel();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -142,6 +142,6 @@
 
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private NasuTek.DevEnvironment.Extendability.Workbench.Docking.DockPanel dockPanel1;
+        private NasuTek.DevEnvironment.Extensibility.Workbench.Docking.DockPanel dockPanel1;
     }
 }

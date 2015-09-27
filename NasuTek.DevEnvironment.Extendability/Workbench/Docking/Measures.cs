@@ -19,7 +19,7 @@
 
 using System;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.Docking
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.Docking
 {
 	internal static class Measures
 	{

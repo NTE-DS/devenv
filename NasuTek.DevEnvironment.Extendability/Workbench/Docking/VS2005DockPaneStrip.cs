@@ -25,7 +25,7 @@ using System.ComponentModel;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.Docking
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.Docking
 {
     internal class VS2005DockPaneStrip : DockPaneStripBase
     {

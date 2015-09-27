@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textEditorControl1 = new NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.TextEditorControl();
+            this.textEditorControl1 = new NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.TextEditorControl();
             this.SuspendLayout();
             // 
             // textEditorControl1
@@ -47,7 +47,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(724, 552);
             this.Controls.Add(this.textEditorControl1);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "TextEditor";
             this.Text = "TextEditor";
             this.ResumeLayout(false);
@@ -56,6 +55,6 @@
 
         #endregion
 
-        private Workspace.TextEditor.TextEditorControl textEditorControl1;
+        private NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.TextEditorControl textEditorControl1;
     }
 }

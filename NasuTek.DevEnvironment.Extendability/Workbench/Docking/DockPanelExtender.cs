@@ -21,7 +21,7 @@ using System;
 using System.Drawing;
 using System.Diagnostics.CodeAnalysis;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.Docking
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.Docking
 {
 	public sealed class DockPanelExtender
 	{

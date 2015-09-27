@@ -17,7 +17,7 @@
  * Boston, MA 02111-1307, USA.
  ***************************************************************************************************/
 
-using NasuTek.DevEnvironment.Extendability;
+using NasuTek.DevEnvironment.Extensibility;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -33,105 +33,91 @@ using NasuTek.DevEnvironment.Pads;
 using NasuTek.DevEnvironment.Extensibility;
 using Microsoft.Win32;
 using NasuTek.DevEnvironment.Workbench;
+using NasuTek.DevEnvironment.Svcs;
 
-namespace NasuTek.DevEnvironment {
+namespace NasuTek.DevEnvironment
+{
     class DebugLog : TraceListener
     {
         public override void Write(string message)
         {
-            DevEnv.Instance.LogWrite("DevEnv Application Log", message);
+            DevEnv.GetActiveInstance().LogWrite("DevEnv Application Log", message);
         }
 
         public override void WriteLine(string message)
         {
-            DevEnv.Instance.LogWriteLine("DevEnv Application Log", message);
+            DevEnv.GetActiveInstance().LogWriteLine("DevEnv Application Log", message);
         }
     }
 
-    public partial class DevEnv { 
-        public static DevEnv Instance { get; private set; }
+    public partial class DevEnv
+    {
+        public static void InitializeNewDevEnv(DevEnvSettings settings, string[] args)
+        {
+            var devEnv = new DevEnv() { Settings = settings };
+            devEnv.InitializeServices();
+            devEnv.InitializeEnvironment(new Arguments(args));
+        }
 
+        public DevEnvSettings Settings { get; set; }
         public WorkspaceWindow WorkspaceEnvironment { get; private set; }
-        public string ProductName { get; set; }
-        public Icon WindowIcon { get; set; }
-        public Version ProductVersionRelease { get; set; }
-        public Version ProductVersionCodebase { get; set; }
-        public string ProductBuildCode { get; set; }
-        public string ProductBuildStage { get; set; }
-        public string ProductCopyrightYear { get; set; }
-        public string ProductBuildLab { get; set; }
-        public string RegisteredUser { get; set; }
-        public string RegisteredCompany { get; set; }
         public Arguments DevEnvArguments { get; private set; }
         internal Dictionary<string, StringBuilder> Logs { get; private set; }
-        public bool ShowIDEOnStartup { get; set; }
-        public bool ExitThreadOnIDEExit { get; set; }
-        public IDevEnvReg DevEnvRegistry { get; set; }
-        public DEExtendability Extendability { get; private set; }
+        public DEExtensibility Extensibility { get; private set; }
         public bool EnvironmentInitialized { get; private set; }
+        public byte[] ActiveWorkbenchSettings { get; internal set; }
 
-        public DevEnv(string productId = "DeveloperStudio", string version = "7.1") {
-            Instance = this;
-
-            WindowIcon = Properties.Resources.DevEnvMain;
-            ProductName = "NasuTek Development Environment";
-            ProductVersionCodebase = new Version(DevEnvVersion.CodebaseVersion);
-            ProductVersionRelease = new Version(DevEnvVersion.ReleaseVersion);
-            ProductBuildStage = DevEnvVersion.BuildStage;
-            ProductBuildLab = DevEnvVersion.BuildLab;
-            ProductCopyrightYear = "2005";
-            RegisteredUser = "Unregistered User";
-            RegisteredCompany = "";
+        public DevEnv()
+        {
             Logs = new Dictionary<string, StringBuilder>();
-            ShowIDEOnStartup = true;
-            ExitThreadOnIDEExit = true;
-
-#if DEBUG
-            DevEnvRegistry = new DevEnvReg(productId, version + "-Debug");
-#else
-            DevEnvRegistry = new DevEnvReg(productId, version);
-#endif
-
-            Extendability = new DEExtendability();
+            Extensibility = new DEExtensibility();
+            ActiveWorkbenchSettings = Encoding.UTF8.GetBytes(Properties.Resources.InitialUi);
         }
 
         public void RegisterOutputLog(string name)
         {
             Logs.Add(name, new StringBuilder());
-            if (WorkspaceEnvironment != null && WorkspaceEnvironment.GetPane("Output") != null)
-                ((OutputPad)WorkspaceEnvironment.GetPane("Output")).RefreshLogs();
+            if (WorkspaceEnvironment != null && Extensibility.GetPane("Output") != null)
+                ((OutputPad)Extensibility.GetPane("Output")).RefreshLogs();
         }
 
         public void UnregisterOutputLog(string name)
         {
             Logs.Remove(name);
-            if (WorkspaceEnvironment != null && WorkspaceEnvironment.GetPane("Output") != null)
-                ((OutputPad)WorkspaceEnvironment.GetPane("Output")).RefreshLogs();
+            if (WorkspaceEnvironment != null && Extensibility.GetPane("Output") != null)
+                ((OutputPad)Extensibility.GetPane("Output")).RefreshLogs();
         }
 
         public void LogWrite(string log, string message)
         {
             Logs[log].Append(message);
-            if (WorkspaceEnvironment != null && WorkspaceEnvironment.GetPane("Output") != null)
-                ((OutputPad)WorkspaceEnvironment.GetPane("Output")).RefreshActiveLog(log);
+            if (WorkspaceEnvironment != null && Extensibility.GetPane("Output") != null)
+                ((OutputPad)Extensibility.GetPane("Output")).RefreshActiveLog(log);
         }
 
         public void LogWriteLine(string log, string message)
         {
             Logs[log].AppendLine(message);
-            if (WorkspaceEnvironment != null && WorkspaceEnvironment.GetPane("Output") != null)
-                ((OutputPad)WorkspaceEnvironment.GetPane("Output")).RefreshActiveLog(log);
+            if (WorkspaceEnvironment != null && Extensibility.GetPane("Output") != null)
+                ((OutputPad)Extensibility.GetPane("Output")).RefreshActiveLog(log);
         }
 
         public void InitializeServices()
         {
-            DevEnvSvc.RegisterService("UISvc", new UiSvc());
-            DevEnvSvc.RegisterService("PluginSvc", new PluginSvc());
+#if DEBUG
+            DevEnvSvc.RegisterService(DevEnvSvc.RegSvc, new DevEnvReg(Settings.ProductID, Settings.ProductVersionCodebase.ToString(2) + "-Debug"));
+#else
+            DevEnvSvc.RegisterService(DevEnvSvc.RegSvc, new DevEnvReg(ProductID, ProductVersionCodebase.ToString(2)));
+#endif      
+            DevEnvSvc.RegisterService(DevEnvSvc.UISvc, new UiSvc());
+            DevEnvSvc.RegisterService(DevEnvSvc.PackageSvc, new PluginSvc());
+            DevEnvSvc.RegisterService(DevEnvSvc.LoggingSvc, new LoggingSvc());
+            DevEnvSvc.RegisterService(DevEnvSvc.DevEnvObject, this);
         }
 
         public void InitializeEnvironment(Arguments args)
         {
-            foreach (var i in DevEnv.Instance.Extendability.Commands["BeforeEnvironmentInitialized"])
+            foreach (var i in Extensibility.Commands["BeforeEnvironmentInitialized"])
             {
                 i.Run();
             }
@@ -143,60 +129,91 @@ namespace NasuTek.DevEnvironment {
             var log = new DebugLog();
             Debug.Listeners.Add(log);
 
-            LoggingService.Info("Application start");
-            
-            LoggingService.Info("Loading AddInTree...");
-            foreach(var i in DevEnvRegistry.OpenSubKey("Packages").GetSubKeyNames())
-            {
-                var addin = DevEnvRegistry.OpenSubKey("Packages").OpenSubKey(i);
-                var guid = Guid.Parse(i);
-                var name = (string)addin.GetValue(null);
+            LogInfo("Application start");
 
-                try
+            LogInfo("Loading AddInTree...");
+            var regSvc = (IDevEnvRegSvc)DevEnvSvc.GetService(DevEnvSvc.RegSvc);
+
+            if (regSvc.SubKeyExists(SettingsReg.Global, "Packages"))
+                foreach (var addin in regSvc.OpenSubKey(SettingsReg.Global, "Packages").GetSubKeys())
                 {
-                    var addInAssemb = Assembly.LoadFile(Path.Combine(Application.StartupPath, (string)addin.GetValue("Assembly")));
-                    
-                    var addinPlug = (IPlugin)addInAssemb.CreateInstance((string)addin.GetValue("PackageClass"));
-                    var plugin = new PlugIn(guid, name, addinPlug);
-                    addinPlug.Load();
-                    Extendability.PluginsInt.Add(plugin);
+                    var guid = Guid.Parse(addin.Name);
+                    var name = (string)addin.GetValue(null);
+
+                    try
+                    {
+                        var addInAssemb = Assembly.Load((string)addin.GetValue("Assembly"));
+
+                        if (addin.GetValue("PackageDependencies") != null)
+                            foreach (var dep in (string[])addin.GetValue("PackageDependencies"))
+                            {
+                                Assembly.Load(dep);
+                            }
+
+                        var addinPlug = (IPackage)addInAssemb.CreateInstance((string)addin.GetValue("PackageClass"));
+                        var plugin = new PlugIn(guid, name, addinPlug);
+                        addinPlug.Load();
+                        Extensibility.PluginsInt.Add(plugin);
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show(String.Format("Addin {1} '{0}' Could not load because of the following reason:\n\n{2}", name, guid, e.Message));
+                    }
                 }
-                catch (Exception e)
+
+            if (regSvc.SubKeyExists(SettingsReg.Global, "DocumentTypes"))
+                foreach (var addin in regSvc.OpenSubKey(SettingsReg.Global, "DocumentTypes").GetSubKeys())
                 {
-                    MessageBox.Show(String.Format("Addin {1} '{0}' Could not load because of the following reason:\n\n{2}", name, guid, e.Message));
+                    var guid = Guid.Parse(addin.Name);
+                    var name = (string)addin.GetValue(null);
+
+
+                    var addInAssemb = AppDomain.CurrentDomain.GetAssemblies().First(v => v.GetName().FullName == (string)addin.GetValue("DocumentAssembly"));
+
+                    var addinPlug = addInAssemb.GetType((string)addin.GetValue("DocumentClass"));
+
+                    Extensibility.DocumentTypes.Add(guid, Tuple.Create(name, addinPlug));
                 }
-            }
 
-            foreach (var i in DevEnvRegistry.OpenSubKey("DocumentTypes").GetSubKeyNames())
-            {
-                var addin = DevEnvRegistry.OpenSubKey("DocumentTypes").OpenSubKey(i);
-                var guid = Guid.Parse(i);
-                var name = (string)addin.GetValue(null);
-
-
-                var addInAssemb = AppDomain.CurrentDomain.GetAssemblies().First(v => v.GetName().FullName == (string)addin.GetValue("DocumentAssembly"));
-
-                var addinPlug = addInAssemb.GetType((string)addin.GetValue("DocumentClass"));
-
-                Extendability.DocumentTypes.Add(guid, Tuple.Create(name, addinPlug));
-            }
-
-            LoggingService.Info("Initializing Workbench...");
+            LogInfo("Initializing Workbench...");
             // Workbench is our class from the base 
             // project, this method creates an instance
             // of the main form.
-            WorkspaceEnvironment = new WorkspaceWindow { Text = ProductName, Icon = WindowIcon };
+            WorkspaceEnvironment = new WorkspaceWindow { Text = Settings.ProductName, Icon = Settings.WindowIcon };
 
 #if DEPROTOCOLSUPPORT
-            //TODO: WebSchemes
+            if (regSvc.SubKeyExists(SettingsReg.Global, "WebSchemes"))
+                foreach (var addin in regSvc.OpenSubKey(SettingsReg.Global, "WebSchemes").GetSubKeys())
+                {
+                    var guid = Guid.Parse(addin.Name);
+                    var name = (string)addin.GetValue(null);
+                    var scheme = (string)addin.GetValue("Scheme");
+
+                    var addInAssemb = AppDomain.CurrentDomain.GetAssemblies().First(v => v.GetName().FullName == (string)addin.GetValue("WebSchemeAssembly"));
+                    var addinPlug = (IProtocol)addInAssemb.CreateInstance((string)addin.GetValue("WebSchemeClass"));
+
+                    Protocol.RegisterProtocol(scheme, addinPlug);
+                    Extensibility.WebProtocols.Add(addinPlug);
+                }
 #endif
-            
-            LoggingService.Info("Running application...");
+
+            LogInfo("Running application...");
             // Workbench.Instance is the instance of 
             // the main form, run the message loop.
             Application.Run(new WorkspaceEnvironmentContext(this));
 
-            LoggingService.Info("Application shutdown");
+            LogInfo("Application shutdown");
+        }
+
+        internal void LogInfo(string v)
+        {
+            var logSvc = (IDevEnvLoggingSvc)DevEnvSvc.GetService(DevEnvSvc.LoggingSvc);
+            logSvc.Info(v);
+        }
+
+        internal static DevEnv GetActiveInstance()
+        {
+            return ((DevEnv)DevEnvSvc.GetService(DevEnvSvc.DevEnvObject));
         }
     }
 
@@ -207,10 +224,10 @@ namespace NasuTek.DevEnvironment {
         public WorkspaceEnvironmentContext(DevEnv env)
         {
             ThreadExit += WorkspaceEnvironmentContext_ThreadExit;
-            if (env.ExitThreadOnIDEExit)
+            if (env.Settings.ExitThreadOnIDEExit)
                 env.WorkspaceEnvironment.FormClosed += WorkspaceEnvironment_FormClosed;
 
-            if (env.ShowIDEOnStartup)
+            if (env.Settings.ShowIDEOnStartup)
                 env.WorkspaceEnvironment.Show();
 
             environment = env;
@@ -223,12 +240,14 @@ namespace NasuTek.DevEnvironment {
 
         private void WorkspaceEnvironmentContext_ThreadExit(object sender, EventArgs e)
         {
-            LoggingService.Info("Running finalize commands...");
-            foreach (var i in DevEnv.Instance.Extendability.Commands["Finalize"])
+            environment.LogInfo("Running finalize commands...");
+            foreach (var i in DevEnv.GetActiveInstance().Extensibility.Commands["Finalize"])
             {
                 i.Run();
             }
-           
+
+            environment.WorkspaceEnvironment.SaveWorkbenchData();
+
             //try
             //{
             //    // Save changed properties

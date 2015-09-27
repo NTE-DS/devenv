@@ -21,9 +21,9 @@ using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Diagnostics.CodeAnalysis;
-using NasuTek.DevEnvironment.Extendability.Workbench.Docking.Win32;
+using NasuTek.DevEnvironment.Extensibility.Workbench.Docking.Win32;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.Docking
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.Docking
 {
     internal static class NativeMethods
     {

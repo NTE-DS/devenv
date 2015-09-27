@@ -20,7 +20,7 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.Docking.Skins
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.Docking.Skins
 {
     internal static class DockPanelSkinBuilder
     {

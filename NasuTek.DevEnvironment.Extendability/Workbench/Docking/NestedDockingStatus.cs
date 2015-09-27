@@ -20,7 +20,7 @@
 using System;
 using System.Drawing;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.Docking
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.Docking
 {
 	public sealed class NestedDockingStatus
 	{

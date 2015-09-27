@@ -9,7 +9,7 @@ using System;
 using System.IO;
 using System.Text;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Util
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Util
 {
 	/// <summary>
 	/// Class that can open text files with auto-detection of the encoding.

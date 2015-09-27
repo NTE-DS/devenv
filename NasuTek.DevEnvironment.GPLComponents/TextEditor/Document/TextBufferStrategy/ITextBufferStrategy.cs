@@ -5,7 +5,7 @@
 //     <version>$Revision$</version>
 // </file>
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document
 {
 	/// <summary>
 	/// Interface to describe a sequence of characters that can be edited. 	

@@ -7,7 +7,7 @@
 
 using System;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Actions 
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Actions 
 {
 	public class Cut : AbstractEditAction
 	{

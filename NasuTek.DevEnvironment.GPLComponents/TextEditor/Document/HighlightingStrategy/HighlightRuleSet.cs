@@ -9,9 +9,9 @@ using System;
 using System.Collections;
 using System.Xml;
 
-using NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Util;
+using NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Util;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document
 {
 	public class HighlightRuleSet
 	{

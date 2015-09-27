@@ -5,11 +5,8 @@ using System.Text;
 
 namespace NasuTek.DevEnvironment.Extensibility
 {
-    public class LoggingService
+    public interface IPackage
     {
-        internal static void Info(string v)
-        {
-            //throw new NotImplementedException();
-        }
+        void Load();
     }
 }

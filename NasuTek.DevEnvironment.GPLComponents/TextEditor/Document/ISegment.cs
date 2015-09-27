@@ -5,7 +5,7 @@
 //     <version>$Revision$</version>
 // </file>
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document
 {
 	/// <summary>
 	/// This interface is used to describe a span inside a text sequence

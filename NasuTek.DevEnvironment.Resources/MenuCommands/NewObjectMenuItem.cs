@@ -1,4 +1,4 @@
-﻿using NasuTek.DevEnvironment.Extendability;
+﻿using NasuTek.DevEnvironment.Extensibility;
 using NasuTek.DevEnvironment.Extensibility.Project;
 using NasuTek.DevEnvironment.Forms;
 using System;

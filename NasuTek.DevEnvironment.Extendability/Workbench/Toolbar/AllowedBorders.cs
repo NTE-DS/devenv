@@ -19,7 +19,7 @@
 
 using System;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.Toolbar
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.Toolbar
 {
 	[Flags]
 	public enum AllowedBorders

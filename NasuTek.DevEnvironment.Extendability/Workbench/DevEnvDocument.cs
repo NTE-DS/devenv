@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using NasuTek.DevEnvironment.Extensibility.Project;
-using NasuTek.DevEnvironment.Extendability.Workbench.Docking;
+using NasuTek.DevEnvironment.Extensibility.Workbench.Docking;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench
+namespace NasuTek.DevEnvironment.Extensibility.Workbench
 {
     public partial class DevEnvDocument : DevEnvPane {
         public DevEnvDocument()

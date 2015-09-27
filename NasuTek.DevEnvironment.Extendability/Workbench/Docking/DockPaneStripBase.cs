@@ -26,7 +26,7 @@ using System.Collections.Generic;
 using System.Security.Permissions;
 using System.Diagnostics.CodeAnalysis;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.Docking
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.Docking
 {
 	public abstract class DockPaneStripBase : Control
 	{

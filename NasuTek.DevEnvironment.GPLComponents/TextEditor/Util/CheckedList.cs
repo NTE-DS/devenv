@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Util
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Util
 {
 	/// <summary>
 	/// A IList{T} that checks that it is only accessed on the thread that created it, and that

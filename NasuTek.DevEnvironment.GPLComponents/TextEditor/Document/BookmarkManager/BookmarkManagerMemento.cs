@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Xml;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document
 {
 	/// <summary>
 	/// This class is used for storing the state of a bookmark manager 

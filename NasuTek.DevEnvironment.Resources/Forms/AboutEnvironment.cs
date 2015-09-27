@@ -17,11 +17,12 @@
  * Boston, MA 02111-1307, USA.
  ***************************************************************************************************/
 
-using NasuTek.DevEnvironment.Extendability;
+using NasuTek.DevEnvironment.Extensibility;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
 namespace NasuTek.DevEnvironment.Forms
@@ -31,18 +32,18 @@ namespace NasuTek.DevEnvironment.Forms
         public AboutEnvironment()
         {
             InitializeComponent();
-            Text = "About " + DevEnv.Instance.ProductName;
-            label1.Text = String.Format(label1.Text, new object[] { DevEnv.Instance.ProductName, DevEnv.Instance.ProductCopyrightYear, "2005" });
-            label2.Text = String.Format(label2.Text, new object[] {DevEnv.Instance.ProductVersionRelease.ToString(2), new Version(DevEnvVersion.ReleaseVersion).ToString(2)});
-            label4.Text = DevEnv.Instance.RegisteredUser + "\n" + DevEnv.Instance.RegisteredCompany;
-            label8.Text = String.Format(label8.Text, DevEnv.Instance.ProductVersionCodebase + "-" + DevEnv.Instance.ProductBuildStage + " (" + DevEnv.Instance.ProductBuildLab + ")", DevEnvVersion.FullVersion + " (" + DevEnvVersion.BuildLab + ")");
+            Text = "About " + DevEnv.GetActiveInstance().Settings.ProductName;
+            label1.Text = String.Format(label1.Text, new object[] { DevEnv.GetActiveInstance().Settings.ProductName, DevEnv.GetActiveInstance().Settings.ProductCopyrightYear, "2005" });
+            label2.Text = String.Format(label2.Text, new object[] {DevEnv.GetActiveInstance().Settings.ProductVersionRelease.ToString(2), new Version(DevEnvVersion.ReleaseVersion).ToString(2)});
+            label4.Text = DevEnv.GetActiveInstance().Settings.RegisteredUser + "\n" + DevEnv.GetActiveInstance().Settings.RegisteredCompany;
+            label8.Text = String.Format(label8.Text, DevEnv.GetActiveInstance().Settings.ProductVersionCodebase + "-" + DevEnv.GetActiveInstance().Settings.ProductBuildStage + " (" + DevEnv.GetActiveInstance().Settings.ProductBuildLab + ")", DevEnvVersion.FullVersion + " (" + DevEnvVersion.BuildLab + ")");
 
-            foreach(var prod in DevEnv.Instance.Extendability.InstalledProducts)
+            foreach(var prod in DevEnv.GetActiveInstance().Extensibility.InstalledProducts)
             {
                 listBox1.Items.Add(prod);
             }
 
-            foreach (var upd in DevEnv.Instance.Extendability.InstalledUpdates)
+            foreach (var upd in DevEnv.GetActiveInstance().Extensibility.InstalledUpdates)
             {
                 listBox2.Items.Add(upd);
             }
@@ -58,7 +59,32 @@ namespace NasuTek.DevEnvironment.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
+            var fs = new StringBuilder();
 
+            fs.AppendLine(String.Format(@"{0}
+Copyright © {1}-2016 NasuTek Enterprises
+
+NasuTek Developer Studio
+Copyright © {2}-2016 NasuTek Enterprises
+
+{3}
+", DevEnv.GetActiveInstance().Settings.ProductName, DevEnv.GetActiveInstance().Settings.ProductCopyrightYear, "2005", label8.Text));
+
+            fs.AppendLine("Installed Products:");
+            foreach (Product i in listBox1.Items)
+            {
+                fs.AppendLine(i.Name);
+                fs.AppendLine(i.Description);
+                fs.AppendLine();
+            }
+
+            fs.AppendLine("Installed Updates:");
+            foreach (Update i in listBox2.Items)
+            {
+                fs.AppendLine(i.Name);
+            }
+
+            Clipboard.SetText(fs.ToString());
         }
     }
 }

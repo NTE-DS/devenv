@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench
+namespace NasuTek.DevEnvironment.Extensibility.Workbench
 {
     public interface ISolutionExplorerRightClick {
         ContextMenuStrip RightClick(TreeNode node);

@@ -54,25 +54,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DevEnvCore.cs" />
-    <Compile Include="DevEnvReg.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Workspace\SvcInterfaces\DevEnvReg.cs" />
     <Compile Include="Documents\TextEditor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Documents\TextEditor.Designer.cs">
       <DependentUpon>TextEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Extensibility\Addins\MenuService.cs" />
-    <Compile Include="Extensibility\ExtendabilityCore.cs" />
-    <Compile Include="Extensibility\LoggingService.cs" />
-    <Compile Include="Extensibility\PluginSvc.cs" />
-    <Compile Include="Extensibility\Project\BasicProjects\SampleDocument.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Extensibility\Project\BasicProjects\SampleDocument.Designer.cs">
-      <DependentUpon>SampleDocument.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Extensibility\Project\DefaultSolution.cs" />
-    <Compile Include="Extensibility\UiSvc.cs" />
+    <Compile Include="Extensibility\MenuService.cs" />
+    <Compile Include="Extensibility\ToolBarService.cs" />
+    <Compile Include="Extensibility\ExtensibilityCore.cs" />
+    <Compile Include="Workspace\SvcInterfaces\LoggingSvc.cs" />
+    <Compile Include="Workspace\SvcInterfaces\PluginSvc.cs" />
+    <Compile Include="Project\BasicProjects\FolderProject.cs" />
+    <Compile Include="Project\DefaultSolution.cs" />
+    <Compile Include="Workspace\SvcInterfaces\UiSvc.cs" />
     <Compile Include="Forms\AboutEnvironment.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,14 +145,9 @@
     <Compile Include="Pads\SolutionExplorer.Designer.cs">
       <DependentUpon>SolutionExplorer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Extensibility\Project\BasicProjects\SampleProject.cs" />
-    <Compile Include="Extensibility\Project\ProjectService.cs" />
+    <Compile Include="Project\ProjectService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
+    <Compile Include="SampleCommand.cs" />
     <Compile Include="SplashScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -175,9 +171,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Documents\TextEditor.resx">
       <DependentUpon>TextEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Extensibility\Project\BasicProjects\SampleDocument.resx">
-      <DependentUpon>SampleDocument.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AboutEnvironment.resx">
       <DependentUpon>AboutEnvironment.cs</DependentUpon>
@@ -224,16 +217,14 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\DevEnvMain.ico" />
-    <None Include="Resources\LGPL-V3.png" />
     <Content Include="InitialUi.xml" />
     <None Include="Resources\SplashObject.png" />
     <None Include="Resources\AboutLogo.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NasuTek.DevEnvironment.Extendability\NasuTek.DevEnvironment.Extendability.csproj">
+    <ProjectReference Include="..\NasuTek.DevEnvironment.Extendability\NasuTek.DevEnvironment.Extensibility.csproj">
       <Project>{af925380-0b78-49e3-9a47-98194703b511}</Project>
-      <Name>NasuTek.DevEnvironment.Extendability</Name>
+      <Name>NasuTek.DevEnvironment.Extensibility</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

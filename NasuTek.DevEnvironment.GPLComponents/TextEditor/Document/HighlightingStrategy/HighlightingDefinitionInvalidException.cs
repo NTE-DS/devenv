@@ -8,7 +8,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace NasuTek.DevEnvironment.Extendability.Workbench.TextEditor.Document
+namespace NasuTek.DevEnvironment.Extensibility.Workbench.TextEditor.Document
 {
 	/// <summary>
 	/// Indicates that the highlighting definition that was tried to load was invalid.
