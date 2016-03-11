@@ -46,6 +46,8 @@ namespace NasuTek.DevEnvironment
                     var mi = new ToolStripMenuItem(i.Text);
                     mi.Owner = menu;
                     mi.Tag = i;
+                    mi.Image = i.Icon;
+
                     if (i.Type != MenuItem.MenuType.Menu)
                         mi.Click += Mi_Click;
                     coll.Add(mi);

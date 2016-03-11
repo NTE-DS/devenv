@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<NasuTekDE>
+  <DocumentTypes>
+    <DocumentType guid="{02D81841-9A80-44A5-9B57-9327F493C4C8}" DocumentClass="NasuTek.DevEnvironment.Extensibility.Project.BasicProjects.SampleDocument"
+            name="Sample Document" DocumentAssembly="ntedevenv, Version=7.1.9000.2900, Culture=neutral, PublicKeyToken=null" />
+    <DocumentType guid="{E10C70C1-3507-45EC-99D2-151BA920D23A}" DocumentClass="NasuTek.DevEnvironment.Documents.TextEditor"
+            name="Text Editor/Code Editor" DocumentAssembly="devenvgpl, Version=7.1.9000.2900, Culture=neutral, PublicKeyToken=null" />
+  </DocumentTypes>
+  <Packages>
+    <Package guid="{39164141-5E4C-416A-8DD1-B7F33942E0C9}" name="NasuTek Development Environment"
+       Assembly="ntedevenv, Version=7.1.9000.2900, Culture=neutral, PublicKeyToken=null" PackageClass="NasuTek.DevEnvironment.DevEnvCore" />
+    <Package guid="{74E94DCA-CCF7-47AE-82D7-D9BB28EFE66A}" name="GNU LGPL Components"
+       Assembly="devenvgpl, Version=7.1.9000.2900, Culture=neutral, PublicKeyToken=null" PackageClass="NasuTek.DevEnvironment.GPLComponents.Core" />
+  </Packages>
+  <ProjectTypes>
+    <ProjectType guid="{2C1ED287-A199-4111-B679-73F4EDE2AB6D}" name="Folder Project" ProjectExtension=".fpj"
+           ProjectAssembly="ntedevenv, Version=7.1.9000.2900, Culture=neutral, PublicKeyToken=null"
+           ProjectClass="NasuTek.DevEnvironment.Project.BasicProjects.FolderProjectGenerator" />
+  </ProjectTypes>
+</NasuTekDE>

@@ -45,6 +45,7 @@ namespace NasuTek.DevEnvironment
                 Commands.Add("BeforeInitialization", new List<AbstractCommand>());
                 Commands.Add("AfterInitialization", new List<AbstractCommand>());
                 Commands.Add("Finalize", new List<AbstractCommand>());
+                Commands.Add("OnInstall", new List<AbstractCommand>());
             }
 
             public DevEnvPane GetPane(string id)

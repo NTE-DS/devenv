@@ -132,6 +132,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "WorkspaceWindow";
             this.Text = "WorkspaceWindow";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WorkspaceWindow_FormClosing);
             this.Load += new System.EventHandler(this.Workspace_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

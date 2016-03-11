@@ -44,6 +44,11 @@ namespace NasuTek.DevEnvironment.Workbench
             {
                 e.Graphics.DrawLine(new Pen(Color.FromArgb(227, 227, 227)), new Point(e.AffectedBounds.Left, e.AffectedBounds.Bottom), new Point(e.AffectedBounds.Right, e.AffectedBounds.Bottom));
             }
+
+            protected override void OnRenderImageMargin(ToolStripRenderEventArgs e)
+            {
+                e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(227, 227, 227)), e.AffectedBounds);
+            }
         }
 
        public ToolBarManager toolBarManager { get; private set; }
@@ -57,6 +62,7 @@ namespace NasuTek.DevEnvironment.Workbench
             
             InitializeComponent();
 
+            menuStrip1.Renderer = new Workbench.WorkspaceWindow.BorderRenderer();
             toolBarManager = new ToolBarManager(dockPanel1, this);
             //toolBarManager.AddControl(menuStrip1);
 
@@ -117,6 +123,17 @@ namespace NasuTek.DevEnvironment.Workbench
 
         private void Workspace_Load(object sender, EventArgs e)
         {
+            var regSettings = (IDevEnvRegSvc)DevEnvSvc.GetService(DevEnvSvc.RegSvc);
+
+            WindowState = bool.Parse((string)regSettings.OpenSubKey(SettingsReg.User, "Workbench").GetValue("Maximized", "False")) == true ? FormWindowState.Maximized : FormWindowState.Normal;
+            if (WindowState != FormWindowState.Maximized)
+            {
+                Left = (int)regSettings.OpenSubKey(SettingsReg.User, "Workbench").GetValue("LeftPosition", Left);
+                Top = (int)regSettings.OpenSubKey(SettingsReg.User, "Workbench").GetValue("TopPosition", Top);
+                Width = (int)regSettings.OpenSubKey(SettingsReg.User, "Workbench").GetValue("Width", Width);
+                Height = (int)regSettings.OpenSubKey(SettingsReg.User, "Workbench").GetValue("Height", Height);
+            }
+                            
             foreach (var i in DevEnv.GetActiveInstance().Extensibility.Commands["AfterInitialization"])
             {
                 i.Run();
@@ -138,6 +155,20 @@ namespace NasuTek.DevEnvironment.Workbench
 
         public DockPanel DockPanel {
             get { return dockPanel1; }
+        }
+
+        private void WorkspaceWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            var regSettings = (IDevEnvRegSvc)DevEnvSvc.GetService(DevEnvSvc.RegSvc);
+
+            regSettings.OpenSubKey(SettingsReg.User, "Workbench").SetValue("Maximized", WindowState == FormWindowState.Maximized);
+            if(WindowState != FormWindowState.Maximized)
+            {
+                regSettings.OpenSubKey(SettingsReg.User, "Workbench").SetValue("LeftPosition", Left);
+                regSettings.OpenSubKey(SettingsReg.User, "Workbench").SetValue("TopPosition", Top);
+                regSettings.OpenSubKey(SettingsReg.User, "Workbench").SetValue("Width", Width);
+                regSettings.OpenSubKey(SettingsReg.User, "Workbench").SetValue("Height", Height);
+            }
         }
     }
 }

@@ -63,6 +63,7 @@ namespace NasuTek.DevEnvironment.Extensibility
         IDevEnvRegSubKey OpenSubKey(string keyName);
         bool SubKeyExists(string keyName);
         object GetValue(string valueName);
+        object GetValue(string valueName, object defaultValue);
         void SetValue(string valueName, object value);
         string Name { get; }
     }

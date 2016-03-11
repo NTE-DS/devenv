@@ -18,6 +18,8 @@ namespace NasuTek.DevEnvironment.Svcs
                 case SettingsReg.Global:
                     return new DevEnvRegSubKey(keyName, regKeyObj, false);
                 case SettingsReg.User:
+                    if (!SubKeyExists(reg, keyName))
+                        userKeyObj.CreateSubKey(keyName);
                     return new DevEnvRegSubKey(keyName, userKeyObj, true);
                 default:
                     return new DevEnvRegSubKey(keyName, regKeyObj, false);
@@ -41,6 +43,8 @@ namespace NasuTek.DevEnvironment.Svcs
         {
             regKeyObj = Registry.LocalMachine.OpenSubKey("SOFTWARE\\NasuTek Enterprises\\" + productId + "\\" + version);
             userKeyObj = Registry.CurrentUser.OpenSubKey("SOFTWARE\\NasuTek Enterprises\\" + productId + "\\" + version, true);
+            if (userKeyObj == null)
+                userKeyObj = Registry.CurrentUser.CreateSubKey("SOFTWARE\\NasuTek Enterprises\\" + productId + "\\" + version);
         }
     }
 
@@ -85,6 +89,11 @@ namespace NasuTek.DevEnvironment.Svcs
         public bool SubKeyExists(string keyName)
         {
             return regKeyObj.GetSubKeyNames().Contains(keyName);
+        }
+
+        public object GetValue(string valueName, object defaultValue)
+        {
+            return regKeyObj.GetValue(valueName, defaultValue);
         }
 
         public DevEnvRegSubKey(string key, RegistryKey root, bool writable)

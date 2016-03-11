@@ -34,6 +34,7 @@ using NasuTek.DevEnvironment.Extensibility;
 using Microsoft.Win32;
 using NasuTek.DevEnvironment.Workbench;
 using NasuTek.DevEnvironment.Svcs;
+using System.Xml.Linq;
 
 namespace NasuTek.DevEnvironment
 {
@@ -117,6 +118,87 @@ namespace NasuTek.DevEnvironment
 
         public void InitializeEnvironment(Arguments args)
         {
+            if(args["Install"] == "true")
+            {
+                try
+                {
+#if DEBUG
+                    var reg = Registry.LocalMachine.CreateSubKey("SOFTWARE\\NasuTek Enterprises\\" + Settings.ProductID + "\\" + Settings.ProductVersionCodebase.ToString(2) + "-Debug");
+#else
+                    var reg = Registry.LocalMachine.CreateSubKey("SOFTWARE\\NasuTek Enterprises\\" + Settings.ProductID + "\\" + Settings.ProductVersionCodebase.ToString(2));
+#endif
+
+                    var xdoc = XDocument.Load(Path.Combine(Application.StartupPath, "Install.xml"));
+
+                    if (xdoc.Root.Element("Packages") != null)
+                    {
+                        var pkgsreg = reg.CreateSubKey("Packages");
+                        foreach (var package in xdoc.Root.Element("Packages").Elements("Package"))
+                        {
+                            var pkgreg = pkgsreg.CreateSubKey(package.Attribute("guid").Value);
+                            pkgreg.SetValue(null, package.Attribute("name").Value);
+                            pkgreg.SetValue("Assembly", package.Attribute("Assembly").Value);
+                            pkgreg.SetValue("PackageClass", package.Attribute("PackageClass").Value);
+                            var deps = new List<string>();
+                            foreach(var dep in package.Elements("Dependency"))
+                            {
+                                deps.Add(package.Attribute("Assembly").Value);
+                            }
+
+                            if (deps.Count != 0)
+                                pkgreg.SetValue("PackageDependencies", deps.ToArray());
+                        }
+                    }
+
+                    if (xdoc.Root.Element("DocumentTypes") != null)
+                    {
+                        var docsreg = reg.CreateSubKey("DocumentTypes");
+                        foreach (var doctype in xdoc.Root.Element("DocumentTypes").Elements("DocumentType"))
+                        {
+                            var docreg = docsreg.CreateSubKey(doctype.Attribute("guid").Value);
+                            docreg.SetValue(null, doctype.Attribute("name").Value);
+                            docreg.SetValue("DocumentClass", doctype.Attribute("DocumentClass").Value);
+                            docreg.SetValue("DocumentAssembly", doctype.Attribute("DocumentAssembly").Value);
+                        }
+                    }
+
+                    if (xdoc.Root.Element("ProjectTypes") != null)
+                    {
+                        var projsreg = reg.CreateSubKey("ProjectTypes");
+                        foreach (var project in xdoc.Root.Element("ProjectTypes").Elements("ProjectType"))
+                        {
+                            var projreg = projsreg.CreateSubKey(project.Attribute("guid").Value);
+                            projreg.SetValue(null, project.Attribute("name").Value);
+                            projreg.SetValue("ProjectClass", project.Attribute("ProjectClass").Value);
+                            projreg.SetValue("ProjectAssembly", project.Attribute("ProjectAssembly").Value);
+                            projreg.SetValue("ProjectExtension", project.Attribute("ProjectExtension").Value);
+                        }
+                    }
+
+                    if (xdoc.Root.Element("WebSchemes") != null)
+                    {
+                        var webschsreg = reg.CreateSubKey("WebSchemes");
+                        foreach (var project in xdoc.Root.Element("WebSchemes").Elements("WebScheme"))
+                        {
+                            var webschreg = webschsreg.CreateSubKey(project.Attribute("guid").Value);
+                            webschreg.SetValue(null, project.Attribute("name").Value);
+                            webschreg.SetValue("WebSchemeClass", project.Attribute("WebSchemeClass").Value);
+                            webschreg.SetValue("WebSchemeAssembly", project.Attribute("WebSchemeAssembly").Value);
+                            webschreg.SetValue("Scheme", project.Attribute("Scheme").Value);
+                        }
+                    }
+                    foreach (var i in Extensibility.Commands["OnInstall"])
+                    {
+                        i.Run();
+                    }
+                }
+                catch(Exception e)
+                {
+                    MessageBox.Show(e.ToString(), Settings.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return;
+            }
+
             foreach (var i in Extensibility.Commands["BeforeEnvironmentInitialized"])
             {
                 i.Run();
@@ -124,6 +206,20 @@ namespace NasuTek.DevEnvironment
 
             EnvironmentInitialized = true;
             DevEnvArguments = args;
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.SetUnhandledExceptionMode(UnhandledExceptionMode.ThrowException);
+            
+            if (File.Exists(Path.Combine(Application.StartupPath, "ner71.exe")))
+            {
+                var ner = new Ner71Api();
+                ner.AttachHandler();
+                ner.SetAppName(Settings.ProductName);
+            }
+            else
+            {
+                AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            }
 
             RegisterOutputLog("DevEnv Application Log");
             var log = new DebugLog();
@@ -203,6 +299,14 @@ namespace NasuTek.DevEnvironment
             Application.Run(new WorkspaceEnvironmentContext(this));
 
             LogInfo("Application shutdown");
+        }
+
+        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            if (Debugger.IsAttached)
+                return;
+
+            MessageBox.Show("ner71.exe is missing, defaulting to backup exception handler\n\n"+e.ExceptionObject.ToString(), Settings.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         internal void LogInfo(string v)

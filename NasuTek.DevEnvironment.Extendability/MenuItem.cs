@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 
@@ -19,6 +20,7 @@ namespace NasuTek.DevEnvironment.Extensibility
         public string Text { get; private set; }
         public AbstractCommand Command { get; private set; }
         public MenuType Type { get; private set; }
+        public Image Icon { get; set; }
 
         public MenuItem(string id) : this(id, null, null) { }
 

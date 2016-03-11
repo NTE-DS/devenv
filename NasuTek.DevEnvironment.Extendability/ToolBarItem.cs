@@ -23,6 +23,7 @@ namespace NasuTek.DevEnvironment.Extensibility
         public ToolBarItemType Type { get; private set; }
 
         public ToolBarItem(string id) : this(id, null, null, null, null) { }
+
         public ToolBarItem(string id, string text, Image icon, AbstractCommand command) : this(id, text, icon, command, null) { }
 
         public ToolBarItem(string id, string text, Image icon, AbstractCommand command, MenuItem subMenu)

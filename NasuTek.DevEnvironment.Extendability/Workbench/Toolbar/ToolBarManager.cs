@@ -202,6 +202,7 @@ namespace NasuTek.DevEnvironment.Extensibility.Workbench.Toolbar
 				holder.DockStyle = DockStyle.None;
 				holder.FloatForm.Size = holder.Size;
 				holder.FloatForm.Visible = true;
+                holder.FloatForm.Text = c.Text;
 			}
 
 			holder.MouseUp += new MouseEventHandler(this.ToolBarMouseUp);

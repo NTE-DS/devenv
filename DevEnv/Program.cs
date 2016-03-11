@@ -14,8 +14,6 @@ namespace DevEnv {
         /// </summary>
         [STAThread]
         static void Main(string[] args) {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
             DevEnvSvc.InitializeDevEnv(new DevEnvSettings(), args, false);
         }
     }
