@@ -5,6 +5,7 @@ using System.Linq;
 using NasuTek.DevEnvironment.Extensibility;
 using System.Reflection;
 using NasuTek.DevEnvironment.Project;
+using System.Xml.Linq;
 
 namespace NasuTek.DevEnvironment.Extensibility.Project
 {
@@ -36,14 +37,41 @@ namespace NasuTek.DevEnvironment.Extensibility.Project
         }
 
         public static ISolution OpenSolution(string solutionFilePath) {
-            throw new NotImplementedException();
+            var solutionObj = new DefaultSolution();
+            solutionObj.Open(solutionFilePath);
+            return solutionObj;
+        }
+
+        private static void LoadFolders(XElement xElement, ISolutionFolder rootFolder, string rootPath) {
+            foreach (var folder in xElement.Elements("SolutionFolder")) {
+                string actFolder = Directory.GetCurrentDirectory();
+                Directory.SetCurrentDirectory(rootPath);
+
+                ISolutionFolder folderObj = rootFolder.CreateFolder(folder.Attribute("name").Value);
+                LoadProjects(folder, folderObj, rootPath);
+
+                foreach (var subFolder in folder.Elements("SolutionFolder")) {
+                    ISolutionFolder subFolderObj = folderObj.CreateFolder(subFolder.Attribute("name").Value);
+                    LoadProjects(subFolder, subFolderObj, rootPath);
+
+                    LoadFolders(subFolder, subFolderObj, rootPath);
+                }
+
+                Directory.SetCurrentDirectory(actFolder);
+            }
+        }
+
+        private static void LoadProjects(XElement xElement, ISolutionFolder folder, string rootPath) {
+            foreach (var proj in xElement.Elements("Project")) {
+                folder.AddProject(OpenProject(Path.GetFullPath(proj.Attribute("file").Value)));
+            }
         }
 
         public static ISolution CreateTempSolutionFromProject(IProject proj)
         {
             var sol = new DefaultSolution();
             sol.SolutionName = proj.ProjectName;
-            sol.AddProject(proj);
+            sol.RootFolder.AddProject(proj);
             return sol;
         }
 

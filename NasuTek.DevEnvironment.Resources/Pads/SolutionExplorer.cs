@@ -30,18 +30,31 @@ namespace NasuTek.DevEnvironment.Pads
                 if (!HideSolutionRoot)
                     rootNode = new TreeNode("Solution '" + m_ActiveSolution.SolutionName + "'") { ImageKey = "GenericProject", SelectedImageKey = "GenericProject", Tag = m_ActiveSolution };
 
-                foreach (var proj in m_ActiveSolution.Projects)
-                {
-                    var projNode = new TreeNode(proj.ProjectName) { ImageKey = "GenericProject", SelectedImageKey = "GenericProject", Tag = proj };
-                    FillFolder(projNode, proj.RootFolder, proj);
-                    if (!HideSolutionRoot)
-                        rootNode.Nodes.Add(projNode);
-                    else
-                        treeView1.Nodes.Add(projNode);
-                }
+                RecurseFolder(m_ActiveSolution.RootFolder, rootNode);
 
                 if (!HideSolutionRoot)
                     treeView1.Nodes.Add(rootNode);
+            }
+        }
+
+        private void RecurseFolder(ISolutionFolder rootFolder, TreeNode rootNode) {
+            foreach (var proj in rootFolder.Projects) {
+                var projNode = new TreeNode(proj.ProjectName) { ImageKey = "GenericProject", SelectedImageKey = "GenericProject", Tag = proj };
+                FillFolder(projNode, proj.RootFolder, proj);
+                if (!HideSolutionRoot)
+                    rootNode.Nodes.Add(projNode);
+                else
+                    treeView1.Nodes.Add(projNode);
+            }
+
+            foreach(var folder in rootFolder.SubFolders) {
+                if (!HideSolutionRoot) {
+                    var node = new TreeNode(folder.Name) { ImageKey = "GenericFolder", SelectedImageKey = "GenericFolder", Tag = folder };
+                    RecurseFolder(folder, node);
+                    rootNode.Nodes.Add(node);
+                } else {
+                    RecurseFolder(folder, rootNode);
+                }
             }
         }
 

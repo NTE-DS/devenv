@@ -66,7 +66,7 @@ namespace NasuTek.DevEnvironment
         internal Dictionary<string, StringBuilder> Logs { get; private set; }
         public DEExtensibility Extensibility { get; private set; }
         public bool EnvironmentInitialized { get; private set; }
-        public byte[] ActiveWorkbenchSettings { get; internal set; }
+        public byte[] ActiveWorkbenchSettings { get; set; }
 
         public DevEnv()
         {
@@ -108,7 +108,7 @@ namespace NasuTek.DevEnvironment
 #if DEBUG
             DevEnvSvc.RegisterService(DevEnvSvc.RegSvc, new DevEnvReg(Settings.ProductID, Settings.ProductVersionCodebase.ToString(2) + "-Debug"));
 #else
-            DevEnvSvc.RegisterService(DevEnvSvc.RegSvc, new DevEnvReg(ProductID, ProductVersionCodebase.ToString(2)));
+            DevEnvSvc.RegisterService(DevEnvSvc.RegSvc, new DevEnvReg(Settings.ProductID, Settings.ProductVersionCodebase.ToString(2)));
 #endif      
             DevEnvSvc.RegisterService(DevEnvSvc.UISvc, new UiSvc());
             DevEnvSvc.RegisterService(DevEnvSvc.PackageSvc, new PluginSvc());

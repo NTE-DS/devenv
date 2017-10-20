@@ -154,13 +154,13 @@ namespace NasuTek.DevEnvironment.Extensibility.Workbench.Toolbar
 //			_control.TextChanged += new EventHandler(control_TextChanged);
 		}
 
-		// Added by mav
-//		private void control_TextChanged(object sender, EventArgs e)
-//		{
-//			ToolbarTitle = _control.Text;
-//		}
+        // Added by mav
+        //		private void control_TextChanged(object sender, EventArgs e)
+        //		{
+        //			ToolbarTitle = _control.Text;
+        //		}
 
-		private void TitleTextChanged() 
+        private void TitleTextChanged() 
 		{
 			if(FloatForm.Visible)
 				this.Invalidate(false);
@@ -335,7 +335,7 @@ namespace NasuTek.DevEnvironment.Extensibility.Workbench.Toolbar
 				&& DockStyle == DockStyle.None
 				&& e.Y < 16 && e.X > Width-16)
 			{
-				FloatForm.Visible = false;
+				Visible = false;
 			}
 		}
 
@@ -372,9 +372,5 @@ namespace NasuTek.DevEnvironment.Extensibility.Workbench.Toolbar
 			g.DrawLine(pen, cross.Right-1, cross.Y, cross.Left, cross.Bottom-1);
 			g.DrawLine(pen, cross.Right, cross.Y+1, cross.Left+1, cross.Bottom);
 		}
-
-        public override string ToString() {
-            return ToolbarTitle;
-        }
 	}
 }

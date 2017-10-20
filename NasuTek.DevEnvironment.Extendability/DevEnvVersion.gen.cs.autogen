@@ -11,7 +11,7 @@ namespace NasuTek.DevEnvironment
 		public const string GitRevision = "${Git::GitShortenedRevision}";
 		public const string DateStamp = "${TimeStamp::DateTime}";
 		public const string LabID = "${NonUser::BuildLab}";
-		public const string BuildStage = "$[User::BuildStage?Retail]";
+		public const string BuildStage = "${User::BuildStage?Retail}";
 		public const string BuildLab = GitBranch + "-" + GitRevision + "_" + Codename + "-" + LabID + "_" + DateStamp;
     }
 }

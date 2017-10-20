@@ -75,6 +75,10 @@ namespace NasuTek.DevEnvironment.Project.BasicProjects
         public void Save() { }
 
         public void SaveAs(string path) { }
+
+        public DocumentMetadata OpenObjectAs(IObject objToOpen) {
+            return new DocumentMetadata { FilePath = ((FolderProjectObject)objToOpen).FilePath, IsFile = true };
+        }
     }
 
     public class FolderProjectFolder : IFolder

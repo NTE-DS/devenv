@@ -18,6 +18,15 @@ namespace NasuTek.DevEnvironment.MenuCommands {
         }
     }
 
+    public class OpenSolution : AbstractCommand {
+        public override void Run() {
+            var proj = new OpenFileDialog { Filter = "NasuTek Solution (*.nsl)|*.nsl" };
+            if (proj.ShowDialog() != DialogResult.OK) return;
+
+            ((SolutionExplorer)DevEnv.GetActiveInstance().Extensibility.GetPane("SolutionExplorer")).ActiveSolution = ProjectService.OpenSolution(proj.FileName);
+        }
+    }
+
     public class IntermediateMenu : AbstractCommand
     {
         public override void Run()

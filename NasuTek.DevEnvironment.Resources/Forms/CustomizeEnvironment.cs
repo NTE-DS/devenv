@@ -41,5 +41,19 @@ namespace NasuTek.DevEnvironment.Forms
         {
             ((ToolBarDockHolder)checkedListBox1.Items[e.Index]).Visible = e.NewValue == CheckState.Checked ? true : false;
         }
+
+        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e) {
+
+        }
+
+        private void CustomizeEnvironment_Load(object sender, EventArgs e) {
+            checkedListBox1.DisplayMember = "ToolbarTitle";
+        }
+
+        private void button3_Click(object sender, EventArgs e) {
+            ((ToolBarDockHolder)checkedListBox1.Items[1]).DockStyle = DockStyle.None;
+            ((ToolBarDockHolder)checkedListBox1.Items[1]).FloatForm.Top = 600;
+
+        }
     }
 }

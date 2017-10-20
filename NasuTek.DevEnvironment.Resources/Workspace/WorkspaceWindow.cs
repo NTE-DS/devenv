@@ -21,6 +21,7 @@ using NasuTek.DevEnvironment.Extensibility;
 using NasuTek.DevEnvironment.Extensibility.Workbench;
 using NasuTek.DevEnvironment.Extensibility.Workbench.Docking;
 using NasuTek.DevEnvironment.Extensibility.Workbench.Toolbar;
+using NasuTek.DevEnvironment.Forms;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -112,6 +113,25 @@ namespace NasuTek.DevEnvironment.Workbench
                 openedAlreadyObj.Show();
                 return;
             }
+
+            DevEnvDocument docFormat;
+
+            docFormat = (DevEnvDocument)Activator.CreateInstance(DevEnv.GetActiveInstance().Extensibility.DocumentTypes[documentMetadata.RequestedFormat].Item2);
+
+            docFormat.Show(dockPanel1, DockState.Document);
+            docFormat.Open(documentMetadata);
+        }
+
+        public void OpenDocumentAs(DocumentMetadata documentMetadata) {
+            var openedAlreadyObj = dockPanel1.Documents.OfType<DevEnvDocument>().FirstOrDefault(v => v.IsSameDocument(documentMetadata));
+            if (openedAlreadyObj != null) {
+                openedAlreadyObj.Show();
+                return;
+            }
+
+            var owf = new OpenWith(documentMetadata);
+
+            if (owf.ShowDialog() != DialogResult.OK) return;
 
             DevEnvDocument docFormat;
 

@@ -40,9 +40,11 @@ namespace NasuTek.DevEnvironment
             // Create Basic Menu
             uiSvc.AddRootMenuItem(new MenuItem("File", "File", null));
             var fileMenu = uiSvc.GetRootMenuItem("File");
-            fileMenu.SubItems.Add(new MenuItem("New", "New", null));
+            fileMenu.SubItems.Add(new MenuItem("New", "New", new NewProject()));
             fileMenu.SubItems.Add(new MenuItem("Seperator2", null, null));
-            fileMenu.SubItems.Add(new MenuItem("Open", "Open", new OpenProject()));
+            fileMenu.SubItems.Add(new MenuItem("Open", "Open", null));
+            fileMenu.GetMenuItem("Open").SubItems.Add(new MenuItem("Project", "Project", new OpenProject()));
+            fileMenu.GetMenuItem("Open").SubItems.Add(new MenuItem("Solution", "Solution", new OpenSolution()));
             fileMenu.SubItems.Add(new MenuItem("Save", "Save", new SaveAsProject()));
             fileMenu.SubItems.Add(new MenuItem("SaveAs", "Save As", new SaveAsProject()));
             fileMenu.SubItems.Add(new MenuItem("Seperator2", null, null));

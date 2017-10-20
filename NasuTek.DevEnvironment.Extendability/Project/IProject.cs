@@ -14,6 +14,7 @@ namespace NasuTek.DevEnvironment.Extensibility.Project
         bool MoveObject(IFolder folderToMove, IFolder oldFolder, IFolder folderToMoveInto);
 
         void OpenObject(IObject objToOpen);
+        DocumentMetadata OpenObjectAs(IObject objToOpen);
 
         void Save();
         void SaveAs(string path);
