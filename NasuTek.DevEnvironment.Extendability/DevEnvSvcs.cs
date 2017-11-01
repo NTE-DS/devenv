@@ -55,6 +55,7 @@ namespace NasuTek.DevEnvironment.Extensibility
     {
         IDevEnvRegSubKey OpenSubKey(SettingsReg reg, string keyName);
         bool SubKeyExists(SettingsReg reg, string keyName);
+        void CreateSubKey(SettingsReg reg, string keyName);
     }
 
     public interface IDevEnvRegSubKey
@@ -62,6 +63,7 @@ namespace NasuTek.DevEnvironment.Extensibility
         IDevEnvRegSubKey[] GetSubKeys();
         IDevEnvRegSubKey OpenSubKey(string keyName);
         bool SubKeyExists(string keyName);
+        void CreateSubKey(string keyName);
         object GetValue(string valueName);
         object GetValue(string valueName, object defaultValue);
         void SetValue(string valueName, object value);

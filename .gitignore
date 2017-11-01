@@ -147,4 +147,4 @@ $RECYCLE.BIN/
 
 # Mac crap
 .DS_Store
-NasuTek.DevEnvironment.Resources/DevEnvVersion.gen.cs
+*.gen.cs

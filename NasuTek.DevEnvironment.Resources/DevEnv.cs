@@ -123,19 +123,21 @@ namespace NasuTek.DevEnvironment
                 try
                 {
 #if DEBUG
-                    var reg = Registry.LocalMachine.CreateSubKey("SOFTWARE\\NasuTek Enterprises\\" + Settings.ProductID + "\\" + Settings.ProductVersionCodebase.ToString(2) + "-Debug");
+                    IDevEnvRegSvc regToCreate = new DevEnvReg(Settings.ProductID, Settings.ProductVersionCodebase.ToString(2) + "-Debug", true);
 #else
-                    var reg = Registry.LocalMachine.CreateSubKey("SOFTWARE\\NasuTek Enterprises\\" + Settings.ProductID + "\\" + Settings.ProductVersionCodebase.ToString(2));
-#endif
+                    IDevEnvRegSvc regToCreate = new DevEnvReg(Settings.ProductID, Settings.ProductVersionCodebase.ToString(2), true);
+#endif 
 
                     var xdoc = XDocument.Load(Path.Combine(Application.StartupPath, "Install.xml"));
 
                     if (xdoc.Root.Element("Packages") != null)
                     {
-                        var pkgsreg = reg.CreateSubKey("Packages");
+                        regToCreate.CreateSubKey(SettingsReg.Global, "Packages");
+                        var pkgsreg = regToCreate.OpenSubKey(SettingsReg.Global, "Packages");
                         foreach (var package in xdoc.Root.Element("Packages").Elements("Package"))
                         {
-                            var pkgreg = pkgsreg.CreateSubKey(package.Attribute("guid").Value);
+                            pkgsreg.CreateSubKey(package.Attribute("guid").Value);
+                            var pkgreg = pkgsreg.OpenSubKey(package.Attribute("guid").Value);
                             pkgreg.SetValue(null, package.Attribute("name").Value);
                             pkgreg.SetValue("Assembly", package.Attribute("Assembly").Value);
                             pkgreg.SetValue("PackageClass", package.Attribute("PackageClass").Value);
@@ -152,10 +154,12 @@ namespace NasuTek.DevEnvironment
 
                     if (xdoc.Root.Element("DocumentTypes") != null)
                     {
-                        var docsreg = reg.CreateSubKey("DocumentTypes");
+                        regToCreate.CreateSubKey(SettingsReg.Global, "DocumentTypes");
+                        var docsreg = regToCreate.OpenSubKey(SettingsReg.Global, "DocumentTypes");
                         foreach (var doctype in xdoc.Root.Element("DocumentTypes").Elements("DocumentType"))
                         {
-                            var docreg = docsreg.CreateSubKey(doctype.Attribute("guid").Value);
+                            docsreg.CreateSubKey(doctype.Attribute("guid").Value);
+                            var docreg = docsreg.OpenSubKey(doctype.Attribute("guid").Value);
                             docreg.SetValue(null, doctype.Attribute("name").Value);
                             docreg.SetValue("DocumentClass", doctype.Attribute("DocumentClass").Value);
                             docreg.SetValue("DocumentAssembly", doctype.Attribute("DocumentAssembly").Value);
@@ -164,10 +168,12 @@ namespace NasuTek.DevEnvironment
 
                     if (xdoc.Root.Element("ProjectTypes") != null)
                     {
-                        var projsreg = reg.CreateSubKey("ProjectTypes");
+                        regToCreate.CreateSubKey(SettingsReg.Global, "ProjectTypes");
+                        var projsreg = regToCreate.OpenSubKey(SettingsReg.Global, "ProjectTypes");
                         foreach (var project in xdoc.Root.Element("ProjectTypes").Elements("ProjectType"))
                         {
-                            var projreg = projsreg.CreateSubKey(project.Attribute("guid").Value);
+                            projsreg.CreateSubKey(project.Attribute("guid").Value);
+                            var projreg = projsreg.OpenSubKey(project.Attribute("guid").Value);
                             projreg.SetValue(null, project.Attribute("name").Value);
                             projreg.SetValue("ProjectClass", project.Attribute("ProjectClass").Value);
                             projreg.SetValue("ProjectAssembly", project.Attribute("ProjectAssembly").Value);
@@ -175,18 +181,23 @@ namespace NasuTek.DevEnvironment
                         }
                     }
 
+#if DEPROTOCOLSUPPORT
                     if (xdoc.Root.Element("WebSchemes") != null)
                     {
-                        var webschsreg = reg.CreateSubKey("WebSchemes");
+                        regToCreate.CreateSubKey(SettingsReg.Global, "WebSchemes");
+                        var webschsreg = regToCreate.OpenSubKey(SettingsReg.Global, "WebSchemes");
                         foreach (var project in xdoc.Root.Element("WebSchemes").Elements("WebScheme"))
                         {
-                            var webschreg = webschsreg.CreateSubKey(project.Attribute("guid").Value);
+                            webschsreg.CreateSubKey(project.Attribute("guid").Value);
+                            var webschreg = webschsreg.OpenSubKey(project.Attribute("guid").Value);
                             webschreg.SetValue(null, project.Attribute("name").Value);
                             webschreg.SetValue("WebSchemeClass", project.Attribute("WebSchemeClass").Value);
                             webschreg.SetValue("WebSchemeAssembly", project.Attribute("WebSchemeAssembly").Value);
                             webschreg.SetValue("Scheme", project.Attribute("Scheme").Value);
                         }
                     }
+#endif
+
                     foreach (var i in Extensibility.Commands["OnInstall"])
                     {
                         i.Run();

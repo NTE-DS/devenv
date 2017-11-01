@@ -21,8 +21,10 @@ namespace NasuTek.DevEnvironment
             public Dictionary<Guid, Tuple<string, Type>> DocumentTypes { get; private set; }
             public Dictionary<string, List<AbstractCommand>> Commands { get; private set; }
             public List<IPackage> UnloadablePlugins { get; private set; }
+#if DEPROTOCOLSUPPORT
             public List<IProtocol> WebProtocols { get; private set; }
-            
+#endif
+
             internal ToolBar GetToolbar(string name)
             {
                 return Toolbars.FirstOrDefault(v => v.Name == name);
@@ -39,7 +41,9 @@ namespace NasuTek.DevEnvironment
                 Commands = new Dictionary<string, List<AbstractCommand>>();
                 Toolbars = new List<ToolBar>();
                 UnloadablePlugins = new List<IPackage>();
+#if DEPROTOCOLSUPPORT
                 WebProtocols = new List<IProtocol>();
+#endif
 
                 Commands.Add("BeforeEnvironmentInitialized", new List<AbstractCommand>());
                 Commands.Add("BeforeInitialization", new List<AbstractCommand>());

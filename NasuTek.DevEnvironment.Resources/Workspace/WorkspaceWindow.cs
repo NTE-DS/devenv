@@ -181,7 +181,7 @@ namespace NasuTek.DevEnvironment.Workbench
         {
             var regSettings = (IDevEnvRegSvc)DevEnvSvc.GetService(DevEnvSvc.RegSvc);
 
-            regSettings.OpenSubKey(SettingsReg.User, "Workbench").SetValue("Maximized", WindowState == FormWindowState.Maximized);
+            regSettings.OpenSubKey(SettingsReg.User, "Workbench").SetValue("Maximized", (WindowState == FormWindowState.Maximized).ToString());
             if(WindowState != FormWindowState.Maximized)
             {
                 regSettings.OpenSubKey(SettingsReg.User, "Workbench").SetValue("LeftPosition", Left);

@@ -10,19 +10,20 @@ namespace NasuTek.DevEnvironment.Svcs
     {
         RegistryKey regKeyObj;
         RegistryKey userKeyObj;
-        
+        private bool installMode;
+
         public IDevEnvRegSubKey OpenSubKey(SettingsReg reg, string keyName)
         {
             switch (reg)
             {
                 case SettingsReg.Global:
-                    return new DevEnvRegSubKey(keyName, regKeyObj, false);
+                    return new DevEnvRegSubKey(keyName, regKeyObj, installMode);
                 case SettingsReg.User:
                     if (!SubKeyExists(reg, keyName))
                         userKeyObj.CreateSubKey(keyName);
                     return new DevEnvRegSubKey(keyName, userKeyObj, true);
                 default:
-                    return new DevEnvRegSubKey(keyName, regKeyObj, false);
+                    return new DevEnvRegSubKey(keyName, regKeyObj, installMode);
             }
         }
 
@@ -39,9 +40,34 @@ namespace NasuTek.DevEnvironment.Svcs
             }
         }
 
-        public DevEnvReg(string productId, string version)
+        public void CreateSubKey(SettingsReg reg, string keyName)
         {
-            regKeyObj = Registry.LocalMachine.OpenSubKey("SOFTWARE\\NasuTek Enterprises\\" + productId + "\\" + version);
+            switch (reg)
+            {
+                case SettingsReg.Global:
+                    regKeyObj.CreateSubKey(keyName);
+                    break;
+                case SettingsReg.User:
+                    userKeyObj.CreateSubKey(keyName);
+                    break;
+                default:
+                    regKeyObj.CreateSubKey(keyName);
+                    break;
+            }
+        }
+
+        public DevEnvReg(string productId, string version) : this(productId, version, false)
+        {
+        }
+
+        public DevEnvReg(string productId, string version, bool install)
+        {
+            installMode = install;
+
+            if (installMode)
+                Registry.LocalMachine.CreateSubKey("SOFTWARE\\NasuTek Enterprises\\" + productId + "\\" + version);
+
+            regKeyObj = Registry.LocalMachine.OpenSubKey("SOFTWARE\\NasuTek Enterprises\\" + productId + "\\" + version, install);
             userKeyObj = Registry.CurrentUser.OpenSubKey("SOFTWARE\\NasuTek Enterprises\\" + productId + "\\" + version, true);
             if (userKeyObj == null)
                 userKeyObj = Registry.CurrentUser.CreateSubKey("SOFTWARE\\NasuTek Enterprises\\" + productId + "\\" + version);
@@ -64,6 +90,11 @@ namespace NasuTek.DevEnvironment.Svcs
         public IDevEnvRegSubKey OpenSubKey(string keyName)
         {
             return new DevEnvRegSubKey(keyName, regKeyObj, isWritable);
+        }
+
+        public void CreateSubKey(string keyName)
+        {
+            regKeyObj.CreateSubKey(keyName);
         }
 
         public object GetValue(string valueName)
