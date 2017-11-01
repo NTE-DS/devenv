@@ -1,4 +1,4 @@
-﻿using NasuTek.DevEnvironment.Extensibility;
+using NasuTek.DevEnvironment.Extensibility;
 using NasuTek.DevEnvironment.Extensibility;
 using NasuTek.DevEnvironment.MenuCommands;
 using NasuTek.DevEnvironment.Pads;
@@ -45,7 +45,7 @@ namespace NasuTek.DevEnvironment
             fileMenu.SubItems.Add(new MenuItem("Open", "Open", null));
             fileMenu.GetMenuItem("Open").SubItems.Add(new MenuItem("Project", "Project", new OpenProject()));
             fileMenu.GetMenuItem("Open").SubItems.Add(new MenuItem("Solution", "Solution", new OpenSolution()));
-            fileMenu.SubItems.Add(new MenuItem("Save", "Save", new SaveAsProject()));
+            fileMenu.SubItems.Add(new MenuItem("Save", "Save", new SaveProject()));
             fileMenu.SubItems.Add(new MenuItem("SaveAs", "Save As", new SaveAsProject()));
             fileMenu.SubItems.Add(new MenuItem("Seperator2", null, null));
             fileMenu.SubItems.Add(new MenuItem("Exit", "Exit", new ExitDevEnv()));

@@ -8,7 +8,7 @@ using NasuTek.DevEnvironment.Extensibility;
 
 namespace NasuTek.DevEnvironment.Pads
 {
-    public partial class SolutionExplorer : DevEnvPane {
+    public partial class SolutionExplorer : DevEnvPane, IDevEnvSolutionSvc {
         private ISolution m_ActiveSolution;
 
         internal string Extension { get; set; }
@@ -60,6 +60,8 @@ namespace NasuTek.DevEnvironment.Pads
 
         public SolutionExplorer() {
             InitializeComponent();
+
+            DevEnvSvc.RegisterService(DevEnvSvc.SolutionSvc, this);
         }
 
         private void FillFolder(TreeNode rootNode, IFolder folder, IProject proj) {
@@ -266,6 +268,11 @@ namespace NasuTek.DevEnvironment.Pads
                 if (((Tuple<IFolder, IProject>) treeView1.SelectedNode.Tag).Item1.GetType().GetCustomAttributes(typeof (DeletableObjectAttribute), false).Length > 0)
                     RemoveFolder(treeView1.SelectedNode.Parent, treeView1.SelectedNode, ((Tuple<IFolder, IProject>) treeView1.SelectedNode.Tag).Item1, ((Tuple<IFolder, IProject>) treeView1.SelectedNode.Tag).Item2);
             }
+        }
+
+        public void OpenDocument(DocumentMetadata meta)
+        {
+            DevEnv.GetActiveInstance().WorkspaceEnvironment.OpenDocument(meta);
         }
     }
 }

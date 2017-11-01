@@ -12,44 +12,51 @@ namespace NasuTek.DevEnvironment.MenuCommands {
         public override void Run() {
             var proj = new OpenFileDialog {Filter = ProjectService.FilterString};
             if (proj.ShowDialog() != DialogResult.OK) return;
-            
-            ((SolutionExplorer) DevEnv.GetActiveInstance().Extensibility.GetPane("SolutionExplorer")).Extension = Path.GetExtension(proj.FileName);
+
+            ((SolutionExplorer)DevEnv.GetActiveInstance().Extensibility.GetPane("SolutionExplorer")).Extension = Path.GetExtension(proj.FileName);
             ((SolutionExplorer)DevEnv.GetActiveInstance().Extensibility.GetPane("SolutionExplorer")).ActiveSolution = ProjectService.CreateTempSolutionFromProject(ProjectService.OpenProject(proj.FileName));
         }
     }
 
     public class OpenSolution : AbstractCommand {
         public override void Run() {
-            var proj = new OpenFileDialog { Filter = "NasuTek Solution (*.nsl)|*.nsl" };
+            var proj = new OpenFileDialog {Filter = "NasuTek Solution (*.nsl)|*.nsl"};
             if (proj.ShowDialog() != DialogResult.OK) return;
 
             ((SolutionExplorer)DevEnv.GetActiveInstance().Extensibility.GetPane("SolutionExplorer")).ActiveSolution = ProjectService.OpenSolution(proj.FileName);
         }
     }
 
-    public class IntermediateMenu : AbstractCommand
-    {
-        public override void Run()
-        {
+    public class IntermediateMenu : AbstractCommand {
+        public override void Run() {
             DevEnv.GetActiveInstance().Extensibility.DevEnvPanes.First(v => v.Name == "IntermediateWindow").Show(DevEnv.GetActiveInstance().WorkspaceEnvironment.DockPanel);
         }
     }
 
-        public class SaveProject : AbstractCommand {
+    public class SaveProject : AbstractCommand {
         public override void Run() {
-        //    if (((SolutionExplorer)DevEnv.GetActiveInstance().Extensibility.GetPane("SolutionExplorer")).ActiveProject == null) return;
+            if (((SolutionExplorer)DevEnv.GetActiveInstance().Extensibility.GetPane("SolutionExplorer")).ActiveSolution == null) return;
+            IterateProjects(((SolutionExplorer)DevEnv.GetActiveInstance().Extensibility.GetPane("SolutionExplorer")).ActiveSolution.RootFolder);
+        }
 
-//            ((SolutionExplorer) DevEnv.GetActiveInstance().Extensibility.GetPane("SolutionExplorer")).ActiveProject.Save();
+        private void IterateProjects(ISolutionFolder activeSolutionRootFolder) {
+            foreach (var project in activeSolutionRootFolder.Projects) {
+                project.Save();
+            }
+
+            foreach (var solutionFolder in activeSolutionRootFolder.SubFolders) {
+                IterateProjects(solutionFolder);
+            }
         }
     }
 
     public class SaveAsProject : AbstractCommand {
         public override void Run() {
-    //        if (((SolutionExplorer) DevEnv.GetActiveInstance().Extensibility.GetPane("SolutionExplorer")).ActiveProject == null) return;
-      //      var proj = new SaveFileDialog { Filter = ProjectService.SaveFilterString(((SolutionExplorer)DevEnv.GetActiveInstance().Extensibility.GetPane("SolutionExplorer")).Extension) };
-        //    if (proj.ShowDialog() != DialogResult.OK) return;
+            //        if (((SolutionExplorer) DevEnv.GetActiveInstance().Extensibility.GetPane("SolutionExplorer")).ActiveProject == null) return;
+            //      var proj = new SaveFileDialog { Filter = ProjectService.SaveFilterString(((SolutionExplorer)DevEnv.GetActiveInstance().Extensibility.GetPane("SolutionExplorer")).Extension) };
+            //    if (proj.ShowDialog() != DialogResult.OK) return;
 
-          //  ((SolutionExplorer) DevEnv.GetActiveInstance().Extensibility.GetPane("SolutionExplorer")).ActiveProject.SaveAs(proj.FileName);
+            //  ((SolutionExplorer) DevEnv.GetActiveInstance().Extensibility.GetPane("SolutionExplorer")).ActiveProject.SaveAs(proj.FileName);
             //((SolutionExplorer) DevEnv.GetActiveInstance().Extensibility.GetPane("SolutionExplorer")).Extension = Path.GetExtension(proj.FileName);
         }
     }

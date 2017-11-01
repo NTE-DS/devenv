@@ -1,8 +1,7 @@
 ﻿using NasuTek.DevEnvironment.Extensibility.Workbench;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Windows.Forms;
+using NasuTek.DevEnvironment.Extensibility.Project;
 
 namespace NasuTek.DevEnvironment.Extensibility
 {
@@ -32,6 +31,13 @@ namespace NasuTek.DevEnvironment.Extensibility
 
     public interface IDevEnvSolutionSvc
     {
+        bool HideSolutionRoot { get; set; }
+        ISolution ActiveSolution { get; set; }
+        void RemoveObject(TreeNode folderNode, TreeNode deleteNode, IObject objId, IProject project);
+        void RemoveFolder(TreeNode folderNode, TreeNode deleteNode, IFolder folder, IProject project);
+        void AddObject(TreeNode folderNode, IObject objId, IProject project);
+        void AddFolder(TreeNode folderNode, IFolder folder, IProject project);
+        void DeleteSelectedNode();
         void OpenDocument(DocumentMetadata meta);
     }
 
