@@ -219,18 +219,8 @@ namespace NasuTek.DevEnvironment
             DevEnvArguments = args;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.SetUnhandledExceptionMode(UnhandledExceptionMode.ThrowException);
-            
-            if (File.Exists(Path.Combine(Application.StartupPath, "ner71.exe")))
-            {
-                var ner = new Ner71Api();
-                ner.AttachHandler();
-                ner.SetAppName(Settings.ProductName);
-            }
-            else
-            {
-                AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-            }
+           
+            Ner71Api.Attach(Settings.ProductName);
 
             RegisterOutputLog("DevEnv Application Log");
             var log = new DebugLog();
@@ -310,14 +300,6 @@ namespace NasuTek.DevEnvironment
             Application.Run(new WorkspaceEnvironmentContext(this));
 
             LogInfo("Application shutdown");
-        }
-
-        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
-        {
-            if (Debugger.IsAttached)
-                return;
-
-            MessageBox.Show("ner71.exe is missing, defaulting to backup exception handler\n\n"+e.ExceptionObject.ToString(), Settings.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         internal void LogInfo(string v)
