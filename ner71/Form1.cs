@@ -5,29 +5,40 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
+using System.IO.Compression;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Soap;
 using System.Text;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace ner71
 {
     public partial class Form1 : Form
     {
-        ExceptionBinder bdr;
+        private string m_BucketPath;
         int top = 0;
         int left = 0;
 
-        public Form1(ExceptionBinder binder)
+        public Form1(string bucketPath)
         {
             InitializeComponent();
+            m_BucketPath = bucketPath;
 
-            Text = binder.AppName;
+            var ini = new IniFile(Path.Combine(m_BucketPath, "NER_Manifest.ini"));
+            Text = ini.Read("Application Name", "Manifest");
+
+            Exception exe;
+            SoapFormatter xmlSerializer = new SoapFormatter();
+            using (var file = File.Open(Path.Combine(m_BucketPath, "Exception.xml"), FileMode.Open))
+            {
+                exe = (Exception)xmlSerializer.Deserialize(file);
+            }
 
             List<Exception> ex = new List<Exception>();
 
-            ExceptionRecurse(ex, binder.ExceptionObject);
-
-            bdr = binder;
+            ExceptionRecurse(ex, exe);
 
             foreach (var exception in ex)
             {
@@ -59,14 +70,27 @@ namespace ner71
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var jit = (string)Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\AeDebug").GetValue("Debugger");
-            MessageBox.Show(jit.Replace("%ld", bdr.ProcessID.ToString()));
-            Process.Start("cmd.exe", "/c " + jit.Replace("%ld", bdr.ProcessID.ToString()));
+            //var jit = (string)Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\AeDebug").GetValue("Debugger");
+            //MessageBox.Show(jit.Replace("%ld", bdr.ProcessID.ToString()));
+            //Process.Start("cmd.exe", "/c " + jit.Replace("%ld", bdr.ProcessID.ToString()));
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             System.Media.SystemSounds.Hand.Play();
+        }
+
+        private void button2_Click(object sender, EventArgs e) {
+            new TranferringReport(m_BucketPath).ShowDialog();
+            Close();
+        }
+
+        private void button3_Click(object sender, EventArgs e) {
+            Close();
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            new ErrorReportContains(m_BucketPath).ShowDialog();
         }
     }
 }

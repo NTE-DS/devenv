@@ -6,6 +6,8 @@ using System.Windows.Forms;
 using NasuTek.DevEnvironment;
 using NasuTek.DevEnvironment.Extensibility;
 using System.Threading;
+using DevEnv.Properties;
+using ner71;
 
 namespace DevEnv {
     static class Program {
@@ -14,7 +16,9 @@ namespace DevEnv {
         /// </summary>
         [STAThread]
         static void Main(string[] args) {
-            DevEnvSvc.InitializeDevEnv(new DevEnvSettings(), args, false);
+            var settings = new DevEnvSettings();
+            Ner71Api.Attach(settings.ProductName, settings.ProductVersionCodebase);
+            DevEnvSvc.InitializeDevEnv(settings, args, false);
         }
     }
 }

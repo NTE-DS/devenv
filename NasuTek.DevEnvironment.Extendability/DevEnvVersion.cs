@@ -27,8 +27,8 @@ namespace NasuTek.DevEnvironment {
     public partial class DevEnvVersion {
         public const string MajorCodebase = "7";
         public const string MinorCodebase = "1";
-        public const string BuildCodebase = "9000";
-        public const string RevisionCodebase = "2900";
+        public const string BuildCodebase = "0";
+        public const string RevisionCodebase = "2120";
         public const string Major = "1";
         public const string Minor = "0";
         public const string Build = "0";

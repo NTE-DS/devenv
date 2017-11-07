@@ -220,8 +220,6 @@ namespace NasuTek.DevEnvironment
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
            
-            Ner71Api.Attach(Settings.ProductName);
-
             RegisterOutputLog("DevEnv Application Log");
             var log = new DebugLog();
             Debug.Listeners.Add(log);

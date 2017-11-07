@@ -7,21 +7,25 @@ using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
-namespace NasuTek.DevEnvironment
+namespace ner71
 {
     public class Ner71Api {
-        private static string m_AppName;
 
-        public static void Attach(string appName) {
+        public static void Attach(string appName, Version appVersion) {
+            if (Debugger.IsAttached)
+                return;
+
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.ThrowException);
-            m_AppName = appName;
 
             if (File.Exists(Path.Combine(Application.StartupPath, "ner71.exe"))) {
                 var ner = new Ner71Api();
+                ner.SetAppName(appName);
+                ner.SetAppVersion(appVersion);
                 ner.AttachHandler();
-                ner.SetAppName(m_AppName);
             } else {
-                AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+                AppDomain.CurrentDomain.UnhandledException += (sender, args) => {
+                    MessageBox.Show("ner71.exe is missing, defaulting to backup exception handler\n\n" + args.ExceptionObject, appName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                };
             }
         }
 
@@ -42,12 +46,9 @@ namespace NasuTek.DevEnvironment
             nerAssembly.GetType("ner71.ExceptionHandle").GetMethod("SetAppName").Invoke(null, new object[] { appName });
         }
 
-        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        public void SetAppVersion(Version appVersion)
         {
-            if (Debugger.IsAttached)
-                return;
-
-            MessageBox.Show("ner71.exe is missing, defaulting to backup exception handler\n\n" + e.ExceptionObject, m_AppName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            nerAssembly.GetType("ner71.ExceptionHandle").GetMethod("SetAppVersion").Invoke(null, new object[] { appVersion });
         }
     }
 }
